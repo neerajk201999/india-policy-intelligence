@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS events (
     id INTEGER PRIMARY KEY,
     canonical_title TEXT NOT NULL,
     area TEXT NOT NULL,
+    signal_type TEXT NOT NULL DEFAULT 'Institutional',
     description TEXT NOT NULL,
     why_it_matters TEXT NOT NULL,
     status TEXT NOT NULL,
@@ -92,6 +93,9 @@ class Database:
     def initialize(self) -> None:
         with self.connect() as conn:
             conn.executescript(SCHEMA)
+            columns = {row["name"] for row in conn.execute("PRAGMA table_info(events)").fetchall()}
+            if "signal_type" not in columns:
+                conn.execute("ALTER TABLE events ADD COLUMN signal_type TEXT NOT NULL DEFAULT 'Institutional'")
 
     def sync_sources(self, sources: Sequence[dict]) -> None:
         with self.connect() as conn:
@@ -135,12 +139,12 @@ class Database:
     def insert_event(self, event: Event) -> int:
         with self.connect() as conn:
             cursor = conn.execute(
-                """INSERT INTO events(canonical_title,area,description,why_it_matters,status,
+                """INSERT INTO events(canonical_title,area,signal_type,description,why_it_matters,status,
                 first_seen,last_seen,publication_date,effective_date,deadline,affected_entities,
                 primary_source_url,secondary_source_urls,source_document_title,source_identifier,
                 content_hash,previous_event_id,is_update,watch_status)
-                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
-                (event.canonical_title, event.area, event.description, event.why_it_matters, event.status,
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                (event.canonical_title, event.area, event.signal_type, event.description, event.why_it_matters, event.status,
                  event.first_seen, event.last_seen, event.publication_date, event.effective_date, event.deadline,
                  json.dumps(event.affected_entities), event.primary_source_url, json.dumps(event.secondary_source_urls),
                  event.source_document_title, event.source_identifier, event.content_hash, event.previous_event_id,
@@ -167,6 +171,14 @@ class Database:
         with self.connect() as conn:
             return conn.execute("SELECT * FROM events WHERE watch_status='open' ORDER BY publication_date DESC LIMIT 20").fetchall()
 
+    def source_alerts(self, threshold: int = 3):
+        """Persistent failures become CI warnings instead of quiet degraded state."""
+        with self.connect() as conn:
+            return conn.execute(
+                "SELECT name,failure_count,last_error FROM sources WHERE failure_count>=? ORDER BY failure_count DESC,name",
+                (threshold,),
+            ).fetchall()
+
     def save_report(self, date: str, generated_at: str, event_ids: List[int], path: str) -> None:
         with self.connect() as conn:
             conn.execute("""INSERT INTO daily_reports VALUES(?,?,?,?)
@@ -186,7 +198,7 @@ class Database:
                     continue
                 sources = [dict(item) for item in conn.execute("SELECT url,source_name AS name,source_type AS type,authority_level FROM event_sources WHERE event_id=?", (event_id,)).fetchall()]
                 events.append(Event(
-                    id=row["id"], canonical_title=row["canonical_title"], area=row["area"],
+                    id=row["id"], canonical_title=row["canonical_title"], area=row["area"], signal_type=row["signal_type"],
                     description=row["description"], why_it_matters=row["why_it_matters"], status=row["status"],
                     first_seen=row["first_seen"], last_seen=row["last_seen"], publication_date=row["publication_date"],
                     effective_date=row["effective_date"], deadline=row["deadline"],

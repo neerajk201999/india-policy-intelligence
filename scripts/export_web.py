@@ -40,6 +40,7 @@ def event_payload(connection: sqlite3.Connection, event: dict) -> dict:
     sources = rows(connection, "SELECT url,source_name AS name,source_type AS type,authority_level AS authorityLevel FROM event_sources WHERE event_id=? ORDER BY authority_level,url", (event_id,))
     authority = min((source["authorityLevel"] for source in sources), default=3)
     institution = sources[0]["name"] if sources else None
+    evidence_level = "Primary" if authority == 1 else ("Official" if authority == 2 else "Reported")
     next_step = None
     effective_date_text = None
     relative_effective = re.search(r"come into force\s+(?:one hundred )?eighty days from the date of (?:their|its) publication in the Official Gazette", event["description"], re.I)
@@ -58,6 +59,7 @@ def event_payload(connection: sqlite3.Connection, event: dict) -> dict:
         "slug": slugify(event["canonical_title"]),
         "title": event["canonical_title"],
         "area": event["area"],
+        "signalType": event.get("signal_type") or "Institutional",
         "subtopic": None,
         "eventType": event["status"],
         "whatHappened": event["description"],
@@ -78,11 +80,12 @@ def event_payload(connection: sqlite3.Connection, event: dict) -> dict:
         "watchStatus": event["watch_status"],
         "isOpen": event["watch_status"] == "open",
         "isVerified": authority == 1,
+        "evidenceLevel": evidence_level,
         "nextStep": next_step,
         "firstSeen": event["first_seen"],
         "lastUpdated": event["last_seen"],
         "previousEventId": event["previous_event_id"],
-        "evidence": "Primary source verified" if authority == 1 else ("Official release" if event["primary_source_url"] else "Secondary only"),
+        "evidence": f"{evidence_level} evidence",
         "sources": sources,
     }
 
@@ -125,6 +128,10 @@ def export(db_path: Path, output: Path) -> dict:
     for event in event_records:
         area_counts[event["area"]] = area_counts.get(event["area"], 0) + 1
     healthy = sum(source["health"] == "healthy" for source in source_records)
+    health_alerts = [
+        {"name": source["name"], "failureCount": source["failureCount"], "lastError": source["lastError"]}
+        for source in source_records if source["failureCount"] >= 3
+    ]
     payload = {
         "schemaVersion": 1,
         "meta": {
@@ -137,7 +144,7 @@ def export(db_path: Path, output: Path) -> dict:
         },
         "summary": {
             "developments": len(event_records),
-            "primaryVerified": sum(event["evidence"] == "Primary source verified" for event in event_records),
+            "primaryVerified": sum(event["evidenceLevel"] == "Primary" for event in event_records),
             "watching": len(watch_records),
             "healthySources": healthy,
             "totalSources": len(source_records),
@@ -147,6 +154,7 @@ def export(db_path: Path, output: Path) -> dict:
         "tracker": tracker_records,
         "watchlist": watch_records,
         "sources": source_records,
+        "healthAlerts": health_alerts,
         "latestRun": run_payload,
         "archive": archives,
     }

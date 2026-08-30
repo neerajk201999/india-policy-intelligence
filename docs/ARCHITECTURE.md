@@ -18,16 +18,16 @@
 ## Corrected design
 
 ```text
-Official feeds/pages + official discovery + trusted news discovery
+Official feeds/APIs first + HTML fallback + trusted news discovery
                     │
                     ▼
        freshness and topic/action filtering
                     │
                     ▼
-        detail page / official PDF extraction
+      source-grounded detail / official PDF extraction
                     │
                     ▼
-    legal status, dates, entities and identifiers
+ signal type + legal status, dates, entities and identifiers
                     │
                     ▼
       hard publication-quality evidence gates
@@ -43,11 +43,11 @@ GitHub Actions runs this flow at 02:30 UTC, which is 08:00 IST throughout the ye
 
 ## Evidence policy
 
-- Tier 1 primary sources establish the regulatory fact.
-- Tier 2 official releases can establish an announcement but not silently convert it into a notification or in-force rule.
-- Tier 3 reporting is discovery/context. Secondary-only publication needs a trusted publisher and substantive text, and is labeled accordingly.
+- Signal type answers what it is: Regulation, Consultation, Data, Programme, Institutional or Legislative.
+- Evidence level answers how it is verified: Primary is the source document, Official is an official release/feed, and Reported is reputable attributed coverage.
+- Primary sources establish the regulatory fact. Official releases can establish an announcement but never silently convert it into a notification or in-force rule. Reported coverage is discovery/context and must remain visibly labeled.
 - Every published event requires a publication date, precise status, valid source URL, sufficient factual detail, practical analysis and no impossible effective/publication date sequence.
-- Exact content fingerprints are not republished. A changed status, deadline, effective date or authoritative identifier becomes a linked update.
+- Canonical identity is publisher host + document ID + publication date when available; otherwise it is the canonical URL. Fuzzy titles are never used to merge identified instruments. A changed status, deadline or effective date becomes a linked update.
 - No numerical impact score is stored or shown.
 
 No automated research system can promise zero factual errors. The correct engineering response is conservative exclusion, exact provenance, visible source health, reproducible state, and a reviewable methodology—not invented certainty.

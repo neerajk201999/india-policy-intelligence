@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from app.classifier import classify, event_from_item, is_meaningful
+from app.classifier import classify, classify_signal_type, event_from_item, is_meaningful
 from app.config import ROOT, topics_config
 from app.database import Database
 from app.http import Response
@@ -75,6 +75,9 @@ class SystemTests(unittest.TestCase):
         macro = "Industrial output growth expanded by 6.7 per cent in July, official data show."
         self.assertEqual(classify(macro, topics), "Macroeconomy, Trade & Public Finance")
         self.assertTrue(is_meaningful(macro, classify(macro, topics)))
+        self.assertEqual(classify_signal_type(macro, "Data release"), "Data")
+        self.assertEqual(classify_signal_type("Draft regulations invite comments", "Draft"), "Consultation")
+        self.assertEqual(classify_signal_type("Bill introduced in Parliament", "Bill introduced"), "Legislative")
 
     def test_article_extraction_excludes_related_story_navigation(self):
         html = """<nav>Old policy story</nav><article><h1>New rule</h1><div class='entry-content'><p>The regulator notified a new rule with detailed compliance duties for banks and payment firms.</p><p>The rule applies after publication and changes transaction records, disclosures, audit logs and customer notices across covered systems.</p></div></article><footer>Unrelated headlines and contact details</footer>"""
@@ -164,6 +167,26 @@ class SystemTests(unittest.TestCase):
         second = pipeline._store_if_new(event_from_item(alternate_item, alternate_item.summary, "Financial & Banking", topics, NOW))
         self.assertIsNotNone(first)
         self.assertIsNone(second)
+
+    def test_similar_directions_with_distinct_ids_remain_distinct(self):
+        pipeline = Pipeline(root=self.root, now=NOW, client=FakeClient())
+        pipeline.db.initialize()
+        topics = topics_config()
+        rural = RawItem("RBI", "primary", 1, "https://rbi.example/rural", "RBI Rural Co-operative Banks CRR Directions", NOW, "RBI/2026/242 issues directions for rural co-operative banks.", "RBI/2026/242")
+        commercial = RawItem("RBI", "primary", 1, "https://rbi.example/commercial", "RBI Commercial Banks CRR Directions", NOW, "RBI/2026/238 issues directions for commercial banks.", "RBI/2026/238")
+        first = pipeline._store_if_new(event_from_item(rural, rural.summary, "Financial & Banking", topics, NOW))
+        second = pipeline._store_if_new(event_from_item(commercial, commercial.summary, "Financial & Banking", topics, NOW))
+        self.assertIsNotNone(first)
+        self.assertIsNotNone(second)
+        self.assertFalse(second.is_update)
+
+    def test_source_alerts_begin_after_three_failures(self):
+        db = Database(self.root / "data" / "intelligence.db")
+        db.initialize()
+        db.sync_sources([{"name": "Unstable feed", "url": "https://example.test/feed", "type": "rss", "authority_level": 1}])
+        for index in range(3):
+            db.source_result("Unstable feed", f"2026-08-30T0{index}:00:00+05:30", False, "timeout")
+        self.assertEqual(db.source_alerts()[0]["name"], "Unstable feed")
 
     def test_watchlist_max_four(self):
         topics = topics_config()

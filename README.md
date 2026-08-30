@@ -2,7 +2,7 @@
 
 A zero-cost, local-first Python pipeline that discovers recent Indian policy and regulatory material, filters routine noise, records the underlying event in SQLite, suppresses unchanged repeats, maintains an open watchlist, and writes a source-linked daily Markdown brief.
 
-It also ships an editorial web interface, a static JSON publication layer, GitHub Actions automation at 08:00 IST, and Vercel hosting. The design rationale and the full issue audit are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+It also ships an editorial web interface, a static JSON publication layer, GitHub Actions automation at 08:00 IST, and Vercel hosting. Each entry carries two independent labels: signal type (Regulation, Consultation, Data, Programme, Institutional or Legislative) and evidence level (Primary, Official or Reported). The design rationale and the full issue audit are in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 The system is deliberately conservative. An index-page link without a verifiable publication date is not presented as current. A source failure is recorded and the remaining registry continues. Secondary discovery can surface candidates, but reports label entries where a primary source could not be confirmed.
 
@@ -56,13 +56,13 @@ The `.yaml` files use JSON syntax, which is valid YAML. This keeps configuration
 
 ## Persistence and change detection
 
-SQLite stores events, event-source provenance, source health, run history, and report history. Events are fingerprinted using authoritative identifiers or canonical URLs together with status and critical dates. Exact fingerprints are touched but not reported again. A matching identifier or highly similar historical title with a changed fingerprint becomes an update linked through `previous_event_id`. Drafts, consultations, introduced Bills, Cabinet approvals and unresolved announcements enter the watchlist.
+SQLite stores events, event-source provenance, source health, run history, and report history. Events are fingerprinted from a publisher host, document identifier and publication date whenever an identifier is available; otherwise the canonical URL is used. Exact fingerprints are touched but not reported again. Fuzzy title matching is only a fallback for documents with no identifier, so similarly worded directions cannot be collapsed into one item. Drafts, consultations, introduced Bills, Cabinet approvals and unresolved announcements enter the watchlist.
 
 The database does not contain or expose an impact score. Inclusion uses qualitative topic/action checks and negative filters for speeches, ceremonies, vacancies, tenders and similar routine material.
 
 ## Sources
 
-The 26-source registry includes RBI, SEBI RSS, CCI, MeitY, DPIIT, Finance, MCA, Labour, Education, Consumer Affairs, PIB, official Akashvani feeds and its public WordPress API, eGazette, Parliament, Supreme Court, High Court services, IRDAI, PFRDA, IFSCA, TRAI, FSSAI, BIS and CERT-In. A public Google News RSS search is a secondary, zero-cost discovery fallback for topic and state-level coverage; it is not treated as authoritative.
+The 27-source registry is feeds/API-first wherever a publisher exposes a stable public endpoint. It includes RBI notification and press-release RSS feeds, SEBI RSS, CCI, MeitY, DPIIT, Finance, MCA, Labour, Education, Consumer Affairs, PIB, official Akashvani feeds and its public WordPress API, eGazette, Parliament, Supreme Court, High Court services, IRDAI, PFRDA, IFSCA, TRAI, FSSAI, BIS and CERT-In. HTML collection is a conservative fallback. A public Google News RSS search is a secondary, zero-cost discovery fallback for topic and state-level coverage; it is not treated as authoritative.
 
 To add a source, append an object to `config/sources.yaml`:
 
@@ -102,7 +102,7 @@ The deterministic test suite covers database creation, feed dates, topic/relevan
 
 ## Limits and troubleshooting
 
-- Government sites can block automated requests, require JavaScript, change markup, or expose no feed. Inspect `sources.last_error` and `runs.errors` in SQLite; other sources still run.
+- Government sites can block automated requests, require JavaScript, change markup, or expose no feed. Inspect `sources.last_error` and `runs.errors` in SQLite; other sources still run. After three consecutive failures a source is emitted as a GitHub Actions warning and appears in exported health-alert data.
 - Generic extraction cannot provide human-level legal interpretation for every PDF or poorly structured page. The system excludes uncertain or undated material instead of inventing facts. Review important output against linked primary documents.
 - Court portals and eGazette are particularly resistant to generic crawling. Their registry entries provide health visibility, while official/news discovery offers another route. The tool never bypasses CAPTCHAs or access controls.
 - Public search RSS is best-effort and may throttle or change. It is a fallback, not a single point of failure.

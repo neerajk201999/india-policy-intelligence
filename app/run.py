@@ -29,12 +29,14 @@ def main() -> int:
         now = datetime.fromisoformat(args.date)
         tz = ZoneInfo("Asia/Kolkata")
         now = now.replace(tzinfo=tz) if now.tzinfo is None else now.astimezone(tz)
-    result = Pipeline(root=args.root, now=now, lookback_days=args.lookback_days, offline=args.offline, max_items=max(1, args.max_items)).run()
+    pipeline = Pipeline(root=args.root, now=now, lookback_days=args.lookback_days, offline=args.offline, max_items=max(1, args.max_items))
+    result = pipeline.run()
     print(f"Report: {result.report_path}")
     print(f"Discovered: {result.discovered}; included: {result.included}; source errors: {len(result.errors)}")
+    for source in pipeline.db.source_alerts():
+        print(f"::warning title=Source health alert::{source['name']} has failed {source['failure_count']} consecutive runs: {source['last_error']}")
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

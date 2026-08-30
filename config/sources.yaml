@@ -1,14 +1,24 @@
 {
   "sources": [
     {
-      "name": "Reserve Bank of India",
-      "short_name": "RBI",
-      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
-      "type": "rbi_notifications",
+      "name": "Reserve Bank of India - Notifications RSS",
+      "short_name": "RBI Notifications",
+      "url": "https://www.rbi.org.in/notifications_rss.xml",
+      "type": "rss",
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking",
       "max_links": 45
+    },
+    {
+      "name": "Reserve Bank of India - Press Releases RSS",
+      "short_name": "RBI Releases",
+      "url": "https://www.rbi.org.in/pressreleases_rss.xml",
+      "type": "rss",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking",
+      "max_links": 30
     },
     {
       "name": "Securities and Exchange Board of India",

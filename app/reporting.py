@@ -25,10 +25,10 @@ def render_report(now: datetime, events: Sequence[Event], watchlist: Iterable, c
     for event in events:
         prefix = "Update: " if event.is_update else ""
         lines.extend([
-            f"## [{event.area.upper()}] — {prefix}{event.canonical_title}", "",
+            f"## [{event.area.upper()} · {event.signal_type.upper()}] — {prefix}{event.canonical_title}", "",
             "**What happened:**", "", event.description, "",
             "**Why it matters:**", "", event.why_it_matters, "",
-            f"**Status:** {event.status}", "",
+            f"**Type:** {event.signal_type}", "", f"**Status:** {event.status}", "",
         ])
         if event.effective_date:
             lines.extend([f"**Effective date:** {event.effective_date}", ""])

@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import List, Optional
 from zoneinfo import ZoneInfo
 
-from .classifier import classify, event_from_item, has_sufficient_evidence, is_meaningful, similar_title
+from .classifier import classify, event_from_item, has_sufficient_evidence, is_meaningful, normalize_url, similar_title
 from .collector import Collector
 from .config import ROOT, sources_config, topics_config
 from .database import Database
@@ -130,12 +130,11 @@ class Pipeline:
         for event in events:
             duplicate_index = None
             for index, existing in enumerate(selected):
+                # Similar titles are not identity: one regulator commonly publishes
+                # several near-identical directions on the same day.  Merge only a
+                # shared publisher document ID or exactly the same canonical URL.
                 same_identifier = bool(event.source_identifier and existing.source_identifier and event.source_identifier == existing.source_identifier)
-                same_story = (
-                    event.area == existing.area
-                    and event.publication_date == existing.publication_date
-                    and similar_title(event.canonical_title, existing.canonical_title)
-                )
+                same_story = normalize_url(event.primary_source_url or "") == normalize_url(existing.primary_source_url or "")
                 if same_identifier or same_story:
                     duplicate_index = index
                     break
@@ -204,7 +203,7 @@ class Pipeline:
             self.db.add_event_sources(equivalent["id"], event.sources)
             return None
         previous = self.db.find_identifier(event.source_identifier) if event.source_identifier else None
-        if previous is None:
+        if previous is None and not event.source_identifier:
             for row in self.db.recent_events(300):
                 if row["area"] == event.area and similar_title(row["canonical_title"], event.canonical_title):
                     previous = row

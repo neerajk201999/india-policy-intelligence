@@ -90,7 +90,7 @@ async function fetchData() {
 
 function searchableText(event) {
   return [event.title, event.whatHappened, event.whyItMatters, event.institution, event.area,
-    event.status, event.primarySourceTitle, ...(event.affectedEntities || [])].filter(Boolean).join(" ").toLowerCase();
+    event.signalType, event.evidenceLevel, event.status, event.primarySourceTitle, ...(event.affectedEntities || [])].filter(Boolean).join(" ").toLowerCase();
 }
 
 function matches(event) {
@@ -166,9 +166,9 @@ function createPolicyEvent(event, detailView = false) {
   const node = $("#event-template").content.firstElementChild.cloneNode(true);
   node.classList.toggle("detail-event", detailView);
   $(".event-area", node).textContent = areaLabel(event.area);
-  $(".event-status", node).textContent = event.status || "Status pending";
+  $(".event-status", node).textContent = event.signalType || event.status || "Signal pending";
   const verification = $(".verification", node);
-  $("span", verification).textContent = event.evidence || (event.isVerified ? "Primary source verified" : "Official source");
+  $("span", verification).textContent = event.evidence || "Evidence linked";
   if (!event.primarySourceUrl) verification.hidden = true;
   const title = $(".event-title a", node);
   title.textContent = event.title || "Untitled policy development";
@@ -189,7 +189,7 @@ function createPolicyEvent(event, detailView = false) {
   const sources = $(".event-sources", node);
   const institution = event.institution || "Official authority";
   const sourceTitle = event.primarySourceTitle || event.sourceDocumentTitle || "Authoritative document";
-  const sourcePrefix = event.isVerified ? "Primary source" : "Official source";
+  const sourcePrefix = `${event.evidenceLevel || (event.isVerified ? "Primary" : "Official")} source`;
   const links = [createSourceLink(sourcePrefix, `${institution} — ${sourceTitle}`, event.primarySourceUrl, formatDate(event.publicationDate))];
   (event.secondarySourceUrls || []).slice(0, 1).forEach((url) => links.push(createSourceLink("News context", "Context source", url)));
   sources.replaceChildren(...links.filter(Boolean));
@@ -218,7 +218,7 @@ function createBriefingEntry(event, index) {
   const node = $("#briefing-template").content.firstElementChild.cloneNode(true);
   $(".briefing-index", node).textContent = String(index + 1);
   $(".event-area", node).textContent = areaLabel(event.area);
-  $(".event-status", node).textContent = event.status || "Policy update";
+  $(".event-status", node).textContent = event.signalType || event.status || "Policy update";
   $(".verification span", node).textContent = event.evidence || "Source linked";
   if (!event.primarySourceUrl) $(".verification", node).hidden = true;
   const title = $("h2 a", node);
@@ -261,7 +261,7 @@ function renderTrackerList(container) {
     const node = $("#tracker-template").content.firstElementChild.cloneNode(true);
     $(".tracker-date", node).textContent = formatDate(event.publicationDate, { day: "numeric", month: "short", year: "numeric" }) || "Date unavailable";
     $(".event-area", node).textContent = areaLabel(event.area);
-    $(".event-status", node).textContent = event.status || "Status pending";
+    $(".event-status", node).textContent = event.signalType || event.status || "Signal pending";
     node.querySelectorAll("a[data-route]").forEach((link) => { link.href = eventPath(event); });
     $("h2 a", node).textContent = event.title || "Untitled policy development";
     $(".tracker-summary", node).textContent = event.whatHappened || "Summary unavailable.";
@@ -339,7 +339,7 @@ function renderDetail() {
     $("#route-view").replaceChildren(emptyState("This policy update is unavailable", "It may have been superseded or the link may be incorrect. Return to the Policy Tracker to continue browsing."));
     return;
   }
-  setIntro(areaLabel(event.area), event.title, `${event.status || "Policy update"}${event.institution ? ` · ${event.institution}` : ""}`, `${formatDate(event.publicationDate) || "Date unavailable"}`);
+  setIntro(areaLabel(event.area), event.title, `${event.signalType || "Policy update"} · ${event.evidenceLevel || "Evidence linked"}${event.institution ? ` · ${event.institution}` : ""}`, `${formatDate(event.publicationDate) || "Date unavailable"}`);
   setMeta(event.title, event.whatHappened);
   const back = document.createElement("a"); back.className = "detail-back"; back.href = "/tracker"; back.dataset.route = ""; back.textContent = "← Back to Policy Tracker";
   const detail = createPolicyEvent(event, true);

@@ -21,6 +21,7 @@ class RawItem:
 class Event:
     canonical_title: str
     area: str
+    signal_type: str
     description: str
     why_it_matters: str
     status: str
@@ -40,4 +41,3 @@ class Event:
     watch_status: Optional[str] = None
     id: Optional[int] = None
     sources: List[dict] = field(default_factory=list)
-

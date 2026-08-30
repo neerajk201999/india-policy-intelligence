@@ -131,6 +131,24 @@ def extract_status(text: str) -> str:
     return "Announcement"
 
 
+def classify_signal_type(text: str, status: str) -> str:
+    """Tag the signal independently of legal status and source provenance."""
+    lower = text.casefold()
+    if status in ("Draft", "Consultation") or any(term in lower for term in ("consultation", "draft", "comments invited", "discussion paper")):
+        return "Consultation"
+    if status == "Data release" or any(term in lower for term in DATA_TERMS):
+        return "Data"
+    if any(term in lower for term in ("bill", "parliament", "legislative", "committee report")):
+        return "Legislative"
+    if any(term in lower for term in ("scheme", "programme", "program", "mission", "allocation", "implementation update")):
+        return "Programme"
+    if status in ("Enforcement action", "Court judgment") or any(term in lower for term in ("appointment", "monetary policy committee", "enforcement", "penalty", "adjudication")):
+        return "Institutional"
+    if any(term in lower for term in ("notification", "gazette", "regulation", "rules", "directions", "circular", "order")):
+        return "Regulation"
+    return "Institutional"
+
+
 IDENTIFIER = re.compile(r"\b(?:circular|notification|order|bill|press release)\s*(?:no\.?\s*)?([A-Z0-9][A-Z0-9./()_-]{3,})", re.I)
 DATE_CONTEXT = re.compile(r"\b(effective|with effect from|deadline|comments? (?:by|until)|commencement)\s+(?:on\s+|from\s+|is\s+)?([A-Za-z]+\s+\d{1,2},?\s+\d{4}|\d{1,2}[-/]\d{1,2}[-/]\d{4})", re.I)
 
@@ -266,19 +284,22 @@ def build_why(area: str, entities: List[str], status: str, topics: Dict, evidenc
 def event_from_item(item: RawItem, detail: str, area: str, topics: Dict, now: datetime) -> Event:
     combined = clean_text(f"{item.title}. {item.summary} {detail}")
     status = extract_status(combined)
+    signal_type = classify_signal_type(combined, status)
     entities = affected_entities(combined)
     identifier = extract_identifier(combined, item.source_identifier)
     effective, deadline = extract_dates(combined)
     title = normalize_title(item.title)
     canonical = normalize_url(item.url)
-    fingerprint = "|".join((identifier or canonical, title.casefold(), status, effective or "", deadline or ""))
+    source_host = re.sub(r"^www\.", "", urlsplit(canonical).netloc.casefold())
+    canonical_key = f"{source_host}:{identifier}:{item.published_at.date().isoformat()}" if identifier and item.published_at else canonical
+    fingerprint = "|".join((canonical_key, title.casefold(), status, effective or "", deadline or ""))
     content_hash = hashlib.sha256(fingerprint.encode()).hexdigest()
     primary = item.url if item.authority_level <= 2 else None
     secondary = [] if primary else [item.url]
     watch = "open" if status in ("Draft", "Consultation", "Bill introduced", "Announcement", "Cabinet approved") or (deadline and deadline >= now.date().isoformat()) else None
     stamp = now.isoformat()
     return Event(
-        canonical_title=title, area=area, description=build_description(item, detail, status),
+        canonical_title=title, area=area, signal_type=signal_type, description=build_description(item, detail, status),
         why_it_matters=build_why(area, entities, status, topics, combined), status=status,
         publication_date=item.published_at.date().isoformat() if item.published_at else None,
         effective_date=effective, deadline=deadline, affected_entities=entities,
