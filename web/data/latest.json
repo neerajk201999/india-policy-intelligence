@@ -3,7 +3,7 @@
   "meta": {
     "title": "India Policy & Regulatory Intelligence",
     "reportDate": "2026-08-30",
-    "generatedAt": "2026-08-30T14:19:58.988918+05:30",
+    "generatedAt": "2026-08-30T14:22:45.910736+05:30",
     "timezone": "Asia/Kolkata",
     "coverage": "Previous 24 hours; limited 3–5 day backfill for material updates",
     "refreshSchedule": "Daily at 08:00 IST"
@@ -116,8 +116,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -128,8 +128,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Digital Economy & Technology",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -140,10 +140,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Competition",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
-      "failureCount": 0,
-      "lastError": null,
+      "failureCount": 1,
+      "lastError": "Competition Commission of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
       "health": "healthy"
     },
     {
@@ -152,9 +152,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Department for Promotion of Industry and Internal Trade: HTTPError: HTTP Error 403: Forbidden",
       "health": "degraded"
     },
@@ -164,10 +164,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
-      "failureCount": 0,
-      "lastError": null,
+      "failureCount": 1,
+      "lastError": "FSSAI: URLError: <urlopen error timed out>",
       "health": "healthy"
     },
     {
@@ -176,10 +176,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
-      "failureCount": 0,
-      "lastError": null,
+      "failureCount": 1,
+      "lastError": "Gazette of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
       "health": "healthy"
     },
     {
@@ -188,8 +188,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Courts",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -200,8 +200,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -212,8 +212,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -224,9 +224,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Ministry of Consumer Affairs: URLError: <urlopen error timed out>",
       "health": "degraded"
     },
@@ -236,10 +236,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Corporate Governance / ESG",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
-      "lastError": "Ministry of Corporate Affairs: URLError: <urlopen error [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:1129)>",
+      "failureCount": 3,
+      "lastError": "Ministry of Corporate Affairs: HTTPError: HTTP Error 403: Forbidden",
       "health": "degraded"
     },
     {
@@ -248,9 +248,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Education",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Ministry of Education: HTTPError: HTTP Error 403: Forbidden",
       "health": "degraded"
     },
@@ -260,9 +260,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Digital Economy & Technology",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Ministry of Electronics and Information Technology: HTTPError: HTTP Error 403: Forbidden",
       "health": "degraded"
     },
@@ -272,9 +272,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Ministry of Finance: URLError: <urlopen error timed out>",
       "health": "degraded"
     },
@@ -284,9 +284,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Ministry of Labour and Employment: HTTPError: HTTP Error 403: Forbidden",
       "health": "degraded"
     },
@@ -296,8 +296,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -308,8 +308,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -320,8 +320,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -332,8 +332,8 @@
       "sourceType": "rss",
       "authorityLevel": 1,
       "topic": "Financial & Banking; Corporate Governance / ESG",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -344,9 +344,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Courts",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Supreme Court of India: HTTPError: HTTP Error 403: Forbidden",
       "health": "degraded"
     },
@@ -356,8 +356,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Digital Economy & Technology",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -368,8 +368,8 @@
       "sourceType": "rss",
       "authorityLevel": 2,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:19:58.988918+05:30",
-      "lastSuccess": "2026-08-30T14:19:58.988918+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -380,9 +380,9 @@
       "sourceType": "rss",
       "authorityLevel": 2,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
       "lastSuccess": null,
-      "failureCount": 2,
+      "failureCount": 3,
       "lastError": "Press Information Bureau: HTTPError: HTTP Error 403: Forbidden",
       "health": "degraded"
     },
@@ -392,26 +392,39 @@
       "sourceType": "search_feed",
       "authorityLevel": 3,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
     }
   ],
   "latestRun": {
-    "id": 8,
-    "started_at": "2026-08-30T14:19:58.988918+05:30",
-    "finished_at": "2026-08-30T14:20:02.410398+05:30",
-    "status": "success",
-    "discovered": 10,
-    "included": 1,
-    "errors": []
+    "id": 9,
+    "started_at": "2026-08-30T14:22:45.910736+05:30",
+    "finished_at": "2026-08-30T14:26:32.674623+05:30",
+    "status": "partial",
+    "discovered": 387,
+    "included": 0,
+    "errors": [
+      "Competition Commission of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
+      "Ministry of Electronics and Information Technology: HTTPError: HTTP Error 403: Forbidden",
+      "Department for Promotion of Industry and Internal Trade: HTTPError: HTTP Error 403: Forbidden",
+      "Ministry of Finance: URLError: <urlopen error timed out>",
+      "Ministry of Corporate Affairs: HTTPError: HTTP Error 403: Forbidden",
+      "Ministry of Labour and Employment: HTTPError: HTTP Error 403: Forbidden",
+      "Ministry of Education: HTTPError: HTTP Error 403: Forbidden",
+      "Ministry of Consumer Affairs: URLError: <urlopen error timed out>",
+      "Press Information Bureau: HTTPError: HTTP Error 403: Forbidden",
+      "Gazette of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
+      "Supreme Court of India: HTTPError: HTTP Error 403: Forbidden",
+      "FSSAI: URLError: <urlopen error timed out>"
+    ]
   },
   "archive": [
     {
       "date": "2026-08-30",
-      "generatedAt": "2026-08-30T14:19:58.988918+05:30",
+      "generatedAt": "2026-08-30T14:22:45.910736+05:30",
       "eventCount": 2
     }
   ]
