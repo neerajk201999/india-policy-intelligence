@@ -3,7 +3,7 @@
   "meta": {
     "title": "India Policy & Regulatory Intelligence",
     "reportDate": "2026-08-30",
-    "generatedAt": "2026-08-30T14:22:45.910736+05:30",
+    "generatedAt": "2026-08-30T14:47:17.923793+05:30",
     "timezone": "Asia/Kolkata",
     "coverage": "Previous 24 hours; limited 3–5 day backfill for material updates",
     "refreshSchedule": "Daily at 08:00 IST"
@@ -21,7 +21,7 @@
       "count": 1
     },
     {
-      "name": "Digital Economy & Technology",
+      "name": "Digital Economy & AI",
       "count": 0
     },
     {
@@ -48,13 +48,61 @@
   "events": [
     {
       "id": 1,
+      "slug": "dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026",
+      "title": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "area": "Deregulation & Ease of Doing Business",
+      "subtopic": null,
+      "eventType": "Notified",
+      "whatHappened": "The Department of Consumer Affairs has notified the Legal Metrology (Indian Standard Time) Rules, 2026. The Rules provide for Indian Standard Time (IST) as the common time reference across the country for legal, administrative, commercial and other official purposes. The common time reference will support accurate time-stamping of banking and digital payment transactions, coordination of railways, airports and other transport systems, and also the coordination of emergency and other time-sensitive services. The Ministry of Consumer Affairs, Food and Public Distribution said that the Rules will come into force one hundred eighty days from the date of their publication in the Official Gazette. The rules are aimed at ensuring that important systems across the country use accurate and consistent IST.",
+      "whyItMatters": "This matters to banks, consumers, payment providers, transport operators because systems that timestamp transactions or coordinate time-sensitive services may need to align clocks, logs, audit trails and operating standards with the prescribed IST reference before commencement. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Notified",
+      "publicationDate": "2026-08-30",
+      "effectiveDate": null,
+      "effectiveDateText": "180 days after Official Gazette publication",
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "consumers",
+        "payment providers",
+        "transport operators"
+      ],
+      "primarySourceUrl": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "primarySourceTitle": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "institution": "Akashvani News - National",
+      "sourceIdentifier": "https://newsonair.gov.in/?p=1826694",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": false,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "previousEventId": null,
+      "evidence": "Official release",
+      "sources": [
+        {
+          "url": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
+          "name": "Akashvani News - National",
+          "type": "official",
+          "authorityLevel": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "standardised-framework-for-classification-and-presentation-of-schemes-under-the-nps",
       "title": "Standardised framework for classification and presentation of Schemes under the NPS",
       "area": "Financial & Banking",
-      "whatHappened": "CIRCULAR PFRDA/2026/47/REG-PF/10 28.08.2026 To All NPS Stakeholders Subject: Standardised framework for classification and presentation of Schemes under the NPS In exercise of the powers conferred under the PFRD Act, 2013, the regulations made thereunder and other enabling provisions, the Authority hereby issues this Circular prescribing the framework governing the classification, presentation, operation and disclosure of investment schemes [1] under the NPS. This Circular seeks to establish a standardised framework for classification and presentation of investment schemes, facilitate informed investment decisions by subscribers, promote comparability of schemes offered by different Pension Funds and prescribe uniform requirements relating to scheme naming, subscriber journeys, disclosures and implementation. Classification Framework 1. Classification of Investment Schemes 1.1 All schemes under NPS shall be classified in accordance with the framework specified in this Circular.",
-      "whyItMatters": "This matters to employers, pension funds, NPS subscribers because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "subtopic": null,
+      "eventType": "Circular issued",
+      "whatHappened": "PFRDA issued Circular PFRDA/2026/47/REG-PF/10 under the PFRDA Act, 2013, creating a uniform framework for how NPS investment schemes are classified, named, presented and disclosed. It groups schemes into lifecycle-based options, Active Choice, NPS Sanchay, Multiple Scheme Framework (MSF) schemes, and Regulation 4A curated or thematic schemes such as NPS Vatsalya, NPS Swasthya and NPS MSME. Lifecycle options retain age-linked equity glide paths, while Active Choice permits subscriber-directed allocation across equity, corporate bonds and government securities within PFRDA limits. MSF schemes must be placed in standard categories according to their equity exposure. Pension Funds must use a prescribed naming convention that identifies the fund, NPS, the MSF category code and scheme name; Tier II products must say so explicitly. Subscriber-facing CRA and onboarding interfaces must follow a common selection sequence and display comparable information before selection, including launch date, historical and benchmark returns, charges, riskometer and assets under management. The circular also permits subscribers with multiple schemes to merge one into another, after which the target scheme's conditions govern the merged investment. Government-sector-tagged accounts are excluded. The circular supersedes three earlier PFRDA circulars dealing with fund changes, MSF introduction and lifecycle-fund nomenclature.",
+      "whyItMatters": "This matters to employers, pension funds, NPS subscribers because pension funds and NPS interface operators must standardise scheme categories, naming, subscriber journeys and disclosures, changing product presentation and operational controls. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
       "status": "Circular issued",
       "publicationDate": "2026-08-28",
       "effectiveDate": null,
+      "effectiveDateText": null,
       "deadline": null,
       "affectedEntities": [
         "employers",
@@ -64,10 +112,18 @@
       "primarySourceUrl": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
       "secondarySourceUrls": [],
       "sourceDocumentTitle": "Standardised framework for classification and presentation of Schemes under the NPS",
+      "primarySourceTitle": "Standardised framework for classification and presentation of Schemes under the NPS",
+      "institution": "Pension Fund Regulatory and Development Authority",
       "sourceIdentifier": "CIRCULAR PFRDA/2026/47/REG-PF/10",
       "isUpdate": false,
       "watchStatus": null,
-      "evidence": "Primary verified",
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
       "sources": [
         {
           "url": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
@@ -76,27 +132,43 @@
           "authorityLevel": 1
         }
       ]
-    },
+    }
+  ],
+  "tracker": [
     {
-      "id": 2,
+      "id": 1,
+      "slug": "dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026",
       "title": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
       "area": "Deregulation & Ease of Doing Business",
-      "whatHappened": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026 | Akashvani News Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026 The Department of Consumer Affairs has notified the Legal Metrology (Indian Standard Time) Rules, 2026. The Rules provide for Indian Standard Time (IST) as the common time reference across the country for legal, administrative, commercial and other official purposes. The common time reference will support accurate time-stamping of banking and digital payment transactions, coordination of railways, airports and other transport systems, and also the coordination of emergency and other time-sensitive services. The Ministry of Consumer Affairs, Food and Public Distribution said that the Rules will come into force one hundred eighty days from the date of their publication in the Official Gazette.",
-      "whyItMatters": "This matters to banks, consumers because it may change licences, approvals, inspections, penalties or recurring compliance work for businesses. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "subtopic": null,
+      "eventType": "Notified",
+      "whatHappened": "The Department of Consumer Affairs has notified the Legal Metrology (Indian Standard Time) Rules, 2026. The Rules provide for Indian Standard Time (IST) as the common time reference across the country for legal, administrative, commercial and other official purposes. The common time reference will support accurate time-stamping of banking and digital payment transactions, coordination of railways, airports and other transport systems, and also the coordination of emergency and other time-sensitive services. The Ministry of Consumer Affairs, Food and Public Distribution said that the Rules will come into force one hundred eighty days from the date of their publication in the Official Gazette. The rules are aimed at ensuring that important systems across the country use accurate and consistent IST.",
+      "whyItMatters": "This matters to banks, consumers, payment providers, transport operators because systems that timestamp transactions or coordinate time-sensitive services may need to align clocks, logs, audit trails and operating standards with the prescribed IST reference before commencement. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
       "status": "Notified",
       "publicationDate": "2026-08-30",
       "effectiveDate": null,
+      "effectiveDateText": "180 days after Official Gazette publication",
       "deadline": null,
       "affectedEntities": [
         "banks",
-        "consumers"
+        "consumers",
+        "payment providers",
+        "transport operators"
       ],
       "primarySourceUrl": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
       "secondarySourceUrls": [],
       "sourceDocumentTitle": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "primarySourceTitle": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "institution": "Akashvani News - National",
       "sourceIdentifier": "https://newsonair.gov.in/?p=1826694",
       "isUpdate": false,
       "watchStatus": null,
+      "isOpen": false,
+      "isVerified": false,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "previousEventId": null,
       "evidence": "Official release",
       "sources": [
         {
@@ -104,6 +176,49 @@
           "name": "Akashvani News - National",
           "type": "official",
           "authorityLevel": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "standardised-framework-for-classification-and-presentation-of-schemes-under-the-nps",
+      "title": "Standardised framework for classification and presentation of Schemes under the NPS",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Circular issued",
+      "whatHappened": "PFRDA issued Circular PFRDA/2026/47/REG-PF/10 under the PFRDA Act, 2013, creating a uniform framework for how NPS investment schemes are classified, named, presented and disclosed. It groups schemes into lifecycle-based options, Active Choice, NPS Sanchay, Multiple Scheme Framework (MSF) schemes, and Regulation 4A curated or thematic schemes such as NPS Vatsalya, NPS Swasthya and NPS MSME. Lifecycle options retain age-linked equity glide paths, while Active Choice permits subscriber-directed allocation across equity, corporate bonds and government securities within PFRDA limits. MSF schemes must be placed in standard categories according to their equity exposure. Pension Funds must use a prescribed naming convention that identifies the fund, NPS, the MSF category code and scheme name; Tier II products must say so explicitly. Subscriber-facing CRA and onboarding interfaces must follow a common selection sequence and display comparable information before selection, including launch date, historical and benchmark returns, charges, riskometer and assets under management. The circular also permits subscribers with multiple schemes to merge one into another, after which the target scheme's conditions govern the merged investment. Government-sector-tagged accounts are excluded. The circular supersedes three earlier PFRDA circulars dealing with fund changes, MSF introduction and lifecycle-fund nomenclature.",
+      "whyItMatters": "This matters to employers, pension funds, NPS subscribers because pension funds and NPS interface operators must standardise scheme categories, naming, subscriber journeys and disclosures, changing product presentation and operational controls. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Circular issued",
+      "publicationDate": "2026-08-28",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "employers",
+        "pension funds",
+        "NPS subscribers"
+      ],
+      "primarySourceUrl": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Standardised framework for classification and presentation of Schemes under the NPS",
+      "primarySourceTitle": "Standardised framework for classification and presentation of Schemes under the NPS",
+      "institution": "Pension Fund Regulatory and Development Authority",
+      "sourceIdentifier": "CIRCULAR PFRDA/2026/47/REG-PF/10",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
+          "name": "Pension Fund Regulatory and Development Authority",
+          "type": "primary",
+          "authorityLevel": 1
         }
       ]
     }
@@ -308,8 +423,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T14:47:17.923793+05:30",
+      "lastSuccess": "2026-08-30T14:47:17.923793+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -368,8 +483,8 @@
       "sourceType": "rss",
       "authorityLevel": 2,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T14:47:17.923793+05:30",
+      "lastSuccess": "2026-08-30T14:47:17.923793+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -400,31 +515,18 @@
     }
   ],
   "latestRun": {
-    "id": 9,
-    "started_at": "2026-08-30T14:22:45.910736+05:30",
-    "finished_at": "2026-08-30T14:26:32.674623+05:30",
-    "status": "partial",
-    "discovered": 387,
-    "included": 0,
-    "errors": [
-      "Competition Commission of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
-      "Ministry of Electronics and Information Technology: HTTPError: HTTP Error 403: Forbidden",
-      "Department for Promotion of Industry and Internal Trade: HTTPError: HTTP Error 403: Forbidden",
-      "Ministry of Finance: URLError: <urlopen error timed out>",
-      "Ministry of Corporate Affairs: HTTPError: HTTP Error 403: Forbidden",
-      "Ministry of Labour and Employment: HTTPError: HTTP Error 403: Forbidden",
-      "Ministry of Education: HTTPError: HTTP Error 403: Forbidden",
-      "Ministry of Consumer Affairs: URLError: <urlopen error timed out>",
-      "Press Information Bureau: HTTPError: HTTP Error 403: Forbidden",
-      "Gazette of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
-      "Supreme Court of India: HTTPError: HTTP Error 403: Forbidden",
-      "FSSAI: URLError: <urlopen error timed out>"
-    ]
+    "id": 13,
+    "started_at": "2026-08-30T14:47:17.923793+05:30",
+    "finished_at": "2026-08-30T14:47:20.354885+05:30",
+    "status": "success",
+    "discovered": 45,
+    "included": 2,
+    "errors": []
   },
   "archive": [
     {
       "date": "2026-08-30",
-      "generatedAt": "2026-08-30T14:22:45.910736+05:30",
+      "generatedAt": "2026-08-30T14:47:17.923793+05:30",
       "eventCount": 2
     }
   ]

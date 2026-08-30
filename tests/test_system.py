@@ -14,7 +14,7 @@ from app.config import ROOT, topics_config
 from app.database import Database
 from app.http import Response
 from app.models import RawItem
-from app.parsing import parse_feed
+from app.parsing import article_text, parse_feed
 from app.pipeline import Pipeline
 from app.reporting import render_report
 from app.quality import publication_issues
@@ -38,6 +38,9 @@ class FakeClient:
         The proposed framework covers disclosure format, annual percentage rates, grievance contacts,
         cooling-off periods and the responsibilities of regulated entities that use lending service providers.
         It would also require regulated entities to review their contracts and digital customer journeys.
+        The proposed disclosure would identify the lender, explain all borrower charges, record recovery-agent
+        arrangements and provide a durable copy before loan execution. Regulated entities would remain
+        responsible for outsourced service providers and for handling complaints raised through digital channels.
         Public comments are invited by 15 September 2026. The directions are not yet in force, and the
         regulator has not stated a commencement date for any final instrument.</p></main></body></html>"""
         return Response(url, 200, "text/html", body)
@@ -69,6 +72,12 @@ class SystemTests(unittest.TestCase):
         self.assertTrue(is_meaningful(text, area))
         routine = entries[1]["title"] + " " + entries[1]["summary"]
         self.assertFalse(is_meaningful(routine, classify(routine, topics)))
+
+    def test_article_extraction_excludes_related_story_navigation(self):
+        html = """<nav>Old policy story</nav><article><h1>New rule</h1><div class='entry-content'><p>The regulator notified a new rule with detailed compliance duties for banks and payment firms.</p><p>The rule applies after publication and changes transaction records, disclosures, audit logs and customer notices across covered systems.</p></div></article><footer>Unrelated headlines and contact details</footer>"""
+        extracted = article_text(html)
+        self.assertIn("detailed compliance duties", extracted)
+        self.assertNotIn("Unrelated headlines", extracted)
 
     def test_database_creation_and_duplicate_hash(self):
         db = Database(self.root / "data" / "intelligence.db")

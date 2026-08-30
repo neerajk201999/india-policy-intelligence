@@ -14,7 +14,7 @@ from .database import Database
 from .http import HttpClient
 from .models import Event
 from .quality import is_publishable
-from .parsing import page_links, page_text, parse_date
+from .parsing import article_text, page_links, parse_date
 from .reporting import render_report, save_report
 
 
@@ -87,7 +87,7 @@ class Pipeline:
             if not self.offline and (len(detail.split()) < 70 or item.published_at is None):
                 try:
                     response = self.client.get(item.url)
-                    detail = page_text(response.text)
+                    detail = article_text(response.text)
                     if item.authority_level <= 2 and "html" in response.content_type.casefold():
                         pdf_url = self._first_pdf_url(response.text, response.url, item.title)
                         if pdf_url:

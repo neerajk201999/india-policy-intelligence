@@ -129,6 +129,32 @@ class TextParser(HTMLParser):
                 self.parts.append(text)
 
 
+class ArticleParser(HTMLParser):
+    """Extract a semantic article body without site navigation or related-story rails."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.depth = 0
+        self.parts: List[str] = []
+
+    def handle_starttag(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
+        values = dict(attrs)
+        classes = set((values.get("class") or "").split())
+        if self.depth:
+            self.depth += 1
+        elif tag.lower() == "article" or "entry-content" in classes or "post-content" in classes:
+            self.depth = 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if self.depth:
+            self.depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self.depth:
+            value = clean_text(data)
+            if value:
+                self.parts.append(value)
+
+
 def page_links(text: str, base_url: str) -> List[Tuple[str, str]]:
     parser = LinkParser(base_url)
     parser.feed(text)
@@ -146,3 +172,10 @@ def page_text(text: str, limit: int = 5000) -> str:
     parser = TextParser()
     parser.feed(text)
     return clean_text(" ".join(parser.parts))[:limit]
+
+
+def article_text(text: str, limit: int = 25_000) -> str:
+    parser = ArticleParser()
+    parser.feed(text)
+    extracted = clean_text(" ".join(parser.parts))
+    return extracted[:limit] if len(extracted.split()) >= 35 else page_text(text, limit)

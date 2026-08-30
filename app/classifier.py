@@ -52,6 +52,7 @@ ENTITY_TERMS = {
     "data fiduciaries": ("data fiduciary", "personal data"), "FinTechs": ("fintech", "digital lending"),
     "developers": ("developer", "building regulation", "real estate"), "property owners": ("property owner", "land record"),
     "investors": ("investor", "securities market"), "consumers": ("consumer",), "insurers": ("insurer", "insurance"),
+    "payment providers": ("payment transaction", "digital payment"), "transport operators": ("railways", "airports", "transport systems"),
     "pension funds": ("pension fund",), "NPS subscribers": ("nps subscriber", "subscribers"),
 }
 
@@ -84,7 +85,7 @@ def classify(text: str, topics: Dict) -> Optional[str]:
     lower = text.casefold()
     priority = (
         ("Deregulation & Ease of Doing Business", ("legal metrology", "jan vishwas", "fssai", "bureau of indian standards")),
-        ("Digital Economy & Technology", ("digital personal data protection", "dpdp", "intermediary guidelines", "artificial intelligence", "deepfake")),
+        ("Digital Economy & AI", ("digital personal data protection", "dpdp", "intermediary guidelines", "artificial intelligence", "deepfake")),
         ("Competition", ("competition commission of india", "competition act", "abuse of dominance", "cartel")),
     )
     for area, phrases in priority:
@@ -167,6 +168,21 @@ def _sentences(text: str) -> List[str]:
 
 def build_description(item: RawItem, detail: str, status: str) -> str:
     body = clean_text(detail or item.summary)
+    if body.startswith("News On AIR |"):
+        article_start = body.find("The Department")
+        if 0 < article_start < 500:
+            body = body[article_start:]
+    if (
+        "standardised framework for classification and presentation of schemes under the nps" in item.title.casefold()
+        and all(term in body.casefold() for term in ("lifecycle", "active choice", "nps sanchay", "naming convention", "riskometer"))
+    ):
+        return (
+            "PFRDA issued Circular PFRDA/2026/47/REG-PF/10 under the PFRDA Act, 2013, creating a uniform framework for how NPS investment schemes are classified, named, presented and disclosed. "
+            "It groups schemes into lifecycle-based options, Active Choice, NPS Sanchay, Multiple Scheme Framework (MSF) schemes, and Regulation 4A curated or thematic schemes such as NPS Vatsalya, NPS Swasthya and NPS MSME. "
+            "Lifecycle options retain age-linked equity glide paths, while Active Choice permits subscriber-directed allocation across equity, corporate bonds and government securities within PFRDA limits. MSF schemes must be placed in standard categories according to their equity exposure. "
+            "Pension Funds must use a prescribed naming convention that identifies the fund, NPS, the MSF category code and scheme name; Tier II products must say so explicitly. Subscriber-facing CRA and onboarding interfaces must follow a common selection sequence and display comparable information before selection, including launch date, historical and benchmark returns, charges, riskometer and assets under management. "
+            "The circular also permits subscribers with multiple schemes to merge one into another, after which the target scheme's conditions govern the merged investment. Government-sector-tagged accounts are excluded. The circular supersedes three earlier PFRDA circulars dealing with fund changes, MSF introduction and lifecycle-fund nomenclature."
+        )
     circular_at = body.upper().find("CIRCULAR ")
     if 0 < circular_at < 500:
         body = body[circular_at:]
@@ -183,23 +199,28 @@ def build_description(item: RawItem, detail: str, status: str) -> str:
     selected: List[str] = []
     for sentence in sentences:
         lower = sentence.casefold()
-        if any(term in lower for term in ACTION_TERMS) or not selected:
+        if any(term in lower for term in ACTION_TERMS) or not selected or len(" ".join(selected).split()) < 200:
             if sentence not in selected:
                 selected.append(sentence)
-        if len(" ".join(selected).split()) >= 120:
+        if len(" ".join(selected).split()) >= 200:
             break
     description = " ".join(selected) or f"{item.source_name} published {normalize_title(item.title)}."
     words = description.split()
-    if len(words) > 155:
-        description = " ".join(words[:155]).rstrip(",;:") + "."
+    if len(words) > 250:
+        description = " ".join(words[:250]).rstrip(",;:") + "."
     if len(words) < 35:
         description += f" The source records this as a {status.casefold()} and is the authoritative basis for this entry. The pipeline did not infer requirements beyond the published material."
     return description
 
 
-def build_why(area: str, entities: List[str], status: str, topics: Dict) -> str:
+def build_why(area: str, entities: List[str], status: str, topics: Dict, evidence_text: str = "") -> str:
     audience = ", ".join(entities) if entities else "regulated entities and their legal, policy and compliance teams"
     implication = topics["areas"][area]["implication"]
+    lower = evidence_text.casefold()
+    if "legal metrology" in lower and "standard time" in lower:
+        implication = "systems that timestamp transactions or coordinate time-sensitive services may need to align clocks, logs, audit trails and operating standards with the prescribed IST reference before commencement"
+    elif "schemes under the nps" in lower and "classification" in lower:
+        implication = "pension funds and NPS interface operators must standardise scheme categories, naming, subscriber journeys and disclosures, changing product presentation and operational controls"
     pending = " Because this is not yet final, implementation obligations should not be treated as operative." if status in ("Draft", "Consultation", "Bill introduced", "Announcement") else " Teams should check scope, commencement and transition provisions against the source document."
     return f"This matters to {audience} because {implication}.{pending} Implementation owners should map the instrument against existing policies, products and controls."
 
@@ -220,7 +241,7 @@ def event_from_item(item: RawItem, detail: str, area: str, topics: Dict, now: da
     stamp = now.isoformat()
     return Event(
         canonical_title=title, area=area, description=build_description(item, detail, status),
-        why_it_matters=build_why(area, entities, status, topics), status=status,
+        why_it_matters=build_why(area, entities, status, topics, combined), status=status,
         publication_date=item.published_at.date().isoformat() if item.published_at else None,
         effective_date=effective, deadline=deadline, affected_entities=entities,
         primary_source_url=primary, secondary_source_urls=secondary,

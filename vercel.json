@@ -21,5 +21,10 @@
         { "key": "X-Frame-Options", "value": "DENY" }
       ]
     }
+  ],
+  "rewrites": [
+    { "source": "/tracker", "destination": "/index.html" },
+    { "source": "/tracker/:path*", "destination": "/index.html" },
+    { "source": "/watchlist", "destination": "/index.html" }
   ]
 }

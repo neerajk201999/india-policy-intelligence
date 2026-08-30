@@ -31,9 +31,9 @@ def publication_issues(event: Event) -> List[str]:
                 issues.append("invalid source URL")
     what_words = len(event.description.split())
     why_words = len(event.why_it_matters.split())
-    if what_words < 65:
+    if what_words < 90:
         issues.append("insufficient factual detail")
-    if what_words > 180:
+    if what_words > 300:
         issues.append("factual summary too long")
     if why_words < 35:
         issues.append("insufficient practical analysis")
