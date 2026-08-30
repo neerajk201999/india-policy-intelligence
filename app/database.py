@@ -119,6 +119,15 @@ class Database:
         with self.connect() as conn:
             return conn.execute("SELECT * FROM events WHERE source_identifier=? ORDER BY id DESC LIMIT 1", (identifier,)).fetchone()
 
+    def find_equivalent(self, event: Event):
+        """Find the same published instrument when alternate feeds use different IDs."""
+        with self.connect() as conn:
+            return conn.execute(
+                """SELECT * FROM events WHERE canonical_title=? AND status=? AND publication_date=?
+                AND effective_date IS ? AND deadline IS ? ORDER BY id DESC LIMIT 1""",
+                (event.canonical_title, event.status, event.publication_date, event.effective_date, event.deadline),
+            ).fetchone()
+
     def recent_events(self, limit: int = 500):
         with self.connect() as conn:
             return conn.execute("SELECT * FROM events ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
@@ -145,6 +154,14 @@ class Database:
     def touch_event(self, event_id: int, seen_at: str) -> None:
         with self.connect() as conn:
             conn.execute("UPDATE events SET last_seen=? WHERE id=?", (seen_at, event_id))
+
+    def add_event_sources(self, event_id: int, sources: Sequence[dict]) -> None:
+        with self.connect() as conn:
+            for source in sources:
+                conn.execute(
+                    "INSERT OR IGNORE INTO event_sources VALUES(?,?,?,?,?)",
+                    (event_id, source["url"], source["name"], source["type"], source["authority_level"]),
+                )
 
     def open_watchlist(self):
         with self.connect() as conn:
@@ -184,6 +201,14 @@ class Database:
     def start_run(self, started_at: str) -> int:
         with self.connect() as conn:
             return int(conn.execute("INSERT INTO runs(started_at,status) VALUES(?,'running')", (started_at,)).lastrowid)
+
+    def close_interrupted_runs(self, finished_at: str) -> None:
+        """Ensure a terminated process cannot leave source health in an ambiguous state."""
+        with self.connect() as conn:
+            conn.execute(
+                "UPDATE runs SET finished_at=?, status='interrupted', errors=? WHERE status='running'",
+                (finished_at, json.dumps(["Run did not complete before the next invocation."])),
+            )
 
     def finish_run(self, run_id: int, finished_at: str, status: str, discovered: int, included: int, errors: List[str]) -> None:
         with self.connect() as conn:

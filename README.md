@@ -8,9 +8,10 @@ The system is deliberately conservative. An index-page link without a verifiable
 
 ## Quick start
 
-Python 3.9 or later is required. The MVP uses only the Python standard library, so no package installation is normally needed.
+Python 3.9 or later is required. Install the small optional dependency set before a live run; it supplies robust public-certificate handling and PDF text extraction.
 
 ```bash
+python3 -m pip install -r requirements.txt
 python3 -m app.run
 python3 scripts/export_web.py
 cd web && python3 -m http.server 8000 --bind 127.0.0.1
@@ -61,7 +62,7 @@ The database does not contain or expose an impact score. Inclusion uses qualitat
 
 ## Sources
 
-The registry includes RBI, SEBI RSS, CCI, MeitY, DPIIT, Finance, MCA, Labour, Education, Consumer Affairs, PIB, the official Akashvani national feed, eGazette, Parliament, Supreme Court, High Court services, IRDAI, PFRDA, IFSCA, TRAI, FSSAI, BIS and CERT-In. A public Google News RSS search is a secondary, zero-cost discovery fallback for topic and state-level coverage; it is not treated as authoritative.
+The 26-source registry includes RBI, SEBI RSS, CCI, MeitY, DPIIT, Finance, MCA, Labour, Education, Consumer Affairs, PIB, official Akashvani feeds and its public WordPress API, eGazette, Parliament, Supreme Court, High Court services, IRDAI, PFRDA, IFSCA, TRAI, FSSAI, BIS and CERT-In. A public Google News RSS search is a secondary, zero-cost discovery fallback for topic and state-level coverage; it is not treated as authoritative.
 
 To add a source, append an object to `config/sources.yaml`:
 
@@ -76,7 +77,7 @@ To add a source, append an object to `config/sources.yaml`:
 }
 ```
 
-Supported types are `rss`, `atom`, `page`, and `search_feed`. Set `enabled` to `false` to pause a source. HTML sources are intentionally parsed generically and conservatively; official sites often change structure.
+Supported types are `rss`, `atom`, `page`, `wordpress`, `rbi_notifications`, and `search_feed`. Set `enabled` to `false` to pause a source. Formal instruments, official updates and official data releases are publishable only when their linked evidence is substantive; secondary feeds are discovery-only until corroborated. HTML sources are intentionally parsed conservatively because official sites often change structure.
 
 ## Scheduling
 

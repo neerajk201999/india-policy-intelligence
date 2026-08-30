@@ -18,6 +18,7 @@ AREAS = [
     "Deregulation & Ease of Doing Business",
     "Digital Economy & AI",
     "Financial & Banking",
+    "Macroeconomy, Trade & Public Finance",
     "Competition",
     "Education",
     "Land, Housing & Governance Reform",

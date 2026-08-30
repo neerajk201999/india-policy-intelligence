@@ -14,7 +14,7 @@ from app.config import ROOT, topics_config
 from app.database import Database
 from app.http import Response
 from app.models import RawItem
-from app.parsing import article_text, parse_feed
+from app.parsing import article_text, parse_date, parse_feed, parse_rbi_notifications, parse_wordpress_posts
 from app.pipeline import Pipeline
 from app.reporting import render_report
 from app.quality import publication_issues
@@ -72,12 +72,25 @@ class SystemTests(unittest.TestCase):
         self.assertTrue(is_meaningful(text, area))
         routine = entries[1]["title"] + " " + entries[1]["summary"]
         self.assertFalse(is_meaningful(routine, classify(routine, topics)))
+        macro = "Industrial output growth expanded by 6.7 per cent in July, official data show."
+        self.assertEqual(classify(macro, topics), "Macroeconomy, Trade & Public Finance")
+        self.assertTrue(is_meaningful(macro, classify(macro, topics)))
 
     def test_article_extraction_excludes_related_story_navigation(self):
         html = """<nav>Old policy story</nav><article><h1>New rule</h1><div class='entry-content'><p>The regulator notified a new rule with detailed compliance duties for banks and payment firms.</p><p>The rule applies after publication and changes transaction records, disclosures, audit logs and customer notices across covered systems.</p></div></article><footer>Unrelated headlines and contact details</footer>"""
         extracted = article_text(html)
         self.assertIn("detailed compliance duties", extracted)
         self.assertNotIn("Unrelated headlines", extracted)
+
+    def test_official_api_and_dated_rbi_parsers_preserve_provenance(self):
+        posts = parse_wordpress_posts(b'''[{"id":42,"date_gmt":"2026-08-30T02:30:00","link":"https://official.example/release","title":{"rendered":"Authority issues draft directions"},"content":{"rendered":"<p>Draft directions set out the proposed framework.</p>"}}]''')
+        self.assertEqual(posts[0]["identifier"], "42")
+        self.assertEqual(posts[0]["published_at"].date().isoformat(), "2026-08-30")
+        table = """<table><tr><td><b>Aug 25, 2026</b></td></tr><tr><td><a href=NotificationUser.aspx?Id=13690&Mode=0>RBI Directions on digital payment security</a></td><td><a href=\"https://rbidocs.rbi.org.in/rule.PDF\">PDF</a></td></tr></table>"""
+        notifications = parse_rbi_notifications(table, "https://www.rbi.org.in/Scripts/NotificationUser.aspx")
+        self.assertEqual(notifications[0]["identifier"], "RBI/13690")
+        self.assertEqual(notifications[0]["url"], "https://rbidocs.rbi.org.in/rule.PDF")
+        self.assertEqual(parse_date("Aug 25, 2026").date().isoformat(), "2026-08-25")
 
     def test_database_creation_and_duplicate_hash(self):
         db = Database(self.root / "data" / "intelligence.db")
@@ -140,6 +153,17 @@ class SystemTests(unittest.TestCase):
         self.assertIsNotNone(first)
         self.assertTrue(second.is_update)
         self.assertEqual(second.previous_event_id, first.id)
+
+    def test_equivalent_official_paths_do_not_create_a_false_update(self):
+        pipeline = Pipeline(root=self.root, now=NOW, client=FakeClient())
+        pipeline.db.initialize()
+        topics = topics_config()
+        first_item = RawItem("Official feed", "official", 2, "https://example.test/release", "RBI issues directions on digital lending", NOW, "RBI issues directions on digital lending for banks and NBFCs.", "feed-100")
+        alternate_item = RawItem("Official API", "official", 2, "https://example.test/release", "RBI issues directions on digital lending", NOW, "RBI issues directions on digital lending for banks and NBFCs.", "api-100")
+        first = pipeline._store_if_new(event_from_item(first_item, first_item.summary, "Financial & Banking", topics, NOW))
+        second = pipeline._store_if_new(event_from_item(alternate_item, alternate_item.summary, "Financial & Banking", topics, NOW))
+        self.assertIsNotNone(first)
+        self.assertIsNone(second)
 
     def test_watchlist_max_four(self):
         topics = topics_config()

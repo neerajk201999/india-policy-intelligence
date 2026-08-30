@@ -3,17 +3,17 @@
   "meta": {
     "title": "India Policy & Regulatory Intelligence",
     "reportDate": "2026-08-30",
-    "generatedAt": "2026-08-30T14:47:17.923793+05:30",
+    "generatedAt": "2026-08-30T18:17:40.997714+05:30",
     "timezone": "Asia/Kolkata",
     "coverage": "Previous 24 hours; limited 3–5 day backfill for material updates",
     "refreshSchedule": "Daily at 08:00 IST"
   },
   "summary": {
-    "developments": 2,
-    "primaryVerified": 1,
+    "developments": 7,
+    "primaryVerified": 5,
     "watching": 0,
-    "healthySources": 15,
-    "totalSources": 24
+    "healthySources": 23,
+    "totalSources": 26
   },
   "areas": [
     {
@@ -26,6 +26,10 @@
     },
     {
       "name": "Financial & Banking",
+      "count": 5
+    },
+    {
+      "name": "Macroeconomy, Trade & Public Finance",
       "count": 1
     },
     {
@@ -78,7 +82,7 @@
       "isVerified": false,
       "nextStep": null,
       "firstSeen": "2026-08-30T14:47:17.923793+05:30",
-      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
       "previousEventId": null,
       "evidence": "Official release",
       "sources": [
@@ -121,7 +125,7 @@
       "isVerified": true,
       "nextStep": null,
       "firstSeen": "2026-08-30T14:47:17.923793+05:30",
-      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
       "previousEventId": null,
       "evidence": "Primary source verified",
       "sources": [
@@ -129,6 +133,213 @@
           "url": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
           "name": "Pension Fund Regulatory and Development Authority",
           "type": "primary",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis",
+      "title": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "area": "Macroeconomy, Trade & Public Finance",
+      "subtopic": null,
+      "eventType": "Data release",
+      "whatHappened": "India’s Industrial output growth, as measured by the Index of Industrial Production (IIP), expanded by 6.7 per cent in July this year on an annual basis. The July data indicates that industrial activity continued to expand at a healthy pace, although the pace of growth moderated from the revised June level. The sharp upward revision in June’s IIP growth to 8.8 per cent from 7.3 per cent also indicates that the industrial momentum entering the July quarter was stronger than initially estimated. According to government data, Manufacturing, which carries the heaviest weight in the index, grew by 7.3 per cent, while electricity and gas supply posted an 8.7 per cent expansion in July. Water supply, sewerage and waste management rose by 7.4 per cent. However, the mining sector proved to be a laggard, posting a negative growth of 0.9 per cent last month.",
+      "whyItMatters": "This matters to businesses, investors and public-policy teams because it changes the macroeconomic baseline used by businesses, investors and public-policy teams for demand, financing, trade and fiscal planning. Teams should compare the release with prior data, revisions and their own operating assumptions before changing plans. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Data release",
+      "publicationDate": "2026-08-29",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "schools"
+      ],
+      "primarySourceUrl": "https://newsonair.gov.in/industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis/",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "primarySourceTitle": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "institution": "Akashvani News - Business",
+      "sourceIdentifier": "https://newsonair.gov.in/?p=1824827",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": false,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:12:04.244412+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Official release",
+      "sources": [
+        {
+          "url": "https://newsonair.gov.in/industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis/",
+          "name": "Akashvani News - Business",
+          "type": "official",
+          "authorityLevel": 2
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "reserve-bank-of-india-rural-co-operative-banks-cash-reserve-ratio-and-statutory-liquidity-ratio-four",
+      "title": "Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/242 DOR.RET.REC.209/12.01.001/2026-27 August 25, 2026 Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026 Please refer to the Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Directions, 2025 (updated as on June 19, 2026) wherein exemption from CRR and SLR maintenance have been provided to fresh FCNR(B) deposits of minimum tenor of three years and maximum tenor of five years and fresh Non-Resident (External) Rupee (NRE) term deposits of tenor of three years or more mobilized (including deposits that are renewed upon maturity) by the banks between June 8, 2026 to September 30, 2026 and June 19, 2026 to September 30, 2026 respectively. On review, it has been decided to amend the date “September 30, 2026” to the date “August 31, 2026” for the aforesaid exemptions. Accordingly, in exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949 and pursuant to Section 42 of the Reserve Bank of India Act, 1934 and Sections 18 and 24, read with section 56 (AACS) , of Banking Regulation Act, 1949, as amended from time to time, and all other provisions / laws enabling the Reserve Bank of India in this regard, the Reserve Bank being satisfied that it is necessary and expedient in the public interest so to do, hereby, issues the Amendment Directions hereinafter specified.",
+      "whyItMatters": "This matters to banks because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT24235AB34A633E1462EB5A2C1CD01994663.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13684",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:08:51.006476+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT24235AB34A633E1462EB5A2C1CD01994663.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "reserve-bank-of-india-non-banking-financial-companies-concentration-risk-management-fourth-amendment",
+      "title": "Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/237 DOR.CRE.REC.210/07-03-008/2026-27 August 25, 2026 Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026 The Reserve Bank has issued the Reserve Bank of India (Non- Banking Financial Companies – Concentration Risk Management) Directions, 2025 dated November 28, 2025 (hereinafter referred to as ‘Directions’). On a review, it has been decided to revise the large exposure framework for Infrastructure Debt Fund- Non-Banking Financial Company (IDF-NBFC) in the Upper Layer. Accordingly, in exercise of the powers conferred by Chapter III B of the Reserve Bank of India Act, 1934, and all other provisions / laws enabling the Reserve Bank of India (‘RBI’) in this regard, RBI being satisfied that it is necessary and expedient in the public interest so to do, hereby, issues the Amendment Directions hereinafter specified. These Amendment Directions shall be called the Reserve Bank of India (Non - Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026. These Amendment Directions shall come into force with immediate effect. These Amendment Directions shall modify the Directions as under: (1) After paragraph 39 in ‘Chapter IV - Guidelines Applicable to NBFC – Upper Layer’, a new paragraph 39A shall be inserted as under: 39A.",
+      "whyItMatters": "This matters to banks, NBFCs, schools because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "NBFCs",
+        "schools"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23780AF472D8C5F49009133ED2265BD663A.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13679",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:08:51.006476+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23780AF472D8C5F49009133ED2265BD663A.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "reserve-bank-of-india-small-finance-banks-cash-reserve-ratio-and-statutory-liquidity-ratio-fourth-am",
+      "title": "Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/239 DOR.RET.REC.206/12.01.001/2026-27 August 25, 2026 Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026 Please refer to the Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Directions, 2025 (updated as on June 19, 2026) wherein exemption from CRR and SLR maintenance have been provided to fresh FCNR(B) deposits of minimum tenor of three years and maximum tenor of five years and fresh Non-Resident (External) Rupee (NRE) term deposits of tenor of three years or more mobilized (including deposits that are renewed upon maturity) by the banks between June 8, 2026 to September 30, 2026 and June 19, 2026 to September 30, 2026 respectively. On review, it has been decided to amend the date “September 30, 2026” to the date “August 31, 2026” for the aforesaid exemptions. Accordingly, in exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949 and pursuant to Section 42 of the Reserve Bank of India Act, 1934 and Sections 18 and 24 of Banking Regulation Act, 1949, as amended from time to time, and all other provisions / laws enabling the Reserve Bank of India in this regard, the Reserve Bank being satisfied that it is necessary and expedient in the public inter est so to do, hereby, issues the Amendment Directions hereinafter specified.",
+      "whyItMatters": "This matters to banks because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT239B0CFAD26A5444D0D901B21618B2F6213.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13681",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:14:08.959854+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT239B0CFAD26A5444D0D901B21618B2F6213.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-statutory-liquidity-ratio-fourth-amend",
+      "title": "Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/238 DOR.RET.REC.205/12.01.001/2026-27 August 25, 2026 Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026 Please refer to the Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Directions, 2025 (updated as on June 19, 2026) wherein exemption from CRR and SLR maintenance have been provided to fresh FCNR(B) deposits of minimum tenor of three years and maximum tenor of five years and fresh Non-Resident (External) Rupee (NRE) term deposits of tenor of three years or more mobilized (including deposits that are renewed upon maturity) by the banks between June 8, 2026 to September 30, 2026 and June 19, 2026 to September 30, 2026 respectively. On review, it has been decided to amend the date “September 30, 2026” to the date “August 31, 2026” for the aforesaid exemptions. Accordingly, in exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949 and pursuant to Section 42 of the Reserve Bank of India Act, 1934 and Sections 18 and 24 of Banking Regulation Act, 1949, as amended from time to time, and all other provisions / laws enabling the Reserve Bank of India in this regard, the Reserve Bank being satisfied that it is necessary and expedient in the public interest so to do, hereby, issues the Amendment Directions hereinafter specified.",
+      "whyItMatters": "This matters to banks because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23815ADAC26488C404E8C691ABFE0080326.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13680",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:14:08.959854+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23815ADAC26488C404E8C691ABFE0080326.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
           "authorityLevel": 1
         }
       ]
@@ -167,13 +378,54 @@
       "isVerified": false,
       "nextStep": null,
       "firstSeen": "2026-08-30T14:47:17.923793+05:30",
-      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
       "previousEventId": null,
       "evidence": "Official release",
       "sources": [
         {
           "url": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
           "name": "Akashvani News - National",
+          "type": "official",
+          "authorityLevel": 2
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "slug": "industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis",
+      "title": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "area": "Macroeconomy, Trade & Public Finance",
+      "subtopic": null,
+      "eventType": "Data release",
+      "whatHappened": "India’s Industrial output growth, as measured by the Index of Industrial Production (IIP), expanded by 6.7 per cent in July this year on an annual basis. The July data indicates that industrial activity continued to expand at a healthy pace, although the pace of growth moderated from the revised June level. The sharp upward revision in June’s IIP growth to 8.8 per cent from 7.3 per cent also indicates that the industrial momentum entering the July quarter was stronger than initially estimated. According to government data, Manufacturing, which carries the heaviest weight in the index, grew by 7.3 per cent, while electricity and gas supply posted an 8.7 per cent expansion in July. Water supply, sewerage and waste management rose by 7.4 per cent. However, the mining sector proved to be a laggard, posting a negative growth of 0.9 per cent last month.",
+      "whyItMatters": "This matters to businesses, investors and public-policy teams because it changes the macroeconomic baseline used by businesses, investors and public-policy teams for demand, financing, trade and fiscal planning. Teams should compare the release with prior data, revisions and their own operating assumptions before changing plans. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Data release",
+      "publicationDate": "2026-08-29",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "schools"
+      ],
+      "primarySourceUrl": "https://newsonair.gov.in/industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis/",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "primarySourceTitle": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "institution": "Akashvani News - Business",
+      "sourceIdentifier": "https://newsonair.gov.in/?p=1824827",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": false,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:12:04.244412+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Official release",
+      "sources": [
+        {
+          "url": "https://newsonair.gov.in/industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis/",
+          "name": "Akashvani News - Business",
           "type": "official",
           "authorityLevel": 2
         }
@@ -210,7 +462,7 @@
       "isVerified": true,
       "nextStep": null,
       "firstSeen": "2026-08-30T14:47:17.923793+05:30",
-      "lastUpdated": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
       "previousEventId": null,
       "evidence": "Primary source verified",
       "sources": [
@@ -218,6 +470,172 @@
           "url": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
           "name": "Pension Fund Regulatory and Development Authority",
           "type": "primary",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "slug": "reserve-bank-of-india-commercial-banks-cash-reserve-ratio-and-statutory-liquidity-ratio-fourth-amend",
+      "title": "Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/238 DOR.RET.REC.205/12.01.001/2026-27 August 25, 2026 Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026 Please refer to the Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Directions, 2025 (updated as on June 19, 2026) wherein exemption from CRR and SLR maintenance have been provided to fresh FCNR(B) deposits of minimum tenor of three years and maximum tenor of five years and fresh Non-Resident (External) Rupee (NRE) term deposits of tenor of three years or more mobilized (including deposits that are renewed upon maturity) by the banks between June 8, 2026 to September 30, 2026 and June 19, 2026 to September 30, 2026 respectively. On review, it has been decided to amend the date “September 30, 2026” to the date “August 31, 2026” for the aforesaid exemptions. Accordingly, in exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949 and pursuant to Section 42 of the Reserve Bank of India Act, 1934 and Sections 18 and 24 of Banking Regulation Act, 1949, as amended from time to time, and all other provisions / laws enabling the Reserve Bank of India in this regard, the Reserve Bank being satisfied that it is necessary and expedient in the public interest so to do, hereby, issues the Amendment Directions hereinafter specified.",
+      "whyItMatters": "This matters to banks because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23815ADAC26488C404E8C691ABFE0080326.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Commercial Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13680",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:14:08.959854+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23815ADAC26488C404E8C691ABFE0080326.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "slug": "reserve-bank-of-india-small-finance-banks-cash-reserve-ratio-and-statutory-liquidity-ratio-fourth-am",
+      "title": "Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/239 DOR.RET.REC.206/12.01.001/2026-27 August 25, 2026 Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026 Please refer to the Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Directions, 2025 (updated as on June 19, 2026) wherein exemption from CRR and SLR maintenance have been provided to fresh FCNR(B) deposits of minimum tenor of three years and maximum tenor of five years and fresh Non-Resident (External) Rupee (NRE) term deposits of tenor of three years or more mobilized (including deposits that are renewed upon maturity) by the banks between June 8, 2026 to September 30, 2026 and June 19, 2026 to September 30, 2026 respectively. On review, it has been decided to amend the date “September 30, 2026” to the date “August 31, 2026” for the aforesaid exemptions. Accordingly, in exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949 and pursuant to Section 42 of the Reserve Bank of India Act, 1934 and Sections 18 and 24 of Banking Regulation Act, 1949, as amended from time to time, and all other provisions / laws enabling the Reserve Bank of India in this regard, the Reserve Bank being satisfied that it is necessary and expedient in the public inter est so to do, hereby, issues the Amendment Directions hereinafter specified.",
+      "whyItMatters": "This matters to banks because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT239B0CFAD26A5444D0D901B21618B2F6213.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Small Finance Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13681",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:14:08.959854+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT239B0CFAD26A5444D0D901B21618B2F6213.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "slug": "reserve-bank-of-india-non-banking-financial-companies-concentration-risk-management-fourth-amendment",
+      "title": "Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/237 DOR.CRE.REC.210/07-03-008/2026-27 August 25, 2026 Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026 The Reserve Bank has issued the Reserve Bank of India (Non- Banking Financial Companies – Concentration Risk Management) Directions, 2025 dated November 28, 2025 (hereinafter referred to as ‘Directions’). On a review, it has been decided to revise the large exposure framework for Infrastructure Debt Fund- Non-Banking Financial Company (IDF-NBFC) in the Upper Layer. Accordingly, in exercise of the powers conferred by Chapter III B of the Reserve Bank of India Act, 1934, and all other provisions / laws enabling the Reserve Bank of India (‘RBI’) in this regard, RBI being satisfied that it is necessary and expedient in the public interest so to do, hereby, issues the Amendment Directions hereinafter specified. These Amendment Directions shall be called the Reserve Bank of India (Non - Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026. These Amendment Directions shall come into force with immediate effect. These Amendment Directions shall modify the Directions as under: (1) After paragraph 39 in ‘Chapter IV - Guidelines Applicable to NBFC – Upper Layer’, a new paragraph 39A shall be inserted as under: 39A.",
+      "whyItMatters": "This matters to banks, NBFCs, schools because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "NBFCs",
+        "schools"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23780AF472D8C5F49009133ED2265BD663A.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Non-Banking Financial Companies – Concentration Risk Management) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13679",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:08:51.006476+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT23780AF472D8C5F49009133ED2265BD663A.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "slug": "reserve-bank-of-india-rural-co-operative-banks-cash-reserve-ratio-and-statutory-liquidity-ratio-four",
+      "title": "Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "area": "Financial & Banking",
+      "subtopic": null,
+      "eventType": "Order issued",
+      "whatHappened": "RBI/2026-27/242 DOR.RET.REC.209/12.01.001/2026-27 August 25, 2026 Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026 Please refer to the Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Directions, 2025 (updated as on June 19, 2026) wherein exemption from CRR and SLR maintenance have been provided to fresh FCNR(B) deposits of minimum tenor of three years and maximum tenor of five years and fresh Non-Resident (External) Rupee (NRE) term deposits of tenor of three years or more mobilized (including deposits that are renewed upon maturity) by the banks between June 8, 2026 to September 30, 2026 and June 19, 2026 to September 30, 2026 respectively. On review, it has been decided to amend the date “September 30, 2026” to the date “August 31, 2026” for the aforesaid exemptions. Accordingly, in exercise of the powers conferred by Section 35A of the Banking Regulation Act, 1949 and pursuant to Section 42 of the Reserve Bank of India Act, 1934 and Sections 18 and 24, read with section 56 (AACS) , of Banking Regulation Act, 1949, as amended from time to time, and all other provisions / laws enabling the Reserve Bank of India in this regard, the Reserve Bank being satisfied that it is necessary and expedient in the public interest so to do, hereby, issues the Amendment Directions hereinafter specified.",
+      "whyItMatters": "This matters to banks because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Order issued",
+      "publicationDate": "2026-08-25",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks"
+      ],
+      "primarySourceUrl": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT24235AB34A633E1462EB5A2C1CD01994663.PDF",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "primarySourceTitle": "Reserve Bank of India (Rural Co-operative Banks – Cash Reserve Ratio and Statutory Liquidity Ratio) Fourth Amendment Directions, 2026",
+      "institution": "Reserve Bank of India",
+      "sourceIdentifier": "RBI/13684",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:08:51.006476+05:30",
+      "lastUpdated": "2026-08-30T18:17:40.997714+05:30",
+      "previousEventId": null,
+      "evidence": "Primary source verified",
+      "sources": [
+        {
+          "url": "https://rbidocs.rbi.org.in/rdocs/notification/PDFs/NT24235AB34A633E1462EB5A2C1CD01994663.PDF",
+          "name": "Reserve Bank of India",
+          "type": "rbi_notifications",
           "authorityLevel": 1
         }
       ]
@@ -231,8 +649,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -242,9 +660,9 @@
       "url": "https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADVLIST",
       "sourceType": "page",
       "authorityLevel": 1,
-      "topic": "Digital Economy & Technology",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "topic": "Digital Economy & AI",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -255,10 +673,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Competition",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
-      "failureCount": 1,
-      "lastError": "Competition Commission of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
       "health": "healthy"
     },
     {
@@ -267,11 +685,11 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": null,
-      "failureCount": 3,
-      "lastError": "Department for Promotion of Industry and Internal Trade: HTTPError: HTTP Error 403: Forbidden",
-      "health": "degraded"
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
     },
     {
       "name": "FSSAI",
@@ -279,10 +697,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
-      "failureCount": 1,
-      "lastError": "FSSAI: URLError: <urlopen error timed out>",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
       "health": "healthy"
     },
     {
@@ -291,10 +709,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
-      "failureCount": 1,
-      "lastError": "Gazette of India: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1016)>",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
       "health": "healthy"
     },
     {
@@ -303,8 +721,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Courts",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -315,8 +733,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -327,8 +745,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -339,9 +757,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
       "lastSuccess": null,
-      "failureCount": 3,
+      "failureCount": 5,
       "lastError": "Ministry of Consumer Affairs: URLError: <urlopen error timed out>",
       "health": "degraded"
     },
@@ -351,10 +769,10 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Corporate Governance / ESG",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
       "lastSuccess": null,
-      "failureCount": 3,
-      "lastError": "Ministry of Corporate Affairs: HTTPError: HTTP Error 403: Forbidden",
+      "failureCount": 5,
+      "lastError": "Ministry of Corporate Affairs: URLError: <urlopen error [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:1129)>",
       "health": "degraded"
     },
     {
@@ -363,23 +781,23 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Education",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": null,
-      "failureCount": 3,
-      "lastError": "Ministry of Education: HTTPError: HTTP Error 403: Forbidden",
-      "health": "degraded"
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
     },
     {
       "name": "Ministry of Electronics and Information Technology",
       "url": "https://www.meity.gov.in/documents/notifications",
       "sourceType": "page",
       "authorityLevel": 1,
-      "topic": "Digital Economy & Technology",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": null,
-      "failureCount": 3,
-      "lastError": "Ministry of Electronics and Information Technology: HTTPError: HTTP Error 403: Forbidden",
-      "health": "degraded"
+      "topic": "Digital Economy & AI",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
     },
     {
       "name": "Ministry of Finance",
@@ -387,9 +805,9 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
       "lastSuccess": null,
-      "failureCount": 3,
+      "failureCount": 5,
       "lastError": "Ministry of Finance: URLError: <urlopen error timed out>",
       "health": "degraded"
     },
@@ -399,11 +817,11 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Deregulation & Ease of Doing Business",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": null,
-      "failureCount": 3,
-      "lastError": "Ministry of Labour and Employment: HTTPError: HTTP Error 403: Forbidden",
-      "health": "degraded"
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
     },
     {
       "name": "Parliament of India - Bills",
@@ -411,8 +829,8 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -423,20 +841,20 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:47:17.923793+05:30",
-      "lastSuccess": "2026-08-30T14:47:17.923793+05:30",
+      "lastChecked": "2026-08-30T18:17:40.997714+05:30",
+      "lastSuccess": "2026-08-30T18:17:40.997714+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
     },
     {
       "name": "Reserve Bank of India",
-      "url": "https://website.rbi.org.in/web/rbi/notifications",
-      "sourceType": "page",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "sourceType": "rbi_notifications",
       "authorityLevel": 1,
       "topic": "Financial & Banking",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:17:40.997714+05:30",
+      "lastSuccess": "2026-08-30T18:17:40.997714+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -447,8 +865,8 @@
       "sourceType": "rss",
       "authorityLevel": 1,
       "topic": "Financial & Banking; Corporate Governance / ESG",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:17:40.997714+05:30",
+      "lastSuccess": "2026-08-30T18:17:40.997714+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -459,20 +877,32 @@
       "sourceType": "page",
       "authorityLevel": 1,
       "topic": "Courts",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": null,
-      "failureCount": 3,
-      "lastError": "Supreme Court of India: HTTPError: HTTP Error 403: Forbidden",
-      "health": "degraded"
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
     },
     {
       "name": "Telecom Regulatory Authority of India",
       "url": "https://www.trai.gov.in/notifications/press-release",
       "sourceType": "page",
       "authorityLevel": 1,
-      "topic": "Digital Economy & Technology",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "topic": "Digital Economy & AI",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Akashvani News - Business",
+      "url": "https://newsonair.gov.in/category/business/feed/",
+      "sourceType": "rss",
+      "authorityLevel": 2,
+      "topic": "Macroeconomy, Trade & Public Finance",
+      "lastChecked": "2026-08-30T18:17:40.997714+05:30",
+      "lastSuccess": "2026-08-30T18:17:40.997714+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -483,8 +913,20 @@
       "sourceType": "rss",
       "authorityLevel": 2,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:47:17.923793+05:30",
-      "lastSuccess": "2026-08-30T14:47:17.923793+05:30",
+      "lastChecked": "2026-08-30T18:17:40.997714+05:30",
+      "lastSuccess": "2026-08-30T18:17:40.997714+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Akashvani News - Official desk",
+      "url": "https://newsonair.gov.in/wp-json/wp/v2/posts?per_page=100&orderby=date&order=desc&after={since}",
+      "sourceType": "wordpress",
+      "authorityLevel": 2,
+      "topic": "All",
+      "lastChecked": "2026-08-30T18:17:40.997714+05:30",
+      "lastSuccess": "2026-08-30T18:17:40.997714+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
@@ -495,11 +937,11 @@
       "sourceType": "rss",
       "authorityLevel": 2,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": null,
-      "failureCount": 3,
-      "lastError": "Press Information Bureau: HTTPError: HTTP Error 403: Forbidden",
-      "health": "degraded"
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
     },
     {
       "name": "State government discovery",
@@ -507,27 +949,27 @@
       "sourceType": "search_feed",
       "authorityLevel": 3,
       "topic": "All",
-      "lastChecked": "2026-08-30T14:22:45.910736+05:30",
-      "lastSuccess": "2026-08-30T14:22:45.910736+05:30",
+      "lastChecked": "2026-08-30T18:09:55.784282+05:30",
+      "lastSuccess": "2026-08-30T18:09:55.784282+05:30",
       "failureCount": 0,
       "lastError": null,
       "health": "healthy"
     }
   ],
   "latestRun": {
-    "id": 13,
-    "started_at": "2026-08-30T14:47:17.923793+05:30",
-    "finished_at": "2026-08-30T14:47:20.354885+05:30",
+    "id": 18,
+    "started_at": "2026-08-30T18:17:40.997714+05:30",
+    "finished_at": "2026-08-30T18:18:07.378799+05:30",
     "status": "success",
-    "discovered": 45,
-    "included": 2,
+    "discovered": 185,
+    "included": 0,
     "errors": []
   },
   "archive": [
     {
       "date": "2026-08-30",
-      "generatedAt": "2026-08-30T14:47:17.923793+05:30",
-      "eventCount": 2
+      "generatedAt": "2026-08-30T18:17:40.997714+05:30",
+      "eventCount": 7
     }
   ]
 }

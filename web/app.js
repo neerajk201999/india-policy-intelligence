@@ -12,6 +12,7 @@ const AREAS = [
   ["Deregulation & Ease of Doing Business", "Deregulation"],
   ["Digital Economy & AI", "Digital & AI"],
   ["Financial & Banking", "Financial"],
+  ["Macroeconomy, Trade & Public Finance", "Macro & Public Finance"],
   ["Competition", "Competition"],
   ["Education", "Education"],
   ["Land, Housing & Governance Reform", "Land & Governance"],
@@ -207,6 +208,28 @@ function emptyState(title, copy) {
   section.append(heading, paragraph); return section;
 }
 
+function compactSummary(value, limit = 44) {
+  const words = String(value || "").trim().split(/\s+/).filter(Boolean);
+  if (words.length <= limit) return words.join(" ");
+  return `${words.slice(0, limit).join(" ")}…`;
+}
+
+function createBriefingEntry(event, index) {
+  const node = $("#briefing-template").content.firstElementChild.cloneNode(true);
+  $(".briefing-index", node).textContent = String(index + 1);
+  $(".event-area", node).textContent = areaLabel(event.area);
+  $(".event-status", node).textContent = event.status || "Policy update";
+  $(".verification span", node).textContent = event.evidence || "Source linked";
+  if (!event.primarySourceUrl) $(".verification", node).hidden = true;
+  const title = $("h2 a", node);
+  title.textContent = event.title || "Untitled policy development";
+  title.href = eventPath(event);
+  $(".briefing-summary", node).textContent = compactSummary(event.whatHappened);
+  $(".briefing-institution", node).textContent = event.institution || "Source linked";
+  node.querySelectorAll("a[data-route]").forEach((link) => { link.href = eventPath(event); });
+  return node;
+}
+
 function renderBriefingList(container) {
   const events = state.data.events.filter(matches);
   const count = document.querySelector("[data-results-count]");
@@ -219,7 +242,7 @@ function renderBriefingList(container) {
     ));
     return;
   }
-  container.replaceChildren(...events.map((event) => createPolicyEvent(event)));
+  container.replaceChildren(...events.map((event, index) => createBriefingEntry(event, index)));
 }
 
 function sortedTracker() {
@@ -256,7 +279,8 @@ function renderListOnly() {
 
 function renderBriefing() {
   const date = formatDate(state.data.meta.reportDate) || "Date unavailable";
-  setIntro("Daily briefing", "Today’s verified developments", "Verified regulatory and policy developments from the last 24 hours.", `${date} · ${formatUpdated(state.data.meta.generatedAt)}`);
+  const count = state.data.events.length;
+  setIntro("Daily briefing", "The morning policy brief", `${count} source-linked developments across regulation, official updates and economic data.`, `${date} · ${formatUpdated(state.data.meta.generatedAt)}`);
   setMeta("India Policy Intelligence", "Today’s verified Indian policy and regulatory developments.");
   const view = $("#route-view");
   const controls = createControls(state.data.events);

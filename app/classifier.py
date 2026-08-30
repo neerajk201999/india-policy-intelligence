@@ -15,6 +15,14 @@ ACTION_TERMS = (
     "draft", "consultation", "order", "judgment", "judgement", "approves", "approved", "amendment",
     "amends", "directions", "guidelines", "framework", "penalty", "enforcement", "bill", "act",
     "deadline", "effective", "implementation", "launches", "issues", "releases", "mandates", "prohibits",
+    "clarifies", "commences", "operationalises", "operationalizes", "introduces", "rolls out",
+)
+DATA_TERMS = (
+    "data shows", "data show", "data released", "data release", "statistics", "statistical",
+    "industrial output", "index of industrial production", "foreign exchange reserves", "forex reserves",
+    "inflation", "consumer price index", "wholesale price index", "trade deficit", "exports", "imports",
+    "fiscal deficit", "tax collection", "divestment", "disinvestment", "gross domestic product", "gdp",
+    "expanded by", "grew by", "growth of",
 )
 EXCLUDE_TERMS = (
     "photo gallery", "courtesy call", "paid respects", "celebrates", "celebration", "inaugurates conference",
@@ -41,6 +49,7 @@ STATUS_RULES: List[Tuple[str, Tuple[str, ...]]] = [
     ("Notified", ("gazette notification", "notified", "notifies", "notification")),
     ("Order issued", ("order", "directions")),
     ("In force", ("comes into force", "effective from", "in force")),
+    ("Data release", ("data shows", "data show", "data released", "industrial output", "index of industrial production", "foreign exchange reserves", "forex reserves", "consumer price index", "wholesale price index", "fiscal deficit")),
     ("Announcement", ("announces", "announcement", "launches", "unveils")),
 ]
 ENTITY_TERMS = {
@@ -71,7 +80,8 @@ def normalize_title(title: str) -> str:
 
 
 def title_tokens(title: str) -> set:
-    return {word for word in re.findall(r"[a-z0-9]+", title.casefold()) if len(word) > 2 and word not in {"the", "and", "for", "with", "from", "india"}}
+    ignored = {"the", "and", "for", "with", "from", "under", "india", "reserve", "bank", "banks", "directions", "direction", "amendment", "amended", "issued", "order", "orders"}
+    return {word for word in re.findall(r"[a-z0-9]+", title.casefold()) if len(word) > 2 and word not in ignored}
 
 
 def similar_title(left: str, right: str) -> bool:
@@ -84,6 +94,7 @@ def similar_title(left: str, right: str) -> bool:
 def classify(text: str, topics: Dict) -> Optional[str]:
     lower = text.casefold()
     priority = (
+        ("Macroeconomy, Trade & Public Finance", ("industrial output", "foreign exchange reserves", "forex reserves", "fiscal deficit", "trade deficit", "consumer price index", "wholesale price index")),
         ("Deregulation & Ease of Doing Business", ("legal metrology", "jan vishwas", "fssai", "bureau of indian standards")),
         ("Digital Economy & AI", ("digital personal data protection", "dpdp", "intermediary guidelines", "artificial intelligence", "deepfake")),
         ("Competition", ("competition commission of india", "competition act", "abuse of dominance", "cartel")),
@@ -103,7 +114,9 @@ def is_meaningful(text: str, area: Optional[str]) -> bool:
     lower = text.casefold()
     if not area or any(term in lower for term in EXCLUDE_TERMS):
         return False
-    return any(term in lower for term in ACTION_TERMS)
+    return any(term in lower for term in ACTION_TERMS) or (
+        area == "Macroeconomy, Trade & Public Finance" and any(term in lower for term in DATA_TERMS)
+    )
 
 
 def extract_status(text: str) -> str:
@@ -168,10 +181,27 @@ def _sentences(text: str) -> List[str]:
 
 def build_description(item: RawItem, detail: str, status: str) -> str:
     body = clean_text(detail or item.summary)
+    rbi_reference = body.find("RBI/20")
+    if 0 < rbi_reference < 1200:
+        # RBI PDFs frequently begin with bilingual headers that pypdf cannot decode
+        # cleanly. The numbered English instrument is the relevant source text.
+        body = body[rbi_reference:]
     if body.startswith("News On AIR |"):
         article_start = body.find("The Department")
         if 0 < article_start < 500:
             body = body[article_start:]
+        else:
+            title_start = body.casefold().find(item.title.casefold())
+            if 0 < title_start < 500:
+                # News On AIR pages put the headline and a short image caption ahead
+                # of the article.  Keep the reporting, rather than repeating the
+                # headline/caption in the evidence summary.
+                body = body[title_start + len(item.title):].lstrip(" :-|")
+                body = re.sub(
+                    r"^(?:[A-Z][A-Za-z ,.'’/-]{1,90})\s+(?=(?:India['’]s|According to|The Department))",
+                    "",
+                    body,
+                )
     if (
         "standardised framework for classification and presentation of schemes under the nps" in item.title.casefold()
         and all(term in body.casefold() for term in ("lifecycle", "active choice", "nps sanchay", "naming convention", "riskometer"))
@@ -186,9 +216,10 @@ def build_description(item: RawItem, detail: str, status: str) -> str:
     circular_at = body.upper().find("CIRCULAR ")
     if 0 < circular_at < 500:
         body = body[circular_at:]
-    operative_at = body.casefold().find("in exercise of the powers")
-    if 0 < operative_at < 650:
-        body = body[operative_at:]
+    # Keep the title and opening explanatory paragraph of RBI directions.  The
+    # operative clause often starts with boilerplate ("In exercise of the
+    # powers…") and, on its own, makes a correct instrument look disconnected
+    # from the policy change it actually records.
     body = re.sub(
         r"Classification Framework\s*1\.?\s*Classification of Investment Schemes\s*1\.1",
         "The framework states that",
@@ -217,11 +248,18 @@ def build_why(area: str, entities: List[str], status: str, topics: Dict, evidenc
     audience = ", ".join(entities) if entities else "regulated entities and their legal, policy and compliance teams"
     implication = topics["areas"][area]["implication"]
     lower = evidence_text.casefold()
+    if area == "Macroeconomy, Trade & Public Finance":
+        audience = "businesses, investors and public-policy teams"
     if "legal metrology" in lower and "standard time" in lower:
         implication = "systems that timestamp transactions or coordinate time-sensitive services may need to align clocks, logs, audit trails and operating standards with the prescribed IST reference before commencement"
     elif "schemes under the nps" in lower and "classification" in lower:
         implication = "pension funds and NPS interface operators must standardise scheme categories, naming, subscriber journeys and disclosures, changing product presentation and operational controls"
-    pending = " Because this is not yet final, implementation obligations should not be treated as operative." if status in ("Draft", "Consultation", "Bill introduced", "Announcement") else " Teams should check scope, commencement and transition provisions against the source document."
+    if status == "Data release":
+        pending = " Teams should compare the release with prior data, revisions and their own operating assumptions before changing plans."
+    elif status in ("Draft", "Consultation", "Bill introduced", "Announcement"):
+        pending = " Because this is not yet final, implementation obligations should not be treated as operative."
+    else:
+        pending = " Teams should check scope, commencement and transition provisions against the source document."
     return f"This matters to {audience} because {implication}.{pending} Implementation owners should map the instrument against existing policies, products and controls."
 
 

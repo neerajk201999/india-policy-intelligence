@@ -3,8 +3,8 @@
     {
       "name": "Reserve Bank of India",
       "short_name": "RBI",
-      "url": "https://website.rbi.org.in/web/rbi/notifications",
-      "type": "page",
+      "url": "https://www.rbi.org.in/Scripts/NotificationUser.aspx",
+      "type": "rbi_notifications",
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking",
@@ -114,6 +114,24 @@
       "short_name": "News On AIR",
       "url": "https://newsonair.gov.in/category/national/feed/",
       "type": "rss",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "All"
+    },
+    {
+      "name": "Akashvani News - Business",
+      "short_name": "News On AIR Business",
+      "url": "https://newsonair.gov.in/category/business/feed/",
+      "type": "rss",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "Macroeconomy, Trade & Public Finance"
+    },
+    {
+      "name": "Akashvani News - Official desk",
+      "short_name": "News On AIR Desk",
+      "url": "https://newsonair.gov.in/wp-json/wp/v2/posts?per_page=100&orderby=date&order=desc&after={since}",
+      "type": "wordpress",
       "category": "official",
       "authority_level": 2,
       "topic": "All"

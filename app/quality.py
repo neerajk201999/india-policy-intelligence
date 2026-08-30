@@ -11,7 +11,7 @@ ALLOWED_STATUS = {
     "Proposed", "Announcement", "Consultation", "Draft", "Cabinet approved",
     "Bill introduced", "Bill passed", "Presidential assent", "Notified",
     "Regulation issued", "Circular issued", "Order issued", "In force",
-    "Enforcement action", "Court judgment", "Stayed", "Withdrawn", "Repealed", "Pending",
+    "Enforcement action", "Court judgment", "Data release", "Stayed", "Withdrawn", "Repealed", "Pending",
 }
 
 
@@ -31,7 +31,8 @@ def publication_issues(event: Event) -> List[str]:
                 issues.append("invalid source URL")
     what_words = len(event.description.split())
     why_words = len(event.why_it_matters.split())
-    if what_words < 90:
+    minimum_detail = 55 if event.status == "Data release" else 90
+    if what_words < minimum_detail:
         issues.append("insufficient factual detail")
     if what_words > 300:
         issues.append("factual summary too long")

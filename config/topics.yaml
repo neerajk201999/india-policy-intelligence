@@ -15,6 +15,11 @@
       "search_terms": ["RBI circular", "SEBI circular", "IRDAI regulation", "PFRDA circular", "IFSCA notification"],
       "implication": "it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services"
     },
+    "Macroeconomy, Trade & Public Finance": {
+      "keywords": ["gross domestic product", "gdp", "industrial output", "index of industrial production", "iip", "foreign exchange reserves", "forex reserves", "consumer price index", "cpi", "wholesale price index", "wpi", "inflation", "trade deficit", "merchandise exports", "merchandise imports", "fiscal deficit", "tax collection", "divestment", "disinvestment", "capital expenditure", "public finance", "government borrowing", "current account", "balance of payments", "manufacturing output"],
+      "search_terms": ["India industrial output data", "India forex reserves", "India inflation data", "India fiscal deficit", "India trade data"],
+      "implication": "it changes the macroeconomic baseline used by businesses, investors and public-policy teams for demand, financing, trade and fiscal planning"
+    },
     "Competition": {
       "keywords": ["competition act", "competition commission", "cci", "cartel", "abuse of dominance", "combination", "merger review", "digital competition", "self-preferencing", "app store", "gatekeeper", "nclat", "antitrust"],
       "search_terms": ["CCI order competition", "Competition Act regulation", "CCI combination", "NCLAT competition"],

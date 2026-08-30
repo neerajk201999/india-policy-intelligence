@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+import json
 import re
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
@@ -39,7 +40,7 @@ def parse_date(value: Optional[str]) -> Optional[datetime]:
             return result
         except ValueError:
             continue
-    for fmt in ("%d %B %Y", "%d %b %Y", "%d %b, %Y %z", "%d %b, %Y", "%B %d, %Y", "%d-%m-%Y", "%d/%m/%Y"):
+    for fmt in ("%d %B %Y", "%d %b %Y", "%d %b, %Y %z", "%d %b, %Y", "%b %d, %Y", "%b %d %Y", "%B %d, %Y", "%d-%m-%Y", "%d/%m/%Y"):
         try:
             return datetime.strptime(value, fmt).replace(tzinfo=timezone.utc)
         except ValueError:
@@ -77,6 +78,52 @@ def parse_feed(data: bytes) -> List[Dict[str, object]]:
         guid = clean_text(_first_text(node, ("guid", "id"))) or None
         if title and link:
             items.append({"title": title, "url": link.strip(), "summary": summary, "published_at": date, "identifier": guid})
+    return items
+
+
+def parse_wordpress_posts(data: bytes) -> List[Dict[str, object]]:
+    """Parse the public WordPress REST response used by several official publishers."""
+    try:
+        payload = json.loads(data.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return []
+    if not isinstance(payload, list):
+        return []
+    items: List[Dict[str, object]] = []
+    for post in payload:
+        if not isinstance(post, dict):
+            continue
+        title_data = post.get("title") or {}
+        content_data = post.get("content") or {}
+        title = clean_text(title_data.get("rendered") if isinstance(title_data, dict) else str(title_data))
+        detail = clean_text(content_data.get("rendered") if isinstance(content_data, dict) else "")
+        link = str(post.get("link") or "").strip()
+        published = parse_date(str(post.get("date_gmt") or post.get("date") or ""))
+        identifier = str(post.get("id") or "").strip() or None
+        if title and link:
+            items.append({"title": title, "url": link, "summary": detail, "published_at": published, "identifier": identifier})
+    return items
+
+
+def parse_rbi_notifications(text: str, base_url: str) -> List[Dict[str, object]]:
+    """Read RBI's dated notification table, preserving the linked official PDF."""
+    from urllib.parse import urljoin
+
+    headers = list(re.finditer(r"<b>\s*([A-Z][a-z]{2}\s+\d{1,2},\s+20\d{2})\s*</b>", text, re.I))
+    items: List[Dict[str, object]] = []
+    for index, header in enumerate(headers):
+        end = headers[index + 1].start() if index + 1 < len(headers) else len(text)
+        published = parse_date(header.group(1))
+        section = text[header.end():end]
+        for row in re.findall(r"<tr[^>]*>(.*?)</tr>", section, re.I | re.S):
+            match = re.search(r"<a[^>]+href\s*=\s*['\"]?([^'\"\s>]*NotificationUser\.aspx\?Id=([^&'\"\s>]+)[^'\"\s>]*)[^>]*>(.*?)</a>", row, re.I | re.S)
+            if not match:
+                continue
+            title = clean_text(match.group(3))
+            pdf = re.search(r"href\s*=\s*['\"]([^'\"]+\.PDF)['\"]", row, re.I)
+            url = urljoin(base_url, pdf.group(1) if pdf else match.group(1))
+            if title and published:
+                items.append({"title": title, "url": url, "summary": "", "published_at": published, "identifier": f"RBI/{match.group(2)}"})
     return items
 
 

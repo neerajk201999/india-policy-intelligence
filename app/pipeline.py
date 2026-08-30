@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 from pathlib import Path
 from typing import List, Optional
 from zoneinfo import ZoneInfo
@@ -37,7 +37,9 @@ class Pipeline:
         self.now = (now or datetime.now(IST)).astimezone(IST)
         self.lookback_days = min(max(lookback_days, 1), 5)
         self.primary_since = self.now - timedelta(hours=24)
-        self.backfill_since = self.now - timedelta(days=self.lookback_days)
+        # Sources usually publish a date without a time. Use an IST calendar boundary so
+        # a five-day backfill never drops material posted early on the fifth day.
+        self.backfill_since = datetime.combine(self.now.date() - timedelta(days=self.lookback_days), time.min, tzinfo=IST)
         self.offline = offline
         self.max_items = max_items
         self.client = client or HttpClient()
@@ -47,6 +49,7 @@ class Pipeline:
 
     def run(self) -> RunResult:
         self.db.initialize()
+        self.db.close_interrupted_runs(self.now.isoformat())
         source_list = self.sources["sources"]
         self.db.sync_sources(source_list)
         run_id = self.db.start_run(self.now.isoformat())
@@ -79,15 +82,19 @@ class Pipeline:
     def _prepare_candidates(self, items) -> List[Event]:
         result = []
         for item in items:
-            combined = f"{item.title} {item.summary}"
-            area = classify(combined, self.topics)
-            if not is_meaningful(combined, area):
+            # The headline must independently identify a policy, regulatory or data
+            # development. Official publisher pages contain broad political and social
+            # coverage; allowing incidental terms in a long article body to establish
+            # relevance creates convincing but incorrect entries.
+            area = classify(item.title, self.topics)
+            if not is_meaningful(item.title, area):
                 continue
+            combined = f"{item.title} {item.summary}"
             detail = item.summary
             if not self.offline and (len(detail.split()) < 70 or item.published_at is None):
                 try:
                     response = self.client.get(item.url)
-                    detail = article_text(response.text)
+                    detail = self._pdf_text(response.body) if response.body.startswith(b"%PDF-") else article_text(response.text)
                     if item.authority_level <= 2 and "html" in response.content_type.casefold():
                         pdf_url = self._first_pdf_url(response.text, response.url, item.title)
                         if pdf_url:
@@ -189,6 +196,12 @@ class Pipeline:
         exact = self.db.find_hash(event.content_hash)
         if exact:
             self.db.touch_event(exact["id"], self.now.isoformat())
+            self.db.add_event_sources(exact["id"], event.sources)
+            return None
+        equivalent = self.db.find_equivalent(event)
+        if equivalent:
+            self.db.touch_event(equivalent["id"], self.now.isoformat())
+            self.db.add_event_sources(equivalent["id"], event.sources)
             return None
         previous = self.db.find_identifier(event.source_identifier) if event.source_identifier else None
         if previous is None:
@@ -197,6 +210,18 @@ class Pipeline:
                     previous = row
                     break
         if previous:
+            # Two publication routes can describe the same instrument with different
+            # source identifiers. Do not turn corroboration into a fictional update.
+            unchanged_state = (
+                previous["status"] == event.status
+                and previous["publication_date"] == event.publication_date
+                and previous["effective_date"] == event.effective_date
+                and previous["deadline"] == event.deadline
+            )
+            if unchanged_state:
+                self.db.touch_event(previous["id"], self.now.isoformat())
+                self.db.add_event_sources(previous["id"], event.sources)
+                return None
             # Same event with materially changed fingerprint/status/date is an update.
             event.previous_event_id = previous["id"]
             event.is_update = True

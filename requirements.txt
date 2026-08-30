@@ -1,2 +1,4 @@
+# A maintained CA bundle keeps public-government TLS validation reliable in CI.
+certifi>=2024.2.2
 # Optional but strongly recommended for extracting official regulatory PDFs.
 pypdf>=5,<7

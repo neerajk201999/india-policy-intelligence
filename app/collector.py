@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Tuple
 from urllib.parse import quote_plus
 
 from .database import Database
 from .http import HttpClient
 from .models import RawItem
-from .parsing import page_links, parse_feed
+from .parsing import page_links, parse_feed, parse_rbi_notifications, parse_wordpress_posts
 
 
 LOG = logging.getLogger(__name__)
@@ -50,6 +50,9 @@ class Collector:
         return self._deduplicate(output)
 
     def _source_urls(self, source: dict, topics: Dict) -> List[str]:
+        if source.get("type") == "wordpress":
+            since = self.since.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+            return [source["url"].replace("{since}", since)]
         if source.get("type") != "search_feed":
             return [source["url"]]
         urls = []
@@ -65,6 +68,10 @@ class Collector:
         entries = []
         if kind in ("rss", "atom", "search_feed"):
             entries = parse_feed(body)
+        elif kind == "wordpress":
+            entries = parse_wordpress_posts(body)
+        elif kind == "rbi_notifications":
+            entries = parse_rbi_notifications(text, final_url)
         elif kind == "page":
             entries = [
                 {"title": title, "url": url, "summary": "", "published_at": None, "identifier": None}
