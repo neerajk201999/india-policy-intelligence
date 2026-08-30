@@ -11,7 +11,7 @@
       "implication": "it may alter data, platform, AI, cybersecurity or digital-market obligations and product design decisions"
     },
     "Financial & Banking": {
-      "keywords": ["reserve bank", "rbi", "banking regulation", "nbfc", "non-banking financial", "payment aggregator", "payments", "digital lending", "kyc", "know your customer", "aml", "anti-money laundering", "pmla", "fintech", "sebi", "securities", "market conduct", "disclosure", "irdai", "insurance", "pfrda", "pension", "ifsca", "financial-sector", "consumer finance"],
+      "keywords": ["reserve bank", "rbi", "banking regulation", "nbfc", "non-banking financial", "payment aggregator", "payments", "digital lending", "kyc", "know your customer", "aml", "anti-money laundering", "pmla", "fintech", "sebi", "securities", "government securities", "treasury bills", "liquidity", "repo", "market conduct", "disclosure", "irdai", "insurance", "pfrda", "pension", "ifsca", "financial-sector", "consumer finance"],
       "search_terms": ["RBI circular", "SEBI circular", "IRDAI regulation", "PFRDA circular", "IFSCA notification"],
       "implication": "it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services"
     },

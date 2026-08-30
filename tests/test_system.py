@@ -10,7 +10,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from app.classifier import classify, classify_signal_type, event_from_item, is_meaningful
-from app.config import ROOT, topics_config
+from app.config import ROOT, sources_config, topics_config
 from app.database import Database
 from app.http import Response
 from app.models import RawItem
@@ -78,6 +78,29 @@ class SystemTests(unittest.TestCase):
         self.assertEqual(classify_signal_type(macro, "Data release"), "Data")
         self.assertEqual(classify_signal_type("Draft regulations invite comments", "Draft"), "Consultation")
         self.assertEqual(classify_signal_type("Bill introduced in Parliament", "Bill introduced"), "Legislative")
+        self.assertEqual(classify_signal_type("Auction of State Government Securities", "Announcement", "Institutional"), "Institutional")
+
+    def test_comprehensive_registry_contains_requested_source_families(self):
+        sources = sources_config()["sources"]
+        names = {source["name"] for source in sources}
+        self.assertGreaterEqual(len(sources), 52)
+        required = {
+            "Reserve Bank of India - Publications RSS", "Open Government Data Platform India",
+            "Ministry of Statistics and Programme Implementation", "PRS Legislative Research - Bill Track",
+            "Insolvency and Bankruptcy Board of India", "National Payments Corporation of India",
+            "Central Board of Indirect Taxes and Customs", "Directorate General of Foreign Trade",
+            "Central Drugs Standard Control Organisation", "Central Electricity Authority",
+            "Petroleum and Natural Gas Regulatory Board", "Rajya Sabha - Bills", "India Code",
+        }
+        self.assertTrue(required.issubset(names))
+
+    def test_query_identifiers_become_canonical_source_ids(self):
+        source = {"name": "RBI", "short_name": "RBI Releases"}
+        from app.collector import Collector
+        self.assertEqual(
+            Collector._identifier_from_url("https://rbi.example/release?prid=63468", source),
+            "RBI Releases/PRID/63468",
+        )
 
     def test_article_extraction_excludes_related_story_navigation(self):
         html = """<nav>Old policy story</nav><article><h1>New rule</h1><div class='entry-content'><p>The regulator notified a new rule with detailed compliance duties for banks and payment firms.</p><p>The rule applies after publication and changes transaction records, disclosures, audit logs and customer notices across covered systems.</p></div></article><footer>Unrelated headlines and contact details</footer>"""

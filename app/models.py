@@ -15,6 +15,8 @@ class RawItem:
     published_at: Optional[datetime]
     summary: str = ""
     source_identifier: Optional[str] = None
+    default_signal_type: Optional[str] = None
+    default_area: Optional[str] = None
 
 
 @dataclass

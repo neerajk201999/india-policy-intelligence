@@ -15,7 +15,7 @@ ACTION_TERMS = (
     "draft", "consultation", "order", "judgment", "judgement", "approves", "approved", "amendment",
     "amends", "directions", "guidelines", "framework", "penalty", "enforcement", "bill", "act",
     "deadline", "effective", "implementation", "launches", "issues", "releases", "mandates", "prohibits",
-    "clarifies", "commences", "operationalises", "operationalizes", "introduces", "rolls out",
+    "clarifies", "commences", "operationalises", "operationalizes", "introduces", "rolls out", "auction",
 )
 DATA_TERMS = (
     "data shows", "data show", "data released", "data release", "statistics", "statistical",
@@ -131,22 +131,22 @@ def extract_status(text: str) -> str:
     return "Announcement"
 
 
-def classify_signal_type(text: str, status: str) -> str:
+def classify_signal_type(text: str, status: str, default: Optional[str] = None) -> str:
     """Tag the signal independently of legal status and source provenance."""
     lower = text.casefold()
     if status in ("Draft", "Consultation") or any(term in lower for term in ("consultation", "draft", "comments invited", "discussion paper")):
         return "Consultation"
     if status == "Data release" or any(term in lower for term in DATA_TERMS):
         return "Data"
-    if any(term in lower for term in ("bill", "parliament", "legislative", "committee report")):
+    if status in ("Bill introduced", "Bill passed", "Presidential assent") or re.search(r"\b(?:bill introduced|bill passed|parliament|legislative|committee report|standing committee)\b", lower):
         return "Legislative"
+    if any(term in lower for term in ("notification", "gazette", "regulation", "rules", "directions", "circular", "order")):
+        return "Regulation"
     if any(term in lower for term in ("scheme", "programme", "program", "mission", "allocation", "implementation update")):
         return "Programme"
     if status in ("Enforcement action", "Court judgment") or any(term in lower for term in ("appointment", "monetary policy committee", "enforcement", "penalty", "adjudication")):
         return "Institutional"
-    if any(term in lower for term in ("notification", "gazette", "regulation", "rules", "directions", "circular", "order")):
-        return "Regulation"
-    return "Institutional"
+    return default or "Institutional"
 
 
 IDENTIFIER = re.compile(r"\b(?:circular|notification|order|bill|press release)\s*(?:no\.?\s*)?([A-Z0-9][A-Z0-9./()_-]{3,})", re.I)
@@ -284,10 +284,19 @@ def build_why(area: str, entities: List[str], status: str, topics: Dict, evidenc
 def event_from_item(item: RawItem, detail: str, area: str, topics: Dict, now: datetime) -> Event:
     combined = clean_text(f"{item.title}. {item.summary} {detail}")
     status = extract_status(combined)
-    signal_type = classify_signal_type(combined, status)
+    if item.default_signal_type == "Institutional" and "auction" in item.title.casefold():
+        status = "Announcement"
+    signal_type = classify_signal_type(item.title, status, item.default_signal_type)
     entities = affected_entities(combined)
     identifier = extract_identifier(combined, item.source_identifier)
     effective, deadline = extract_dates(combined)
+    publication_date = item.published_at.date().isoformat() if item.published_at else None
+    # References to an older instrument often contain historical "with effect"
+    # dates. They are context, not the commencement of the new update.
+    if effective and publication_date and effective < publication_date:
+        effective = None
+    if not effective and publication_date and "come into force with immediate effect" in combined.casefold():
+        effective = publication_date
     title = normalize_title(item.title)
     canonical = normalize_url(item.url)
     source_host = re.sub(r"^www\.", "", urlsplit(canonical).netloc.casefold())
@@ -301,7 +310,7 @@ def event_from_item(item: RawItem, detail: str, area: str, topics: Dict, now: da
     return Event(
         canonical_title=title, area=area, signal_type=signal_type, description=build_description(item, detail, status),
         why_it_matters=build_why(area, entities, status, topics, combined), status=status,
-        publication_date=item.published_at.date().isoformat() if item.published_at else None,
+        publication_date=publication_date,
         effective_date=effective, deadline=deadline, affected_entities=entities,
         primary_source_url=primary, secondary_source_urls=secondary,
         source_document_title=title, source_identifier=identifier, content_hash=content_hash,

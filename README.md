@@ -21,7 +21,8 @@ Useful options:
 
 ```bash
 python3 -m app.run --verbose
-python3 -m app.run --lookback-days 3 --max-items 8
+python3 -m app.run --lookback-days 3 --max-items 30
+python3 -m app.run --source "Reserve Bank of India - Notifications RSS"
 python3 -m app.run --offline
 ```
 
@@ -62,7 +63,7 @@ The database does not contain or expose an impact score. Inclusion uses qualitat
 
 ## Sources
 
-The 27-source registry is feeds/API-first wherever a publisher exposes a stable public endpoint. It includes RBI notification and press-release RSS feeds, SEBI RSS, CCI, MeitY, DPIIT, Finance, MCA, Labour, Education, Consumer Affairs, PIB, official Akashvani feeds and its public WordPress API, eGazette, Parliament, Supreme Court, High Court services, IRDAI, PFRDA, IFSCA, TRAI, FSSAI, BIS and CERT-In. HTML collection is a conservative fallback. A public Google News RSS search is a secondary, zero-cost discovery fallback for topic and state-level coverage; it is not treated as authoritative.
+The 52-source registry is feeds/API-first wherever a publisher exposes a stable public endpoint. It covers RBI notifications, releases and publications; SEBI, IRDAI, PFRDA, IFSCA, IBBI, NPCI, NSE and BSE; PIB and official Akashvani feeds; data.gov.in, MoSPI, Finance/DEA, the Budget and NITI Aayog; CBIC, GST Council, Income Tax and DGFT; TRAI, CCI, MeitY, CERT-In, FSSAI, CDSCO, CEA, CERC, PNGRB and MoEFCC; Parliament, PRS, India Code, courts and eGazette; and the other national sources in `config/sources.yaml`. HTML collection is a conservative fallback. Google News RSS remains secondary discovery and is never treated as authoritative.
 
 To add a source, append an object to `config/sources.yaml`:
 
@@ -98,7 +99,7 @@ python3 -m unittest discover -s tests -v
 python3 -m compileall -q app tests
 ```
 
-The deterministic test suite covers database creation, feed dates, topic/relevance filtering, duplicate suppression, historical lookup, clickable links, watchlist limits, and nonfatal source failures.
+The deterministic test suite covers database creation, feed dates, topic/relevance filtering, canonical identity, duplicate suppression, historical lookup, clickable links, watchlist limits, and nonfatal source failures.
 
 ## Limits and troubleshooting
 

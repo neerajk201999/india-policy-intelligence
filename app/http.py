@@ -31,7 +31,7 @@ class Response:
 
 
 class HttpClient:
-    def __init__(self, timeout: int = 20, retries: int = 2, max_bytes: int = 3_000_000):
+    def __init__(self, timeout: int = 15, retries: int = 1, max_bytes: int = 3_000_000):
         self.timeout = timeout
         self.retries = retries
         self.max_bytes = max_bytes

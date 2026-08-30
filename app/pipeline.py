@@ -4,7 +4,7 @@ import logging
 from dataclasses import dataclass
 from datetime import datetime, time, timedelta
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Sequence
 from zoneinfo import ZoneInfo
 
 from .classifier import classify, event_from_item, has_sufficient_evidence, is_meaningful, normalize_url, similar_title
@@ -32,7 +32,7 @@ class RunResult:
 
 
 class Pipeline:
-    def __init__(self, root: Path = ROOT, now: Optional[datetime] = None, lookback_days: int = 5, offline: bool = False, max_items: int = 12, client: Optional[HttpClient] = None):
+    def __init__(self, root: Path = ROOT, now: Optional[datetime] = None, lookback_days: int = 5, offline: bool = False, max_items: int = 30, client: Optional[HttpClient] = None, source_names: Optional[Sequence[str]] = None):
         self.root = root
         self.now = (now or datetime.now(IST)).astimezone(IST)
         self.lookback_days = min(max(lookback_days, 1), 5)
@@ -43,6 +43,7 @@ class Pipeline:
         self.offline = offline
         self.max_items = max_items
         self.client = client or HttpClient()
+        self.source_names = set(source_names or [])
         self.db = Database(root / "data" / "intelligence.db")
         self.sources = sources_config(root / "config" / "sources.yaml")
         self.topics = topics_config(root / "config" / "topics.yaml")
@@ -50,8 +51,9 @@ class Pipeline:
     def run(self) -> RunResult:
         self.db.initialize()
         self.db.close_interrupted_runs(self.now.isoformat())
-        source_list = self.sources["sources"]
-        self.db.sync_sources(source_list)
+        source_registry = self.sources["sources"]
+        self.db.sync_sources(source_registry)
+        source_list = [source for source in source_registry if not self.source_names or source["name"] in self.source_names]
         run_id = self.db.start_run(self.now.isoformat())
         collector = Collector(self.db, self.client, self.now, self.backfill_since, self.offline)
         included: List[Event] = []
@@ -67,6 +69,8 @@ class Pipeline:
             prior_today = self.db.report_events(self.now.date().isoformat())
             known_ids = {event.id for event in prior_today}
             report_events = prior_today + [event for event in included if event.id not in known_ids]
+            report_events.sort(key=self._candidate_priority, reverse=True)
+            report_events = report_events[: self.max_items]
             watchlist = self.db.open_watchlist()
             report = render_report(self.now, report_events, watchlist, self.lookback_days)
             report_path = save_report(self.root / "reports" / "daily", self.now, report)
@@ -86,7 +90,7 @@ class Pipeline:
             # development. Official publisher pages contain broad political and social
             # coverage; allowing incidental terms in a long article body to establish
             # relevance creates convincing but incorrect entries.
-            area = classify(item.title, self.topics)
+            area = classify(item.title, self.topics) or item.default_area
             if not is_meaningful(item.title, area):
                 continue
             combined = f"{item.title} {item.summary}"
@@ -119,9 +123,18 @@ class Pipeline:
             event = event_from_item(item, detail, area, self.topics, self.now)
             if is_publishable(event):
                 result.append(event)
-        # Primary 24-hour items first, then limited backfill, primary authority before secondary.
-        result.sort(key=lambda e: (e.publication_date or "", 3 - e.sources[0]["authority_level"]), reverse=True)
+        result.sort(key=self._candidate_priority, reverse=True)
         return self._deduplicate_candidates(result)
+
+    def _candidate_priority(self, event: Event):
+        """Deterministic editorial ranking; this is selection priority, not impact."""
+        authority = {1: 30, 2: 20, 3: 10}.get(event.sources[0]["authority_level"], 0)
+        signal = {"Regulation": 18, "Legislative": 17, "Consultation": 15, "Data": 13, "Programme": 10, "Institutional": 8}.get(event.signal_type, 0)
+        published = datetime.fromisoformat(event.publication_date).date() if event.publication_date else self.now.date()
+        recency = max(0, 25 - (self.now.date() - published).days * 5)
+        evidence = (5 if event.source_identifier else 0) + (4 if len(event.description.split()) >= 100 else 0)
+        actionability = 6 if event.deadline or event.effective_date else 0
+        return authority + signal + recency + evidence + actionability, event.publication_date or "", event.canonical_title
 
     @staticmethod
     def _deduplicate_candidates(events: List[Event]) -> List[Event]:

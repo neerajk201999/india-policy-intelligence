@@ -51,3 +51,32 @@ GitHub Actions runs this flow at 02:30 UTC, which is 08:00 IST throughout the ye
 - No numerical impact score is stored or shown.
 
 No automated research system can promise zero factual errors. The correct engineering response is conservative exclusion, exact provenance, visible source health, reproducible state, and a reviewable methodology—not invented certainty.
+
+## Coverage and selection algorithm
+
+The registry contains 52 independently monitored endpoints. RSS, Atom and public JSON APIs are preferred; semantic HTML link extraction is the fallback. Up to eight sources are fetched concurrently with a 15-second timeout and one retry, so one slow portal cannot consume the whole 08:00 run. Every source records its own last check, last success, consecutive failure count and error. Three consecutive failures generate a GitHub Actions warning.
+
+Collection is intentionally broader than publication. Candidates must pass all of these gates:
+
+1. A dated item must fall inside the five-day safety window.
+2. Its headline must independently establish a covered topic and a material action or official data release.
+3. The detail or PDF must contain enough source-grounded factual text.
+4. Title and evidence must overlap; boilerplate, recruitment, tenders and unrelated PDFs are rejected.
+5. Effective dates cannot be inferred from historical dates quoted inside an amendment.
+6. A primary or official URL and exact provenance must be retained.
+
+Passing candidates are ranked for the daily edition using a deterministic selection-priority function:
+
+`priority = authority + signal + recency + evidence + actionability`
+
+- authority: Primary 30, Official 20, Reported 10
+- signal: Regulation 18, Legislative 17, Consultation 15, Data 13, Programme 10, Institutional 8
+- recency: 25 points today, declining by 5 per day
+- evidence: 5 for a publisher identifier and 4 for at least 100 words of evidence
+- actionability: 6 for a recorded effective date or deadline
+
+This score chooses and orders up to 30 developments; it is not an impact claim and is neither stored nor displayed. Canonical identity uses publisher host + document ID + publication date, falling back to canonical URL only when an ID is unavailable.
+
+## Credentials and known access constraints
+
+No paid API is required. The data.gov.in catalogue is monitored without a key; a free `DATA_GOV_IN_API_KEY` can later be attached to selected stable resource IDs for record-level macro data. The system never disables TLS validation, bypasses CAPTCHAs or disguises a failed endpoint as healthy. MCA and MoEFCC currently expose obsolete TLS from this runtime, while NPCI rejects automated access with HTTP 403; their failures stay visible and other official feeds provide corroborating discovery until those publishers expose a usable endpoint.

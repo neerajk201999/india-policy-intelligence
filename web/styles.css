@@ -135,6 +135,22 @@ h1 { margin: 0; font-size: clamp(2.25rem, 4.2vw, 4.35rem); line-height: .98; let
 .history-item time { color: var(--muted); font-size: .7rem; }
 .history-item h3 { margin: 0; font-family: "Iowan Old Style", Georgia, serif; font-size: 1.1rem; font-weight: 500; }
 
+.coverage-summary { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.coverage-summary > div { display: flex; flex-direction: column; gap: 5px; padding: 24px 0; }
+.coverage-summary > div + div { padding-left: 28px; border-left: 1px solid var(--rule); }
+.coverage-summary strong { font-family: "Iowan Old Style", Georgia, serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 500; line-height: 1; }
+.coverage-summary span { color: var(--muted); font-size: .66rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.source-ledger { margin-top: 28px; border-top: 1px solid var(--ink); }
+.source-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 25px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.source-row h2 { margin: 0; font-size: clamp(1.05rem, 1.7vw, 1.45rem); }
+.source-row h2 a { text-decoration: none; }
+.source-row h2 a:hover { color: var(--accent); }
+.source-row p { margin: 5px 0 0; color: var(--muted); font-size: .66rem; letter-spacing: .03em; }
+.source-health { min-width: 74px; padding: 5px 8px; border: 1px solid var(--rule); color: var(--muted); font-size: .62rem; font-weight: 760; text-align: center; text-transform: uppercase; }
+.source-health.healthy { border-color: var(--verified); color: var(--verified); }
+.source-health.reachable { color: var(--muted); }
+.source-health.degraded { border-color: var(--accent); color: var(--accent); }
+
 .empty-state, .error-state { padding: 60px 0; border-top: 1px solid var(--ink); }
 .empty-state h2, .error-state h2 { margin: 0 0 10px; font-size: 2rem; }
 .empty-state p, .error-state p { max-width: 620px; margin: 0; color: var(--muted); font-family: "Iowan Old Style", Georgia, serif; line-height: 1.55; }
@@ -193,6 +209,10 @@ h1 { margin: 0; font-size: clamp(2.25rem, 4.2vw, 4.35rem); line-height: .98; let
   .watch-entry > div:nth-child(2) { grid-column: 1; }
   .watch-open { grid-column: 2; grid-row: 2; }
   .history-item { grid-template-columns: 1fr; gap: 6px; }
+  .coverage-summary { grid-template-columns: 1fr; }
+  .coverage-summary > div { padding: 17px 0; }
+  .coverage-summary > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+  .source-row { gap: 12px; }
   .site-footer { display: block; }
   .site-footer div { margin-top: 10px; }
 }

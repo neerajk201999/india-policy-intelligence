@@ -51,9 +51,11 @@ CREATE TABLE IF NOT EXISTS sources (
     source_type TEXT NOT NULL,
     authority_level INTEGER NOT NULL,
     topic TEXT,
+    default_signal_type TEXT,
     last_checked TEXT,
     last_success TEXT,
     failure_count INTEGER NOT NULL DEFAULT 0,
+    last_item_count INTEGER NOT NULL DEFAULT 0,
     last_error TEXT
 );
 CREATE TABLE IF NOT EXISTS daily_reports (
@@ -96,24 +98,34 @@ class Database:
             columns = {row["name"] for row in conn.execute("PRAGMA table_info(events)").fetchall()}
             if "signal_type" not in columns:
                 conn.execute("ALTER TABLE events ADD COLUMN signal_type TEXT NOT NULL DEFAULT 'Institutional'")
+            source_columns = {row["name"] for row in conn.execute("PRAGMA table_info(sources)").fetchall()}
+            if "default_signal_type" not in source_columns:
+                conn.execute("ALTER TABLE sources ADD COLUMN default_signal_type TEXT")
+            if "last_item_count" not in source_columns:
+                conn.execute("ALTER TABLE sources ADD COLUMN last_item_count INTEGER NOT NULL DEFAULT 0")
 
     def sync_sources(self, sources: Sequence[dict]) -> None:
         with self.connect() as conn:
             for source in sources:
                 conn.execute(
-                    """INSERT INTO sources(name,url,source_type,authority_level,topic)
-                    VALUES(?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET
+                    """INSERT INTO sources(name,url,source_type,authority_level,topic,default_signal_type)
+                    VALUES(?,?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET
                     url=excluded.url, source_type=excluded.source_type,
-                    authority_level=excluded.authority_level, topic=excluded.topic""",
-                    (source["name"], source["url"], source.get("type", "page"), source.get("authority_level", 1), source.get("topic")),
+                    authority_level=excluded.authority_level, topic=excluded.topic,
+                    default_signal_type=excluded.default_signal_type""",
+                    (source["name"], source["url"], source.get("type", "page"), source.get("authority_level", 1), source.get("topic"), source.get("default_signal_type")),
                 )
+            names = [source["name"] for source in sources]
+            if names:
+                placeholders = ",".join("?" for _ in names)
+                conn.execute(f"DELETE FROM sources WHERE name NOT IN ({placeholders})", names)
 
-    def source_result(self, name: str, checked_at: str, success: bool, error: Optional[str] = None) -> None:
+    def source_result(self, name: str, checked_at: str, success: bool, error: Optional[str] = None, item_count: int = 0) -> None:
         with self.connect() as conn:
             if success:
-                conn.execute("UPDATE sources SET last_checked=?, last_success=?, failure_count=0, last_error=NULL WHERE name=?", (checked_at, checked_at, name))
+                conn.execute("UPDATE sources SET last_checked=?, last_success=?, failure_count=0, last_item_count=?, last_error=NULL WHERE name=?", (checked_at, checked_at, item_count, name))
             else:
-                conn.execute("UPDATE sources SET last_checked=?, failure_count=failure_count+1, last_error=? WHERE name=?", (checked_at, (error or "")[:500], name))
+                conn.execute("UPDATE sources SET last_checked=?, failure_count=failure_count+1, last_item_count=0, last_error=? WHERE name=?", (checked_at, (error or "")[:500], name))
 
     def find_hash(self, content_hash: str):
         with self.connect() as conn:

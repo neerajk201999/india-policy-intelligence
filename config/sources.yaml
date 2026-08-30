@@ -8,6 +8,7 @@
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking",
+      "default_signal_type": "Regulation",
       "max_links": 45
     },
     {
@@ -18,6 +19,7 @@
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking",
+      "default_signal_type": "Institutional",
       "max_links": 30
     },
     {
@@ -28,6 +30,7 @@
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking; Corporate Governance / ESG",
+      "default_signal_type": "Regulation",
       "max_links": 45
     },
     {
@@ -117,7 +120,8 @@
       "type": "rss",
       "category": "official",
       "authority_level": 2,
-      "topic": "All"
+      "topic": "All",
+      "default_signal_type": "Programme"
     },
     {
       "name": "Akashvani News - National",
@@ -194,6 +198,7 @@
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking",
+      "default_signal_type": "Regulation",
       "max_links": 40
     },
     {
@@ -204,6 +209,7 @@
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking",
+      "default_signal_type": "Regulation",
       "max_links": 35
     },
     {
@@ -214,6 +220,7 @@
       "category": "primary",
       "authority_level": 1,
       "topic": "Financial & Banking",
+      "default_signal_type": "Regulation",
       "max_links": 40
     },
     {
@@ -224,6 +231,7 @@
       "category": "primary",
       "authority_level": 1,
       "topic": "Digital Economy & AI",
+      "default_signal_type": "Consultation",
       "max_links": 40
     },
     {
@@ -255,6 +263,280 @@
       "authority_level": 1,
       "topic": "Digital Economy & AI",
       "max_links": 35
+    },
+    {
+      "name": "Reserve Bank of India - Publications RSS",
+      "short_name": "RBI Publications",
+      "url": "https://www.rbi.org.in/Publication_rss.xml",
+      "type": "rss",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance",
+      "default_signal_type": "Data"
+    },
+    {
+      "name": "Ministry of Statistics and Programme Implementation",
+      "short_name": "MoSPI",
+      "url": "https://www.mospi.gov.in/latest-releases",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance",
+      "default_signal_type": "Data",
+      "max_links": 45
+    },
+    {
+      "name": "Open Government Data Platform India",
+      "short_name": "data.gov.in",
+      "url": "https://www.data.gov.in/catalogs",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance",
+      "default_signal_type": "Data",
+      "max_links": 40
+    },
+    {
+      "name": "PRS Legislative Research - Bill Track",
+      "short_name": "PRS Bill Track",
+      "url": "https://prsindia.org/billtrack",
+      "type": "page",
+      "category": "secondary",
+      "authority_level": 3,
+      "topic": "All",
+      "default_signal_type": "Legislative",
+      "attribution": "PRS Legislative Research, CC BY 4.0",
+      "max_links": 50
+    },
+    {
+      "name": "Insolvency and Bankruptcy Board of India",
+      "short_name": "IBBI",
+      "url": "https://ibbi.gov.in/legal-framework/circulars",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking; Corporate Governance / ESG",
+      "default_signal_type": "Regulation",
+      "max_links": 45
+    },
+    {
+      "name": "National Payments Corporation of India",
+      "short_name": "NPCI",
+      "url": "https://www.npci.org.in/what-we-do/upi/circular",
+      "type": "page",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "Financial & Banking; Digital Economy & AI",
+      "default_signal_type": "Institutional",
+      "max_links": 35
+    },
+    {
+      "name": "National Stock Exchange - Circulars",
+      "short_name": "NSE Circulars",
+      "url": "https://www.nseindia.com/resources/exchange-communication-circulars",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking; Corporate Governance / ESG",
+      "default_signal_type": "Regulation"
+    },
+    {
+      "name": "BSE - Notices and Circulars",
+      "short_name": "BSE",
+      "url": "https://www.bseindia.com/markets/MarketInfo/NoticesCirculars",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking; Corporate Governance / ESG",
+      "default_signal_type": "Regulation",
+      "max_links": 45
+    },
+    {
+      "name": "National Bank for Agriculture and Rural Development",
+      "short_name": "NABARD",
+      "url": "https://www.nabard.org/whats-new.aspx",
+      "type": "page",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "Financial & Banking",
+      "default_signal_type": "Programme",
+      "max_links": 35
+    },
+    {
+      "name": "Small Industries Development Bank of India",
+      "short_name": "SIDBI",
+      "url": "https://www.sidbi.in/en/latest-development",
+      "type": "page",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "Financial & Banking; Deregulation & Ease of Doing Business",
+      "default_signal_type": "Programme",
+      "max_links": 35
+    },
+    {
+      "name": "Central Board of Indirect Taxes and Customs",
+      "short_name": "CBIC / GST",
+      "url": "https://www.cbic.gov.in/htdocs-cbec/gst/index",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance; Deregulation & Ease of Doing Business",
+      "default_signal_type": "Regulation",
+      "max_links": 50
+    },
+    {
+      "name": "GST Council",
+      "short_name": "GST Council",
+      "url": "https://gstcouncil.gov.in/en/circularsadvisory",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance; Deregulation & Ease of Doing Business",
+      "default_signal_type": "Regulation",
+      "max_links": 40
+    },
+    {
+      "name": "Income Tax Department",
+      "short_name": "CBDT / Income Tax",
+      "url": "https://www.incometax.gov.in/iec/foportal/latest-news",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance; Deregulation & Ease of Doing Business",
+      "default_signal_type": "Regulation",
+      "max_links": 45
+    },
+    {
+      "name": "Directorate General of Foreign Trade",
+      "short_name": "DGFT",
+      "url": "https://www.dgft.gov.in/CP/?opt=notification",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance; Deregulation & Ease of Doing Business",
+      "default_signal_type": "Regulation",
+      "max_links": 45
+    },
+    {
+      "name": "Central Drugs Standard Control Organisation",
+      "short_name": "CDSCO",
+      "url": "https://cdsco.gov.in/opencms/opencms/en/Notifications/Gazette-Notifications/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "default_signal_type": "Regulation",
+      "max_links": 40
+    },
+    {
+      "name": "Central Electricity Authority",
+      "short_name": "CEA",
+      "url": "https://cea.nic.in/whats-new/?lang=en",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business; Macroeconomy, Trade & Public Finance",
+      "default_signal_type": "Regulation",
+      "max_links": 45
+    },
+    {
+      "name": "Central Electricity Regulatory Commission",
+      "short_name": "CERC",
+      "url": "https://cercind.gov.in/Current_reg.html",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "default_signal_type": "Regulation",
+      "max_links": 40
+    },
+    {
+      "name": "Petroleum and Natural Gas Regulatory Board",
+      "short_name": "PNGRB",
+      "url": "https://pngrb.gov.in/eng-web/whats-new.html",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "default_signal_type": "Regulation",
+      "max_links": 40
+    },
+    {
+      "name": "Ministry of Environment, Forest and Climate Change",
+      "short_name": "MoEFCC",
+      "url": "https://moef.gov.in/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Corporate Governance / ESG; Deregulation & Ease of Doing Business",
+      "default_signal_type": "Consultation",
+      "max_links": 40
+    },
+    {
+      "name": "Department of Economic Affairs",
+      "short_name": "DEA",
+      "url": "https://dea.gov.in/documents-gazette-notification",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance; Financial & Banking",
+      "default_signal_type": "Regulation",
+      "max_links": 40
+    },
+    {
+      "name": "Union Budget",
+      "short_name": "India Budget",
+      "url": "https://www.indiabudget.gov.in/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Macroeconomy, Trade & Public Finance",
+      "default_signal_type": "Data",
+      "max_links": 35
+    },
+    {
+      "name": "NITI Aayog",
+      "short_name": "NITI Aayog",
+      "url": "https://www.niti.gov.in/all-whats-new",
+      "type": "page",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "All",
+      "default_signal_type": "Programme",
+      "max_links": 45
+    },
+    {
+      "name": "Rajya Sabha - Bills",
+      "short_name": "Rajya Sabha",
+      "url": "https://sansad.in/rs/legislation/bills",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "All",
+      "default_signal_type": "Legislative",
+      "max_links": 35
+    },
+    {
+      "name": "India Code",
+      "short_name": "India Code",
+      "url": "https://indiacode.gov.in/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "All",
+      "default_signal_type": "Legislative",
+      "max_links": 35
+    },
+    {
+      "name": "Indian Kanoon",
+      "short_name": "Indian Kanoon",
+      "url": "https://indiankanoon.org/",
+      "type": "page",
+      "category": "secondary",
+      "authority_level": 3,
+      "topic": "All",
+      "default_signal_type": "Legislative",
+      "max_links": 25
     },
     {
       "name": "State government discovery",

@@ -3,6 +3,7 @@ const state = {
   area: "All",
   query: "",
   status: "All",
+  signal: "All",
   sort: "newest",
 };
 
@@ -44,6 +45,7 @@ function routeName() {
   if (location.pathname.startsWith("/tracker/")) return "detail";
   if (location.pathname === "/tracker" || location.pathname === "/tracker/") return "tracker";
   if (location.pathname === "/watchlist" || location.pathname === "/watchlist/") return "watchlist";
+  if (location.pathname === "/sources" || location.pathname === "/sources/") return "sources";
   return "briefing";
 }
 
@@ -82,6 +84,7 @@ async function fetchData() {
       if (!payload || !payload.meta || !Array.isArray(payload.events)) throw new Error("Published data is malformed");
       payload.tracker = Array.isArray(payload.tracker) ? payload.tracker : payload.events;
       payload.watchlist = Array.isArray(payload.watchlist) ? payload.watchlist : [];
+      payload.sources = Array.isArray(payload.sources) ? payload.sources : [];
       return payload;
     } catch (error) { lastError = error; }
   }
@@ -96,7 +99,8 @@ function searchableText(event) {
 function matches(event) {
   const areaMatch = state.area === "All" || event.area === state.area;
   const statusMatch = state.status === "All" || event.status === state.status;
-  return areaMatch && statusMatch && searchableText(event).includes(state.query.toLowerCase());
+  const signalMatch = state.signal === "All" || event.signalType === state.signal;
+  return areaMatch && statusMatch && signalMatch && searchableText(event).includes(state.query.toLowerCase());
 }
 
 function createControls(events, tracker = false) {
@@ -119,6 +123,15 @@ function createControls(events, tracker = false) {
   count.className = "results-count";
   count.dataset.resultsCount = "";
   secondary.append(count);
+  const signals = ["All", "Regulation", "Consultation", "Data", "Programme", "Institutional", "Legislative"];
+  const signalSelect = document.createElement("select");
+  signalSelect.className = "select-control";
+  signalSelect.setAttribute("aria-label", "Filter by signal type");
+  signalSelect.replaceChildren(...signals.map((signal) => {
+    const option = document.createElement("option"); option.value = signal; option.textContent = signal === "All" ? "All signal types" : signal; option.selected = state.signal === signal; return option;
+  }));
+  signalSelect.addEventListener("change", (event) => { state.signal = event.target.value; renderListOnly(); });
+  secondary.prepend(signalSelect);
   if (tracker) {
     const statuses = ["All", ...new Set(events.map((event) => event.status).filter(Boolean))];
     const statusSelect = document.createElement("select");
@@ -235,7 +248,7 @@ function renderBriefingList(container) {
   const count = document.querySelector("[data-results-count]");
   if (count) count.textContent = `${events.length} ${events.length === 1 ? "development" : "developments"}`;
   if (!events.length) {
-    const hasFilters = state.query || state.area !== "All";
+    const hasFilters = state.query || state.area !== "All" || state.signal !== "All";
     container.replaceChildren(emptyState(
       hasFilters ? "No matching developments" : "No developments today",
       hasFilters ? "Clear a filter or use a broader search term." : "No meaningful regulatory developments were verified in the current window."
@@ -280,7 +293,7 @@ function renderListOnly() {
 function renderBriefing() {
   const date = formatDate(state.data.meta.reportDate) || "Date unavailable";
   const count = state.data.events.length;
-  setIntro("Daily briefing", "The morning policy brief", `${count} source-linked developments across regulation, official updates and economic data.`, `${date} · ${formatUpdated(state.data.meta.generatedAt)}`);
+  setIntro("Daily briefing", "The morning policy brief", `${count} source-linked developments selected from a ${state.data.summary.totalSources}-source public-record network.`, `${date} · ${formatUpdated(state.data.meta.generatedAt)}`);
   setMeta("India Policy Intelligence", "Today’s verified Indian policy and regulatory developments.");
   const view = $("#route-view");
   const controls = createControls(state.data.events);
@@ -316,6 +329,30 @@ function renderWatchlist() {
     return node;
   }));
   view.replaceChildren(list);
+}
+
+function renderSources() {
+  const sources = state.data.sources;
+  const healthy = sources.filter((source) => source.health === "healthy").length;
+  const feeds = sources.filter((source) => ["rss", "atom", "wordpress"].includes(source.sourceType)).length;
+  setIntro("Coverage ledger", "The public record we monitor", "Every source is collected independently, provenance is retained, and a failure never becomes a policy claim.", `${sources.length} sources · ${feeds} feeds/APIs · ${healthy} healthy`);
+  setMeta("Source Coverage", "The official and attributed sources monitored by India Policy Intelligence.");
+  const view = $("#route-view");
+  const summary = document.createElement("section"); summary.className = "coverage-summary";
+  [[sources.length, "sources registered"], [feeds, "feeds and APIs"], [healthy, "currently healthy"]].forEach(([value, label]) => {
+    const item = document.createElement("div"); const strong = document.createElement("strong"); strong.textContent = value; const span = document.createElement("span"); span.textContent = label; item.append(strong, span); summary.append(item);
+  });
+  const list = document.createElement("section"); list.className = "source-ledger"; list.setAttribute("aria-label", "Monitored sources");
+  list.replaceChildren(...sources.map((source) => {
+    const row = document.createElement("article"); row.className = "source-row";
+    const main = document.createElement("div"); const title = document.createElement("h2");
+    const link = document.createElement("a"); link.href = source.url.includes("{") ? new URL(source.url).origin : source.url; link.target = "_blank"; link.rel = "noreferrer"; link.textContent = source.name; title.append(link);
+    const meta = document.createElement("p"); meta.textContent = `${source.defaultSignalType || "Mixed signals"} · ${source.authorityLevel === 1 ? "Primary" : source.authorityLevel === 2 ? "Official" : "Reported"} · ${source.sourceType.toUpperCase()}`;
+    main.append(title, meta);
+    const health = document.createElement("span"); health.className = `source-health ${source.health}`; health.textContent = source.health;
+    row.append(main, health); return row;
+  }));
+  view.replaceChildren(summary, list);
 }
 
 function findHistory(event) {
@@ -367,6 +404,7 @@ function render() {
   if (route === "briefing") renderBriefing();
   if (route === "tracker") renderTracker();
   if (route === "watchlist") renderWatchlist();
+  if (route === "sources") renderSources();
   if (route === "detail") renderDetail();
 }
 
@@ -394,6 +432,7 @@ document.addEventListener("click", (event) => {
     state.area = "All";
     state.query = "";
     state.status = "All";
+    state.signal = "All";
     state.sort = "newest";
   }
   history.pushState({}, "", link.pathname);

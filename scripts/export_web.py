@@ -108,12 +108,14 @@ def export(db_path: Path, output: Path) -> dict:
             event_records.append(event_payload(connection, dict(row)))
     tracker_records = [event_payload(connection, item) for item in rows(connection, "SELECT * FROM events ORDER BY publication_date DESC,last_seen DESC,id DESC")]
     watch_records = [event_payload(connection, item) for item in rows(connection, "SELECT * FROM events WHERE watch_status='open' ORDER BY deadline IS NULL,deadline,publication_date DESC LIMIT 4")]
-    source_records = rows(connection, "SELECT name,url,source_type AS sourceType,authority_level AS authorityLevel,topic,last_checked AS lastChecked,last_success AS lastSuccess,failure_count AS failureCount,last_error AS lastError FROM sources ORDER BY authority_level,name")
+    source_records = rows(connection, "SELECT name,url,source_type AS sourceType,authority_level AS authorityLevel,topic,default_signal_type AS defaultSignalType,last_checked AS lastChecked,last_success AS lastSuccess,failure_count AS failureCount,last_item_count AS lastItemCount,last_error AS lastError FROM sources ORDER BY authority_level,name")
     for source in source_records:
-        if source["lastSuccess"]:
-            source["health"] = "healthy"
-        elif source["failureCount"]:
+        if source["failureCount"]:
             source["health"] = "degraded"
+        elif source["lastSuccess"] and source["lastItemCount"] > 0:
+            source["health"] = "healthy"
+        elif source["lastSuccess"]:
+            source["health"] = "reachable"
         else:
             source["health"] = "pending"
     run = connection.execute("SELECT * FROM runs WHERE discovered>0 ORDER BY id DESC LIMIT 1").fetchone()

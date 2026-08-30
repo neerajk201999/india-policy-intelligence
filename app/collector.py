@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from typing import Dict, List, Tuple
-from urllib.parse import quote_plus
+from urllib.parse import parse_qs, quote_plus, urlsplit
 
 from .database import Database
 from .http import HttpClient
@@ -27,27 +28,37 @@ class Collector:
         if self.offline:
             return []
         output: List[RawItem] = []
-        for source in sources:
-            if not source.get("enabled", True):
-                continue
-            urls = self._source_urls(source, topics)
-            source_items: List[RawItem] = []
-            source_errors: List[str] = []
-            fetched_any = False
-            for url in urls:
-                try:
-                    response = self.client.get(url)
-                    fetched_any = True
-                    source_items.extend(self._parse(source, response.body, response.text, response.url))
-                except Exception as exc:  # a failed source must never stop the run
-                    message = f"{source['name']}: {type(exc).__name__}: {str(exc)[:220]}"
-                    LOG.warning(message)
-                    self.errors.append(message)
-                    source_errors.append(message)
-            success = fetched_any
-            self.db.source_result(source["name"], self.now.isoformat(), success, None if success else (source_errors[-1] if source_errors else "Source returned no response"))
-            output.extend(source_items)
+        enabled = [source for source in sources if source.get("enabled", True)]
+        # Public-sector hosts vary wildly in latency. Independent bounded workers keep
+        # one slow portal from serially blocking the other fifty sources.
+        with ThreadPoolExecutor(max_workers=min(8, max(1, len(enabled)))) as executor:
+            futures = {executor.submit(self._collect_source, source, topics): source for source in enabled}
+            for future in as_completed(futures):
+                source = futures[future]
+                source_items, source_errors, fetched_any = future.result()
+                self.errors.extend(source_errors)
+                self.db.source_result(
+                    source["name"], self.now.isoformat(), fetched_any,
+                    None if fetched_any else (source_errors[-1] if source_errors else "Source returned no response"),
+                    len(source_items),
+                )
+                output.extend(source_items)
         return self._deduplicate(output)
+
+    def _collect_source(self, source: dict, topics: Dict):
+        source_items: List[RawItem] = []
+        source_errors: List[str] = []
+        fetched_any = False
+        for url in self._source_urls(source, topics):
+            try:
+                response = self.client.get(url)
+                source_items.extend(self._parse(source, response.body, response.text, response.url, topics))
+                fetched_any = True
+            except Exception as exc:  # a failed source must never stop the run
+                message = f"{source['name']}: {type(exc).__name__}: {str(exc)[:220]}"
+                LOG.warning(message)
+                source_errors.append(message)
+        return source_items, source_errors, fetched_any
 
     def _source_urls(self, source: dict, topics: Dict) -> List[str]:
         if source.get("type") == "wordpress":
@@ -63,7 +74,7 @@ class Collector:
             urls.append(source["url"].replace("{query}", quote_plus(query + " when:5d")))
         return urls
 
-    def _parse(self, source: dict, body: bytes, text: str, final_url: str) -> List[RawItem]:
+    def _parse(self, source: dict, body: bytes, text: str, final_url: str, topics: Dict) -> List[RawItem]:
         kind = source.get("type", "page")
         entries = []
         if kind in ("rss", "atom", "search_feed"):
@@ -87,13 +98,23 @@ class Collector:
             # may provide a date. They are never included in a report until dated.
             if published is not None and published < self.since:
                 continue
+            identifier = entry.get("identifier") or self._identifier_from_url(str(entry["url"]), source)
             result.append(RawItem(
                 source_name=source["name"], source_type=source.get("category", "primary"),
                 authority_level=int(source.get("authority_level", 1)), url=str(entry["url"]),
                 title=str(entry["title"]), published_at=published, summary=str(entry.get("summary", "")),
-                source_identifier=entry.get("identifier"),
+                source_identifier=identifier, default_signal_type=source.get("default_signal_type"),
+                default_area=source.get("topic") if source.get("topic") in topics["areas"] else None,
             ))
         return result
+
+    @staticmethod
+    def _identifier_from_url(url: str, source: dict):
+        query = parse_qs(urlsplit(url).query)
+        for key, values in query.items():
+            if key.casefold() in {"id", "prid", "notificationid", "circularid", "documentid"} and values:
+                return f"{source.get('short_name', source['name'])}/{key.upper()}/{values[0]}"
+        return None
 
     @staticmethod
     def _date_in_title(title: str):
