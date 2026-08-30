@@ -1,4 +1,8 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "echo 'Publishing prebuilt static intelligence site'",
+  "outputDirectory": "web",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
@@ -17,12 +21,5 @@
         { "key": "X-Frame-Options", "value": "DENY" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/", "destination": "/web/index.html" },
-    { "source": "/styles.css", "destination": "/web/styles.css" },
-    { "source": "/app.js", "destination": "/web/app.js" },
-    { "source": "/config.js", "destination": "/web/config.js" },
-    { "source": "/data/latest.json", "destination": "/web/data/latest.json" }
   ]
 }
