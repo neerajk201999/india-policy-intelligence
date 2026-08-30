@@ -1,0 +1,190 @@
+from __future__ import annotations
+
+import json
+import sqlite3
+from contextlib import contextmanager
+from pathlib import Path
+from typing import Iterator, List, Optional, Sequence
+
+from .models import Event
+
+
+SCHEMA = """
+PRAGMA journal_mode=WAL;
+PRAGMA foreign_keys=ON;
+CREATE TABLE IF NOT EXISTS events (
+    id INTEGER PRIMARY KEY,
+    canonical_title TEXT NOT NULL,
+    area TEXT NOT NULL,
+    description TEXT NOT NULL,
+    why_it_matters TEXT NOT NULL,
+    status TEXT NOT NULL,
+    first_seen TEXT NOT NULL,
+    last_seen TEXT NOT NULL,
+    publication_date TEXT,
+    effective_date TEXT,
+    deadline TEXT,
+    affected_entities TEXT NOT NULL DEFAULT '[]',
+    primary_source_url TEXT,
+    secondary_source_urls TEXT NOT NULL DEFAULT '[]',
+    source_document_title TEXT NOT NULL,
+    source_identifier TEXT,
+    content_hash TEXT NOT NULL UNIQUE,
+    previous_event_id INTEGER REFERENCES events(id),
+    is_update INTEGER NOT NULL DEFAULT 0,
+    watch_status TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_events_identifier ON events(source_identifier);
+CREATE INDEX IF NOT EXISTS idx_events_publication ON events(publication_date);
+CREATE TABLE IF NOT EXISTS event_sources (
+    event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+    url TEXT NOT NULL,
+    source_name TEXT NOT NULL,
+    source_type TEXT NOT NULL,
+    authority_level INTEGER NOT NULL,
+    PRIMARY KEY(event_id, url)
+);
+CREATE TABLE IF NOT EXISTS sources (
+    name TEXT PRIMARY KEY,
+    url TEXT NOT NULL,
+    source_type TEXT NOT NULL,
+    authority_level INTEGER NOT NULL,
+    topic TEXT,
+    last_checked TEXT,
+    last_success TEXT,
+    failure_count INTEGER NOT NULL DEFAULT 0,
+    last_error TEXT
+);
+CREATE TABLE IF NOT EXISTS daily_reports (
+    report_date TEXT PRIMARY KEY,
+    generated_at TEXT NOT NULL,
+    event_ids TEXT NOT NULL,
+    report_path TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS runs (
+    id INTEGER PRIMARY KEY,
+    started_at TEXT NOT NULL,
+    finished_at TEXT,
+    status TEXT NOT NULL,
+    discovered INTEGER NOT NULL DEFAULT 0,
+    included INTEGER NOT NULL DEFAULT 0,
+    errors TEXT NOT NULL DEFAULT '[]'
+);
+"""
+
+
+class Database:
+    def __init__(self, path: Path):
+        self.path = path
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+
+    @contextmanager
+    def connect(self) -> Iterator[sqlite3.Connection]:
+        conn = sqlite3.connect(str(self.path))
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys=ON")
+        try:
+            yield conn
+            conn.commit()
+        finally:
+            conn.close()
+
+    def initialize(self) -> None:
+        with self.connect() as conn:
+            conn.executescript(SCHEMA)
+
+    def sync_sources(self, sources: Sequence[dict]) -> None:
+        with self.connect() as conn:
+            for source in sources:
+                conn.execute(
+                    """INSERT INTO sources(name,url,source_type,authority_level,topic)
+                    VALUES(?,?,?,?,?) ON CONFLICT(name) DO UPDATE SET
+                    url=excluded.url, source_type=excluded.source_type,
+                    authority_level=excluded.authority_level, topic=excluded.topic""",
+                    (source["name"], source["url"], source.get("type", "page"), source.get("authority_level", 1), source.get("topic")),
+                )
+
+    def source_result(self, name: str, checked_at: str, success: bool, error: Optional[str] = None) -> None:
+        with self.connect() as conn:
+            if success:
+                conn.execute("UPDATE sources SET last_checked=?, last_success=?, failure_count=0, last_error=NULL WHERE name=?", (checked_at, checked_at, name))
+            else:
+                conn.execute("UPDATE sources SET last_checked=?, failure_count=failure_count+1, last_error=? WHERE name=?", (checked_at, (error or "")[:500], name))
+
+    def find_hash(self, content_hash: str):
+        with self.connect() as conn:
+            return conn.execute("SELECT * FROM events WHERE content_hash=?", (content_hash,)).fetchone()
+
+    def find_identifier(self, identifier: str):
+        with self.connect() as conn:
+            return conn.execute("SELECT * FROM events WHERE source_identifier=? ORDER BY id DESC LIMIT 1", (identifier,)).fetchone()
+
+    def recent_events(self, limit: int = 500):
+        with self.connect() as conn:
+            return conn.execute("SELECT * FROM events ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
+
+    def insert_event(self, event: Event) -> int:
+        with self.connect() as conn:
+            cursor = conn.execute(
+                """INSERT INTO events(canonical_title,area,description,why_it_matters,status,
+                first_seen,last_seen,publication_date,effective_date,deadline,affected_entities,
+                primary_source_url,secondary_source_urls,source_document_title,source_identifier,
+                content_hash,previous_event_id,is_update,watch_status)
+                VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                (event.canonical_title, event.area, event.description, event.why_it_matters, event.status,
+                 event.first_seen, event.last_seen, event.publication_date, event.effective_date, event.deadline,
+                 json.dumps(event.affected_entities), event.primary_source_url, json.dumps(event.secondary_source_urls),
+                 event.source_document_title, event.source_identifier, event.content_hash, event.previous_event_id,
+                 int(event.is_update), event.watch_status),
+            )
+            event_id = int(cursor.lastrowid)
+            for source in event.sources:
+                conn.execute("INSERT OR IGNORE INTO event_sources VALUES(?,?,?,?,?)", (event_id, source["url"], source["name"], source["type"], source["authority_level"]))
+            return event_id
+
+    def touch_event(self, event_id: int, seen_at: str) -> None:
+        with self.connect() as conn:
+            conn.execute("UPDATE events SET last_seen=? WHERE id=?", (seen_at, event_id))
+
+    def open_watchlist(self):
+        with self.connect() as conn:
+            return conn.execute("SELECT * FROM events WHERE watch_status='open' ORDER BY publication_date DESC LIMIT 20").fetchall()
+
+    def save_report(self, date: str, generated_at: str, event_ids: List[int], path: str) -> None:
+        with self.connect() as conn:
+            conn.execute("""INSERT INTO daily_reports VALUES(?,?,?,?)
+                ON CONFLICT(report_date) DO UPDATE SET generated_at=excluded.generated_at,
+                event_ids=excluded.event_ids,report_path=excluded.report_path""", (date, generated_at, json.dumps(event_ids), path))
+
+    def report_events(self, date: str) -> List[Event]:
+        with self.connect() as conn:
+            report = conn.execute("SELECT event_ids FROM daily_reports WHERE report_date=?", (date,)).fetchone()
+            if not report:
+                return []
+            ids = [int(value) for value in json.loads(report["event_ids"])]
+            events: List[Event] = []
+            for event_id in ids:
+                row = conn.execute("SELECT * FROM events WHERE id=?", (event_id,)).fetchone()
+                if not row:
+                    continue
+                sources = [dict(item) for item in conn.execute("SELECT url,source_name AS name,source_type AS type,authority_level FROM event_sources WHERE event_id=?", (event_id,)).fetchall()]
+                events.append(Event(
+                    id=row["id"], canonical_title=row["canonical_title"], area=row["area"],
+                    description=row["description"], why_it_matters=row["why_it_matters"], status=row["status"],
+                    first_seen=row["first_seen"], last_seen=row["last_seen"], publication_date=row["publication_date"],
+                    effective_date=row["effective_date"], deadline=row["deadline"],
+                    affected_entities=json.loads(row["affected_entities"]), primary_source_url=row["primary_source_url"],
+                    secondary_source_urls=json.loads(row["secondary_source_urls"]), source_document_title=row["source_document_title"],
+                    source_identifier=row["source_identifier"], content_hash=row["content_hash"],
+                    previous_event_id=row["previous_event_id"], is_update=bool(row["is_update"]),
+                    watch_status=row["watch_status"], sources=sources,
+                ))
+            return events
+
+    def start_run(self, started_at: str) -> int:
+        with self.connect() as conn:
+            return int(conn.execute("INSERT INTO runs(started_at,status) VALUES(?,'running')", (started_at,)).lastrowid)
+
+    def finish_run(self, run_id: int, finished_at: str, status: str, discovered: int, included: int, errors: List[str]) -> None:
+        with self.connect() as conn:
+            conn.execute("UPDATE runs SET finished_at=?,status=?,discovered=?,included=?,errors=? WHERE id=?", (finished_at, status, discovered, included, json.dumps(errors), run_id))

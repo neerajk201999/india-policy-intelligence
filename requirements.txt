@@ -1,0 +1,2 @@
+# Optional but strongly recommended for extracting official regulatory PDFs.
+pypdf>=5,<7

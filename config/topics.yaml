@@ -1,0 +1,39 @@
+{
+  "areas": {
+    "Deregulation & Ease of Doing Business": {
+      "keywords": ["jan vishwas", "decriminalisation", "decriminalization", "ease of doing business", "regulatory simplification", "compliance reduction", "licensing", "approval", "inspection", "industrial regulation", "labour compliance", "environmental clearance", "fssai", "food safety", "bis", "bureau of indian standards", "legal metrology", "customs", "import-export", "foreign trade", "tax administration", "administrative reform"],
+      "search_terms": ["Jan Vishwas", "ease of doing business", "regulatory simplification", "FSSAI notification", "BIS notification"],
+      "implication": "it may change licences, approvals, inspections, penalties or recurring compliance work for businesses"
+    },
+    "Digital Economy & Technology": {
+      "keywords": ["digital personal data protection", "dpdp", "data protection", "privacy", "data fiduciary", "data processor", "cross-border data", "information technology rules", "intermediary guidelines", "it rules", "intermediary liability", "social media intermediary", "online platform", "content moderation", "online gaming", "platform governance", "artificial intelligence", "ai governance", "ai regulation", "generative ai", "foundation model", "deepfake", "synthetic content", "synthetically generated information", "algorithmic governance", "digital competition", "big tech", "app store", "interoperability", "self-preferencing", "gatekeeper", "e-commerce", "ondc", "upi", "digital payment", "digital lending", "account aggregator", "aadhaar", "cert-in", "cybersecurity", "telecom regulation", "trai"],
+      "search_terms": ["DPDP Rules", "IT Rules intermediary", "AI governance deepfake", "digital competition", "CERT-In directions"],
+      "implication": "it may alter data, platform, AI, cybersecurity or digital-market obligations and product design decisions"
+    },
+    "Financial & Banking": {
+      "keywords": ["reserve bank", "rbi", "banking regulation", "nbfc", "non-banking financial", "payment aggregator", "payments", "digital lending", "kyc", "know your customer", "aml", "anti-money laundering", "pmla", "fintech", "sebi", "securities", "market conduct", "disclosure", "irdai", "insurance", "pfrda", "pension", "ifsca", "financial-sector", "consumer finance"],
+      "search_terms": ["RBI circular", "SEBI circular", "IRDAI regulation", "PFRDA circular", "IFSCA notification"],
+      "implication": "it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services"
+    },
+    "Competition": {
+      "keywords": ["competition act", "competition commission", "cci", "cartel", "abuse of dominance", "combination", "merger review", "digital competition", "self-preferencing", "app store", "gatekeeper", "nclat", "antitrust"],
+      "search_terms": ["CCI order competition", "Competition Act regulation", "CCI combination", "NCLAT competition"],
+      "implication": "it may affect merger clearance, platform conduct, distribution arrangements or exposure to antitrust enforcement"
+    },
+    "Education": {
+      "keywords": ["right to education", "rte", "school education", "higher education", "national education policy", "nep 2020", "ugc", "university grants commission", "aicte", "ncte", "ncert", "education regulation", "university", "school governance"],
+      "search_terms": ["UGC regulation", "AICTE notification", "Right to Education rules", "education governance reform"],
+      "implication": "it may change institutional approvals, academic governance, student rights or operating requirements for education providers"
+    },
+    "Land, Housing & Governance Reform": {
+      "keywords": ["land administration", "land records", "property registration", "stamp duty", "land acquisition", "zoning", "development control", "building regulation", "urban planning", "municipal governance", "housing regulation", "real estate", "rera", "land reform", "urban development", "property owner"],
+      "search_terms": ["land records reform state government", "property registration notification", "building regulation", "urban planning reform", "RERA order"],
+      "implication": "it may change land use, property registration, construction approvals, development rights or project timelines"
+    },
+    "Corporate Governance / ESG": {
+      "keywords": ["companies act", "ministry of corporate affairs", "mca", "corporate social responsibility", "csr", "beneficial ownership", "related party", "board governance", "independent director", "corporate disclosure", "lodr", "brsr", "esg", "sustainability disclosure", "insider trading", "listed company", "listed entity"],
+      "search_terms": ["MCA Companies Act notification", "SEBI LODR", "BRSR ESG disclosure", "beneficial ownership rules", "corporate governance enforcement"],
+      "implication": "it may change board, ownership, related-party, sustainability or listed-company disclosure responsibilities"
+    }
+  }
+}

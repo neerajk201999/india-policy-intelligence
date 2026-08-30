@@ -1,0 +1,165 @@
+from __future__ import annotations
+
+import json
+import shutil
+import sqlite3
+import tempfile
+import unittest
+from datetime import datetime
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+from app.classifier import classify, event_from_item, is_meaningful
+from app.config import ROOT, topics_config
+from app.database import Database
+from app.http import Response
+from app.models import RawItem
+from app.parsing import parse_feed
+from app.pipeline import Pipeline
+from app.reporting import render_report
+from app.quality import publication_issues
+
+
+NOW = datetime(2026, 8, 30, 9, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+
+
+class FakeClient:
+    def __init__(self, fail=False):
+        self.fail = fail
+        self.feed = (ROOT / "tests" / "fixtures" / "feed.xml").read_bytes()
+
+    def get(self, url):
+        if self.fail:
+            raise TimeoutError("simulated timeout")
+        if url.endswith("feed.xml"):
+            return Response(url, 200, "application/rss+xml", self.feed)
+        body = b"""<html><body><main><p>RBI issued draft directions on digital lending disclosures.
+        Banks and NBFCs would give borrowers a standard key facts statement before executing a loan.
+        The proposed framework covers disclosure format, annual percentage rates, grievance contacts,
+        cooling-off periods and the responsibilities of regulated entities that use lending service providers.
+        It would also require regulated entities to review their contracts and digital customer journeys.
+        Public comments are invited by 15 September 2026. The directions are not yet in force, and the
+        regulator has not stated a commencement date for any final instrument.</p></main></body></html>"""
+        return Response(url, 200, "text/html", body)
+
+
+class SystemTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        (self.root / "config").mkdir()
+        shutil.copy(ROOT / "config" / "topics.yaml", self.root / "config" / "topics.yaml")
+        sources = {"sources": [{
+            "name": "Test RBI", "url": "https://regulator.example/feed.xml", "type": "rss",
+            "category": "primary", "authority_level": 1, "topic": "Financial & Banking"
+        }]}
+        (self.root / "config" / "sources.yaml").write_text(json.dumps(sources), encoding="utf-8")
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def test_feed_dates_and_classification(self):
+        entries = parse_feed((ROOT / "tests" / "fixtures" / "feed.xml").read_bytes())
+        self.assertEqual(len(entries), 2)
+        self.assertEqual(entries[0]["published_at"].date().isoformat(), "2026-08-30")
+        topics = topics_config()
+        text = entries[0]["title"] + " " + entries[0]["summary"]
+        area = classify(text, topics)
+        self.assertEqual(area, "Financial & Banking")
+        self.assertTrue(is_meaningful(text, area))
+        routine = entries[1]["title"] + " " + entries[1]["summary"]
+        self.assertFalse(is_meaningful(routine, classify(routine, topics)))
+
+    def test_database_creation_and_duplicate_hash(self):
+        db = Database(self.root / "data" / "intelligence.db")
+        db.initialize()
+        item = RawItem("RBI", "primary", 1, "https://example.test/item", "RBI issues circular on KYC", NOW, "RBI circular changes KYC requirements for banks.")
+        event = event_from_item(item, item.summary, "Financial & Banking", topics_config(), NOW)
+        event.id = db.insert_event(event)
+        self.assertIsNotNone(db.find_hash(event.content_hash))
+        with self.assertRaises(sqlite3.IntegrityError):
+            db.insert_event(event)
+
+    def test_end_to_end_report_history_and_links(self):
+        first = Pipeline(root=self.root, now=NOW, client=FakeClient()).run()
+        self.assertEqual(first.included, 1)
+        content = first.report_path.read_text(encoding="utf-8")
+        self.assertIn("India Policy & Regulatory Intelligence Update", content)
+        self.assertIn("[Primary source](https://regulator.example/draft-digital-lending)", content)
+        self.assertIn("Status:** Draft", content)
+        second = Pipeline(root=self.root, now=NOW, client=FakeClient()).run()
+        self.assertEqual(second.included, 0)
+        self.assertIn("RBI issues draft directions", second.report_path.read_text(encoding="utf-8"))
+        with sqlite3.connect(self.root / "data" / "intelligence.db") as conn:
+            self.assertEqual(conn.execute("SELECT count(*) FROM events").fetchone()[0], 1)
+            self.assertEqual(conn.execute("SELECT count(*) FROM daily_reports").fetchone()[0], 1)
+
+    def test_source_failure_is_nonfatal_and_recorded(self):
+        result = Pipeline(root=self.root, now=NOW, client=FakeClient(fail=True)).run()
+        self.assertEqual(result.included, 0)
+        self.assertTrue(result.errors)
+        with sqlite3.connect(self.root / "data" / "intelligence.db") as conn:
+            count, error = conn.execute("SELECT failure_count,last_error FROM sources WHERE name='Test RBI'").fetchone()
+            self.assertEqual(count, 1)
+            self.assertIn("simulated timeout", error)
+
+    def test_successful_empty_source_is_not_marked_failed(self):
+        sources = {"sources": [{
+            "name": "Empty feed", "url": "https://regulator.example/empty.xml", "type": "rss",
+            "category": "primary", "authority_level": 1, "topic": "Financial & Banking"
+        }]}
+        (self.root / "config" / "sources.yaml").write_text(json.dumps(sources), encoding="utf-8")
+
+        class EmptyClient:
+            def get(self, url):
+                return Response(url, 200, "application/rss+xml", b"<rss><channel><title>Empty</title></channel></rss>")
+
+        Pipeline(root=self.root, now=NOW, client=EmptyClient()).run()
+        with sqlite3.connect(self.root / "data" / "intelligence.db") as conn:
+            failures, success = conn.execute("SELECT failure_count,last_success FROM sources WHERE name='Empty feed'").fetchone()
+            self.assertEqual(failures, 0)
+            self.assertIsNotNone(success)
+
+    def test_material_status_change_links_to_history(self):
+        pipeline = Pipeline(root=self.root, now=NOW, client=FakeClient())
+        pipeline.db.initialize()
+        topics = topics_config()
+        draft_item = RawItem("RBI", "primary", 1, "https://example.test/rule", "RBI draft regulation on digital lending", NOW, "Draft regulation for banks and NBFC digital lending.", "RBI/2026/101")
+        final_item = RawItem("RBI", "primary", 1, "https://example.test/rule-final", "RBI notifies regulation on digital lending", NOW, "RBI notification issues final regulation for banks and NBFC digital lending.", "RBI/2026/101")
+        first = pipeline._store_if_new(event_from_item(draft_item, draft_item.summary, "Financial & Banking", topics, NOW))
+        second = pipeline._store_if_new(event_from_item(final_item, final_item.summary, "Financial & Banking", topics, NOW))
+        self.assertIsNotNone(first)
+        self.assertTrue(second.is_update)
+        self.assertEqual(second.previous_event_id, first.id)
+
+    def test_watchlist_max_four(self):
+        topics = topics_config()
+        events = []
+        for n in range(5):
+            item = RawItem("RBI", "primary", 1, f"https://example.test/{n}", f"RBI draft regulation {n} on digital lending", NOW, "Draft regulation for banks and NBFC digital lending compliance.")
+            event = event_from_item(item, item.summary, "Financial & Banking", topics, NOW)
+            event.id = n + 1
+            events.append(event)
+        text = render_report(NOW, [], [dict(id=e.id, canonical_title=e.canonical_title, status=e.status, deadline=e.deadline, primary_source_url=e.primary_source_url) for e in events])
+        self.assertEqual(text.count("### [RBI draft regulation"), 4)
+
+    def test_editorial_gate_rejects_thin_event(self):
+        item = RawItem("RBI", "primary", 1, "https://example.test/thin", "RBI circular on KYC", NOW, "Short notice.")
+        event = event_from_item(item, item.summary, "Financial & Banking", topics_config(), NOW)
+        event.description = "Too short to establish what changed."
+        self.assertIn("insufficient factual detail", publication_issues(event))
+
+    def test_editorial_gate_rejects_unrelated_site_pdf(self):
+        item = RawItem("Official news", "official", 2, "https://example.test/charter.pdf", "Consumer Affairs notifies Legal Metrology Rules", NOW, "")
+        event = event_from_item(item, "", "Deregulation & Ease of Doing Business", topics_config(), NOW)
+        event.description = "Citizen's Charter for programme booking and recording at All India Radio stations, with contact details for engineering and news rooms across India. This general document explains service contacts, complaints, offices, telephone numbers, email addresses and programme procedures for listeners and visitors. It does not describe a regulatory notification or legal metrology obligations."
+        self.assertIn("site-wide boilerplate mistaken for evidence", publication_issues(event))
+
+    def test_pdf_selection_requires_title_relevance(self):
+        html = '<a href="/Citizens-Charter.pdf">PDF</a><a href="/Standardised-framework-NPS.pdf">Download PDF</a>'
+        selected = Pipeline._first_pdf_url(html, "https://example.test/page", "Standardised framework for NPS schemes")
+        self.assertEqual(selected, "https://example.test/Standardised-framework-NPS.pdf")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,418 @@
+{
+  "schemaVersion": 1,
+  "meta": {
+    "title": "India Policy & Regulatory Intelligence",
+    "reportDate": "2026-08-30",
+    "generatedAt": "2026-08-30T14:19:58.988918+05:30",
+    "timezone": "Asia/Kolkata",
+    "coverage": "Previous 24 hours; limited 3–5 day backfill for material updates",
+    "refreshSchedule": "Daily at 08:00 IST"
+  },
+  "summary": {
+    "developments": 2,
+    "primaryVerified": 1,
+    "watching": 0,
+    "healthySources": 15,
+    "totalSources": 24
+  },
+  "areas": [
+    {
+      "name": "Deregulation & Ease of Doing Business",
+      "count": 1
+    },
+    {
+      "name": "Digital Economy & Technology",
+      "count": 0
+    },
+    {
+      "name": "Financial & Banking",
+      "count": 1
+    },
+    {
+      "name": "Competition",
+      "count": 0
+    },
+    {
+      "name": "Education",
+      "count": 0
+    },
+    {
+      "name": "Land, Housing & Governance Reform",
+      "count": 0
+    },
+    {
+      "name": "Corporate Governance / ESG",
+      "count": 0
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Standardised framework for classification and presentation of Schemes under the NPS",
+      "area": "Financial & Banking",
+      "whatHappened": "CIRCULAR PFRDA/2026/47/REG-PF/10 28.08.2026 To All NPS Stakeholders Subject: Standardised framework for classification and presentation of Schemes under the NPS In exercise of the powers conferred under the PFRD Act, 2013, the regulations made thereunder and other enabling provisions, the Authority hereby issues this Circular prescribing the framework governing the classification, presentation, operation and disclosure of investment schemes [1] under the NPS. This Circular seeks to establish a standardised framework for classification and presentation of investment schemes, facilitate informed investment decisions by subscribers, promote comparability of schemes offered by different Pension Funds and prescribe uniform requirements relating to scheme naming, subscriber journeys, disclosures and implementation. Classification Framework 1. Classification of Investment Schemes 1.1 All schemes under NPS shall be classified in accordance with the framework specified in this Circular.",
+      "whyItMatters": "This matters to employers, pension funds, NPS subscribers because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Circular issued",
+      "publicationDate": "2026-08-28",
+      "effectiveDate": null,
+      "deadline": null,
+      "affectedEntities": [
+        "employers",
+        "pension funds",
+        "NPS subscribers"
+      ],
+      "primarySourceUrl": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Standardised framework for classification and presentation of Schemes under the NPS",
+      "sourceIdentifier": "CIRCULAR PFRDA/2026/47/REG-PF/10",
+      "isUpdate": false,
+      "watchStatus": null,
+      "evidence": "Primary verified",
+      "sources": [
+        {
+          "url": "https://www.pfrda.org.in/documents/33652/154008/Standardised+framework+for+classification+and+presentation+of+Schemes+under+the+NPS.pdf",
+          "name": "Pension Fund Regulatory and Development Authority",
+          "type": "primary",
+          "authorityLevel": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "area": "Deregulation & Ease of Doing Business",
+      "whatHappened": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026 | Akashvani News Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026 The Department of Consumer Affairs has notified the Legal Metrology (Indian Standard Time) Rules, 2026. The Rules provide for Indian Standard Time (IST) as the common time reference across the country for legal, administrative, commercial and other official purposes. The common time reference will support accurate time-stamping of banking and digital payment transactions, coordination of railways, airports and other transport systems, and also the coordination of emergency and other time-sensitive services. The Ministry of Consumer Affairs, Food and Public Distribution said that the Rules will come into force one hundred eighty days from the date of their publication in the Official Gazette.",
+      "whyItMatters": "This matters to banks, consumers because it may change licences, approvals, inspections, penalties or recurring compliance work for businesses. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Notified",
+      "publicationDate": "2026-08-30",
+      "effectiveDate": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "consumers"
+      ],
+      "primarySourceUrl": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "sourceIdentifier": "https://newsonair.gov.in/?p=1826694",
+      "isUpdate": false,
+      "watchStatus": null,
+      "evidence": "Official release",
+      "sources": [
+        {
+          "url": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
+          "name": "Akashvani News - National",
+          "type": "official",
+          "authorityLevel": 2
+        }
+      ]
+    }
+  ],
+  "watchlist": [],
+  "sources": [
+    {
+      "name": "Bureau of Indian Standards",
+      "url": "https://www.bis.gov.in/whats-new/",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "CERT-In",
+      "url": "https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADVLIST",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Digital Economy & Technology",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Competition Commission of India",
+      "url": "https://www.cci.gov.in/antitrust/press-release",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Competition",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Department for Promotion of Industry and Internal Trade",
+      "url": "https://dpiit.gov.in/whats-new",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Department for Promotion of Industry and Internal Trade: HTTPError: HTTP Error 403: Forbidden",
+      "health": "degraded"
+    },
+    {
+      "name": "FSSAI",
+      "url": "https://www.fssai.gov.in/notifications.php",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Gazette of India",
+      "url": "https://egazette.gov.in/",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "All",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "High Courts of India",
+      "url": "https://hcservices.ecourts.gov.in/",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Courts",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Insurance Regulatory and Development Authority of India",
+      "url": "https://irdai.gov.in/notifications",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Financial & Banking",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "International Financial Services Centres Authority",
+      "url": "https://ifsca.gov.in/Legal/Index?MId=U3k1SzROcVlOWXlGMVlKVmF3QT09",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Financial & Banking",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Ministry of Consumer Affairs",
+      "url": "https://consumeraffairs.nic.in/acts-and-rules",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Ministry of Consumer Affairs: URLError: <urlopen error timed out>",
+      "health": "degraded"
+    },
+    {
+      "name": "Ministry of Corporate Affairs",
+      "url": "https://www.mca.gov.in/content/mca/global/en/acts-rules/ebooks/notifications.html",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Corporate Governance / ESG",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Ministry of Corporate Affairs: URLError: <urlopen error [SSL: TLSV1_ALERT_PROTOCOL_VERSION] tlsv1 alert protocol version (_ssl.c:1129)>",
+      "health": "degraded"
+    },
+    {
+      "name": "Ministry of Education",
+      "url": "https://www.education.gov.in/whats-new",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Education",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Ministry of Education: HTTPError: HTTP Error 403: Forbidden",
+      "health": "degraded"
+    },
+    {
+      "name": "Ministry of Electronics and Information Technology",
+      "url": "https://www.meity.gov.in/documents/notifications",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Digital Economy & Technology",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Ministry of Electronics and Information Technology: HTTPError: HTTP Error 403: Forbidden",
+      "health": "degraded"
+    },
+    {
+      "name": "Ministry of Finance",
+      "url": "https://www.finmin.gov.in/whats-new",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Financial & Banking",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Ministry of Finance: URLError: <urlopen error timed out>",
+      "health": "degraded"
+    },
+    {
+      "name": "Ministry of Labour and Employment",
+      "url": "https://labour.gov.in/whats-new",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Ministry of Labour and Employment: HTTPError: HTTP Error 403: Forbidden",
+      "health": "degraded"
+    },
+    {
+      "name": "Parliament of India - Bills",
+      "url": "https://sansad.in/ls/legislation/bills",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "All",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Pension Fund Regulatory and Development Authority",
+      "url": "https://www.pfrda.org.in/web/pfrda/regulatory-framework/circulars",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Financial & Banking",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Reserve Bank of India",
+      "url": "https://website.rbi.org.in/web/rbi/notifications",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Financial & Banking",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Securities and Exchange Board of India",
+      "url": "https://www.sebi.gov.in/sebirss.xml",
+      "sourceType": "rss",
+      "authorityLevel": 1,
+      "topic": "Financial & Banking; Corporate Governance / ESG",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Supreme Court of India",
+      "url": "https://www.sci.gov.in/latest-orders/",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Courts",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Supreme Court of India: HTTPError: HTTP Error 403: Forbidden",
+      "health": "degraded"
+    },
+    {
+      "name": "Telecom Regulatory Authority of India",
+      "url": "https://www.trai.gov.in/notifications/press-release",
+      "sourceType": "page",
+      "authorityLevel": 1,
+      "topic": "Digital Economy & Technology",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Akashvani News - National",
+      "url": "https://newsonair.gov.in/category/national/feed/",
+      "sourceType": "rss",
+      "authorityLevel": 2,
+      "topic": "All",
+      "lastChecked": "2026-08-30T14:19:58.988918+05:30",
+      "lastSuccess": "2026-08-30T14:19:58.988918+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    },
+    {
+      "name": "Press Information Bureau",
+      "url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
+      "sourceType": "rss",
+      "authorityLevel": 2,
+      "topic": "All",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": null,
+      "failureCount": 2,
+      "lastError": "Press Information Bureau: HTTPError: HTTP Error 403: Forbidden",
+      "health": "degraded"
+    },
+    {
+      "name": "State government discovery",
+      "url": "https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en",
+      "sourceType": "search_feed",
+      "authorityLevel": 3,
+      "topic": "All",
+      "lastChecked": "2026-08-30T14:14:40.424943+05:30",
+      "lastSuccess": "2026-08-30T14:14:40.424943+05:30",
+      "failureCount": 0,
+      "lastError": null,
+      "health": "healthy"
+    }
+  ],
+  "latestRun": {
+    "id": 8,
+    "started_at": "2026-08-30T14:19:58.988918+05:30",
+    "finished_at": "2026-08-30T14:20:02.410398+05:30",
+    "status": "success",
+    "discovered": 10,
+    "included": 1,
+    "errors": []
+  },
+  "archive": [
+    {
+      "date": "2026-08-30",
+      "generatedAt": "2026-08-30T14:19:58.988918+05:30",
+      "eventCount": 2
+    }
+  ]
+}

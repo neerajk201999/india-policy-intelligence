@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Regulator updates</title>
+    <item>
+      <title>RBI issues draft directions on digital lending disclosures</title>
+      <link>https://regulator.example/draft-digital-lending</link>
+      <guid>RBI/DOR/2026-27/101</guid>
+      <pubDate>Sun, 30 Aug 2026 05:30:00 +0530</pubDate>
+      <description>RBI issues draft directions and invites public comments by 15 September 2026. The proposal would require banks and NBFCs to provide standardised digital lending disclosures.</description>
+    </item>
+    <item>
+      <title>Governor addresses annual banking conference</title>
+      <link>https://regulator.example/speech</link>
+      <pubDate>Sun, 30 Aug 2026 06:30:00 +0530</pubDate>
+      <description>The Governor addresses a gathering at an annual conference.</description>
+    </item>
+  </channel>
+</rss>
+

@@ -1,0 +1,242 @@
+{
+  "sources": [
+    {
+      "name": "Reserve Bank of India",
+      "short_name": "RBI",
+      "url": "https://website.rbi.org.in/web/rbi/notifications",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking",
+      "max_links": 45
+    },
+    {
+      "name": "Securities and Exchange Board of India",
+      "short_name": "SEBI",
+      "url": "https://www.sebi.gov.in/sebirss.xml",
+      "type": "rss",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking; Corporate Governance / ESG",
+      "max_links": 45
+    },
+    {
+      "name": "Competition Commission of India",
+      "short_name": "CCI",
+      "url": "https://www.cci.gov.in/antitrust/press-release",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Competition",
+      "max_links": 40
+    },
+    {
+      "name": "Ministry of Electronics and Information Technology",
+      "short_name": "MeitY",
+      "url": "https://www.meity.gov.in/documents/notifications",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Digital Economy & Technology",
+      "max_links": 40
+    },
+    {
+      "name": "Department for Promotion of Industry and Internal Trade",
+      "short_name": "DPIIT",
+      "url": "https://dpiit.gov.in/whats-new",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "max_links": 40
+    },
+    {
+      "name": "Ministry of Finance",
+      "short_name": "Finance Ministry",
+      "url": "https://www.finmin.gov.in/whats-new",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking",
+      "max_links": 40
+    },
+    {
+      "name": "Ministry of Corporate Affairs",
+      "short_name": "MCA",
+      "url": "https://www.mca.gov.in/content/mca/global/en/acts-rules/ebooks/notifications.html",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Corporate Governance / ESG",
+      "max_links": 40
+    },
+    {
+      "name": "Ministry of Labour and Employment",
+      "short_name": "Labour Ministry",
+      "url": "https://labour.gov.in/whats-new",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "max_links": 35
+    },
+    {
+      "name": "Ministry of Education",
+      "short_name": "Education Ministry",
+      "url": "https://www.education.gov.in/whats-new",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Education",
+      "max_links": 35
+    },
+    {
+      "name": "Ministry of Consumer Affairs",
+      "short_name": "Consumer Affairs",
+      "url": "https://consumeraffairs.nic.in/acts-and-rules",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "max_links": 35
+    },
+    {
+      "name": "Press Information Bureau",
+      "short_name": "PIB",
+      "url": "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3",
+      "type": "rss",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "All"
+    },
+    {
+      "name": "Akashvani News - National",
+      "short_name": "News On AIR",
+      "url": "https://newsonair.gov.in/category/national/feed/",
+      "type": "rss",
+      "category": "official",
+      "authority_level": 2,
+      "topic": "All"
+    },
+    {
+      "name": "Gazette of India",
+      "short_name": "eGazette",
+      "url": "https://egazette.gov.in/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "All",
+      "max_links": 25
+    },
+    {
+      "name": "Parliament of India - Bills",
+      "short_name": "Parliament",
+      "url": "https://sansad.in/ls/legislation/bills",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "All",
+      "max_links": 30
+    },
+    {
+      "name": "Supreme Court of India",
+      "short_name": "Supreme Court",
+      "url": "https://www.sci.gov.in/latest-orders/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Courts",
+      "max_links": 30
+    },
+    {
+      "name": "High Courts of India",
+      "short_name": "High Courts",
+      "url": "https://hcservices.ecourts.gov.in/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Courts",
+      "max_links": 25
+    },
+    {
+      "name": "Insurance Regulatory and Development Authority of India",
+      "short_name": "IRDAI",
+      "url": "https://irdai.gov.in/notifications",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking",
+      "max_links": 40
+    },
+    {
+      "name": "Pension Fund Regulatory and Development Authority",
+      "short_name": "PFRDA",
+      "url": "https://www.pfrda.org.in/web/pfrda/regulatory-framework/circulars",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking",
+      "max_links": 35
+    },
+    {
+      "name": "International Financial Services Centres Authority",
+      "short_name": "IFSCA",
+      "url": "https://ifsca.gov.in/Legal/Index?MId=U3k1SzROcVlOWXlGMVlKVmF3QT09",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Financial & Banking",
+      "max_links": 40
+    },
+    {
+      "name": "Telecom Regulatory Authority of India",
+      "short_name": "TRAI",
+      "url": "https://www.trai.gov.in/notifications/press-release",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Digital Economy & Technology",
+      "max_links": 40
+    },
+    {
+      "name": "FSSAI",
+      "short_name": "FSSAI",
+      "url": "https://www.fssai.gov.in/notifications.php",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "max_links": 35
+    },
+    {
+      "name": "Bureau of Indian Standards",
+      "short_name": "BIS",
+      "url": "https://www.bis.gov.in/whats-new/",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Deregulation & Ease of Doing Business",
+      "max_links": 35
+    },
+    {
+      "name": "CERT-In",
+      "short_name": "CERT-In",
+      "url": "https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADVLIST",
+      "type": "page",
+      "category": "primary",
+      "authority_level": 1,
+      "topic": "Digital Economy & Technology",
+      "max_links": 35
+    },
+    {
+      "name": "State government discovery",
+      "short_name": "State sources",
+      "url": "https://news.google.com/rss/search?q={query}&hl=en-IN&gl=IN&ceid=IN:en",
+      "type": "search_feed",
+      "category": "secondary",
+      "authority_level": 3,
+      "topic": "All",
+      "max_queries": 7
+    }
+  ]
+}

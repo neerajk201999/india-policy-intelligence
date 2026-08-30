@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Daily, primary-source-led intelligence on Indian policy and regulation.">
+  <meta name="theme-color" content="#f3efe5">
+  <title>India Policy & Regulatory Intelligence</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◆</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+  <header class="masthead">
+    <a class="brand" href="#top" aria-label="India Policy Intelligence home">
+      <span class="brand-mark" aria-hidden="true">IP</span>
+      <span>India Policy Intelligence</span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="#briefing">Briefing</a>
+      <a href="#watchlist">Watchlist</a>
+      <a href="#sources">Sources</a>
+    </nav>
+    <div class="live-state" title="The page checks for newly published data every minute">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span id="sync-label">Connecting</span>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="desk-header" aria-labelledby="page-title">
+      <div class="edition-line reveal">
+        <span>Daily desk</span>
+        <span id="edition-date">—</span>
+        <span>08:00 IST edition</span>
+      </div>
+      <div class="title-lockup reveal">
+        <div>
+          <p class="eyebrow">Primary-source-led regulatory monitoring</p>
+          <h1 id="page-title">What changed.<br><em>What it means.</em></h1>
+        </div>
+        <div class="desk-note">
+          <p>A selective briefing for policy, legal, strategy and corporate-affairs teams. Quiet days stay quiet.</p>
+          <p class="freshness" id="freshness">Loading the latest verified edition…</p>
+        </div>
+      </div>
+      <div class="signal-strip reveal" aria-label="Edition summary">
+        <div><strong id="stat-developments">—</strong><span>developments</span></div>
+        <div><strong id="stat-primary">—</strong><span>primary verified</span></div>
+        <div><strong id="stat-watch">—</strong><span>open watch items</span></div>
+        <div><strong id="stat-sources">—</strong><span>sources responding</span></div>
+      </div>
+    </section>
+
+    <section class="workspace" id="briefing">
+      <div class="workspace-main">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Today’s briefing</p>
+            <h2>Verified developments</h2>
+          </div>
+          <label class="search-wrap">
+            <span class="sr-only">Search developments</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 5 5"></path></svg>
+            <input id="search" type="search" placeholder="Search the brief" autocomplete="off">
+          </label>
+        </div>
+        <div class="area-filter" id="area-filter" role="group" aria-label="Filter by policy area"></div>
+        <div class="event-list" id="event-list" aria-live="polite"></div>
+      </div>
+
+      <aside class="watch-rail" id="watchlist">
+        <p class="eyebrow">Forward radar</p>
+        <h2>What to watch</h2>
+        <div id="watch-list"></div>
+        <div class="next-edition">
+          <span>Next scheduled scan</span>
+          <strong id="countdown">—</strong>
+          <small>GitHub Actions · 08:00 IST</small>
+        </div>
+      </aside>
+    </section>
+
+    <section class="coverage" aria-labelledby="coverage-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Coverage map</p>
+          <h2 id="coverage-title">Signal across the policy landscape</h2>
+        </div>
+        <p>Counts show published developments, not an impact score.</p>
+      </div>
+      <div id="coverage-map" class="coverage-map"></div>
+    </section>
+
+    <section class="source-ledger" id="sources" aria-labelledby="sources-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Evidence operations</p>
+          <h2 id="sources-title">Source ledger</h2>
+        </div>
+        <p id="source-summary">Checking source health…</p>
+      </div>
+      <div class="ledger-key" aria-label="Health legend">
+        <span><i class="health-dot healthy"></i>Responding</span>
+        <span><i class="health-dot degraded"></i>Needs attention</span>
+        <span><i class="health-dot pending"></i>Pending</span>
+      </div>
+      <div class="source-table-wrap">
+        <table>
+          <thead><tr><th>Institution</th><th>Coverage</th><th>Tier</th><th>Last success</th><th>Health</th></tr></thead>
+          <tbody id="source-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="method-note">
+      <p class="eyebrow">Method</p>
+      <p>Secondary reporting discovers and contextualises. Primary documents establish the regulatory fact. Every candidate passes freshness, legal-status, evidence, duplication and history checks before publication.</p>
+      <a href="https://github.com/neerajk201999/india-policy-intelligence" target="_blank" rel="noreferrer">Inspect the methodology and source registry ↗</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>India Policy Intelligence</span>
+    <span>Automated research with explicit evidence limits</span>
+    <span id="footer-updated">—</span>
+  </footer>
+
+  <template id="event-template">
+    <article class="event reveal-item">
+      <div class="event-meta">
+        <span class="event-area"></span>
+        <span class="event-status"></span>
+        <span class="event-evidence"></span>
+      </div>
+      <h3></h3>
+      <div class="event-grid">
+        <div><h4>What happened</h4><p class="event-what"></p></div>
+        <div><h4>Why it matters</h4><p class="event-why"></p></div>
+      </div>
+      <div class="event-footer">
+        <div class="event-dates"></div>
+        <a class="source-link" target="_blank" rel="noreferrer">Open primary document <span>↗</span></a>
+      </div>
+    </article>
+  </template>
+
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
+
