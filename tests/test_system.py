@@ -14,7 +14,7 @@ from app.config import ROOT, sources_config, topics_config
 from app.database import Database
 from app.http import Response
 from app.models import RawItem
-from app.parsing import article_text, parse_date, parse_feed, parse_rbi_notifications, parse_wordpress_posts
+from app.parsing import article_text, parse_data_gov_resource, parse_date, parse_feed, parse_rbi_notifications, parse_wordpress_posts
 from app.pipeline import Pipeline
 from app.reporting import render_report
 from app.quality import publication_issues
@@ -117,6 +117,20 @@ class SystemTests(unittest.TestCase):
         self.assertEqual(notifications[0]["identifier"], "RBI/13690")
         self.assertEqual(notifications[0]["url"], "https://rbidocs.rbi.org.in/rule.PDF")
         self.assertEqual(parse_date("Aug 25, 2026").date().isoformat(), "2026-08-25")
+
+    def test_data_gov_api_uses_public_citation_and_never_exposes_key(self):
+        resource_id = "239ac3d0-f08d-40d0-b03c-9b7a426a62d5"
+        source = {"resources": [{"id": resource_id, "public_url": "https://www.data.gov.in/resource/wpi"}]}
+        payload = json.dumps({
+            "status": "ok", "index_name": f"resource_{resource_id}",
+            "title": "Wholesale Price Index (Base Year 2011-12) till last month",
+            "updated_date": "2026-08-30T00:15:33Z", "total": 869,
+            "org": ["Ministry of Commerce and Industry"], "sector": ["Economy", "Prices"],
+        }).encode()
+        item = parse_data_gov_resource(payload, source)[0]
+        self.assertEqual(item["url"], "https://www.data.gov.in/resource/wpi")
+        self.assertEqual(item["identifier"], f"data.gov.in/{resource_id}")
+        self.assertNotIn("api-key", item["summary"])
 
     def test_database_creation_and_duplicate_hash(self):
         db = Database(self.root / "data" / "intelligence.db")

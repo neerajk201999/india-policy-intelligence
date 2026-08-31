@@ -65,6 +65,8 @@ The database does not contain or expose an impact score. Inclusion uses qualitat
 
 The 52-source registry is feeds/API-first wherever a publisher exposes a stable public endpoint. It covers RBI notifications, releases and publications; SEBI, IRDAI, PFRDA, IFSCA, IBBI, NPCI, NSE and BSE; PIB and official Akashvani feeds; data.gov.in, MoSPI, Finance/DEA, the Budget and NITI Aayog; CBIC, GST Council, Income Tax and DGFT; TRAI, CCI, MeitY, CERT-In, FSSAI, CDSCO, CEA, CERC, PNGRB and MoEFCC; Parliament, PRS, India Code, courts and eGazette; and the other national sources in `config/sources.yaml`. HTML collection is a conservative fallback. Google News RSS remains secondary discovery and is never treated as authoritative.
 
+`data.gov.in` record-level resources use the free `DATA_GOV_IN_API_KEY` environment variable. The key is required only by the backend collector and is never written to reports, SQLite, exported JSON, source links or browser code. The initial curated resource is the official Wholesale Price Index dataset; additional resource UUIDs must be paired with their public provenance page in the registry.
+
 To add a source, append an object to `config/sources.yaml`:
 
 ```json

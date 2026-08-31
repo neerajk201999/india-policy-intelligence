@@ -105,6 +105,52 @@ def parse_wordpress_posts(data: bytes) -> List[Dict[str, object]]:
     return items
 
 
+def parse_data_gov_resource(data: bytes, source: Dict[str, object]) -> List[Dict[str, object]]:
+    """Turn one authenticated data.gov.in resource response into a safe public item.
+
+    The authenticated API URL is deliberately never returned.  Citations use the
+    publisher's public resource page configured beside the resource UUID.
+    """
+    try:
+        payload = json.loads(data.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return []
+    if not isinstance(payload, dict) or payload.get("status") != "ok":
+        return []
+    resource_id = str(payload.get("index_name") or "").removeprefix("resource_")
+    resources = source.get("resources") if isinstance(source, dict) else None
+    resource = next(
+        (item for item in resources or [] if isinstance(item, dict) and item.get("id") == resource_id),
+        None,
+    )
+    if not resource:
+        return []
+    title = clean_text(str(payload.get("title") or ""))
+    published = parse_date(str(payload.get("updated_date") or payload.get("created_date") or ""))
+    public_url = str(resource.get("public_url") or "").strip()
+    if not title or not public_url or not published:
+        return []
+    organizations = payload.get("org") if isinstance(payload.get("org"), list) else []
+    sectors = payload.get("sector") if isinstance(payload.get("sector"), list) else []
+    publisher = ", ".join(clean_text(str(value)) for value in organizations[:3] if value) or "the responsible Government of India authority"
+    sector_text = ", ".join(dict.fromkeys(clean_text(str(value)) for value in sectors if value)) or "public statistics"
+    total = payload.get("total")
+    record_text = f" The API currently exposes {int(total):,} records." if isinstance(total, int) else ""
+    summary = (
+        f"Open Government Data Platform India updated the dataset “{title}” on {published.date().isoformat()}. "
+        f"The resource is published by {publisher} and classified under {sector_text}.{record_text} "
+        "This entry records the official dataset refresh and its publisher metadata; it does not infer a change in the underlying index values. "
+        "Users should inspect the linked public resource, its field definitions, revisions and individual records before drawing a trend conclusion or changing an operating assumption."
+    )
+    return [{
+        "title": title,
+        "url": public_url,
+        "summary": summary,
+        "published_at": published,
+        "identifier": f"data.gov.in/{resource_id}",
+    }]
+
+
 def parse_rbi_notifications(text: str, base_url: str) -> List[Dict[str, object]]:
     """Read RBI's dated notification table, preserving the linked official PDF."""
     from urllib.parse import urljoin

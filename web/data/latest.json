@@ -2292,14 +2292,14 @@
     {
       "name": "Open Government Data Platform India",
       "url": "https://www.data.gov.in/catalogs",
-      "sourceType": "page",
+      "sourceType": "data_gov",
       "authorityLevel": 1,
       "topic": "Macroeconomy, Trade & Public Finance",
       "defaultSignalType": "Data",
-      "lastChecked": "2026-08-30T18:55:01.518587+05:30",
-      "lastSuccess": "2026-08-30T18:55:01.518587+05:30",
+      "lastChecked": "2026-08-31T10:06:40.691511+05:30",
+      "lastSuccess": "2026-08-31T10:06:40.691511+05:30",
       "failureCount": 0,
-      "lastItemCount": 7,
+      "lastItemCount": 1,
       "lastError": null,
       "health": "healthy"
     },

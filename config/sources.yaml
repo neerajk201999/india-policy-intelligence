@@ -289,12 +289,17 @@
       "name": "Open Government Data Platform India",
       "short_name": "data.gov.in",
       "url": "https://www.data.gov.in/catalogs",
-      "type": "page",
+      "type": "data_gov",
       "category": "primary",
       "authority_level": 1,
       "topic": "Macroeconomy, Trade & Public Finance",
       "default_signal_type": "Data",
-      "max_links": 40
+      "resources": [
+        {
+          "id": "239ac3d0-f08d-40d0-b03c-9b7a426a62d5",
+          "public_url": "https://www.data.gov.in/resource/wholesale-price-index-base-year-2011-12-till-last-month"
+        }
+      ]
     },
     {
       "name": "PRS Legislative Research - Bill Track",

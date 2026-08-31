@@ -32,6 +32,8 @@ jobs:
 
       - name: Run research pipeline
         run: python -m app.run --lookback-days 5 --max-items 30 --verbose
+        env:
+          DATA_GOV_IN_API_KEY: ${{ secrets.DATA_GOV_IN_API_KEY }}
 
       - name: Export website data
         run: python scripts/export_web.py

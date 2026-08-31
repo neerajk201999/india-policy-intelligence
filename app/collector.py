@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import logging
+import os
+import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from typing import Dict, List, Tuple
@@ -9,7 +11,7 @@ from urllib.parse import parse_qs, quote_plus, urlsplit
 from .database import Database
 from .http import HttpClient
 from .models import RawItem
-from .parsing import page_links, parse_feed, parse_rbi_notifications, parse_wordpress_posts
+from .parsing import page_links, parse_data_gov_resource, parse_feed, parse_rbi_notifications, parse_wordpress_posts
 
 
 LOG = logging.getLogger(__name__)
@@ -49,18 +51,34 @@ class Collector:
         source_items: List[RawItem] = []
         source_errors: List[str] = []
         fetched_any = False
-        for url in self._source_urls(source, topics):
+        try:
+            urls = self._source_urls(source, topics)
+        except Exception as exc:
+            safe_error = re.sub(r"([?&]api-key=)[^&\s]+", r"\1REDACTED", str(exc), flags=re.I)
+            message = f"{source['name']}: {type(exc).__name__}: {safe_error[:220]}"
+            LOG.warning(message)
+            return source_items, [message], fetched_any
+        for url in urls:
             try:
                 response = self.client.get(url)
                 source_items.extend(self._parse(source, response.body, response.text, response.url, topics))
                 fetched_any = True
             except Exception as exc:  # a failed source must never stop the run
-                message = f"{source['name']}: {type(exc).__name__}: {str(exc)[:220]}"
+                safe_error = re.sub(r"([?&]api-key=)[^&\s]+", r"\1REDACTED", str(exc), flags=re.I)
+                message = f"{source['name']}: {type(exc).__name__}: {safe_error[:220]}"
                 LOG.warning(message)
                 source_errors.append(message)
         return source_items, source_errors, fetched_any
 
     def _source_urls(self, source: dict, topics: Dict) -> List[str]:
+        if source.get("type") == "data_gov":
+            api_key = os.environ.get("DATA_GOV_IN_API_KEY", "").strip()
+            if not api_key:
+                raise RuntimeError("DATA_GOV_IN_API_KEY is not configured")
+            return [
+                f"https://api.data.gov.in/resource/{resource['id']}?api-key={api_key}&format=json&offset=0&limit=10"
+                for resource in source.get("resources", [])
+            ]
         if source.get("type") == "wordpress":
             since = self.since.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
             return [source["url"].replace("{since}", since)]
@@ -83,6 +101,8 @@ class Collector:
             entries = parse_wordpress_posts(body)
         elif kind == "rbi_notifications":
             entries = parse_rbi_notifications(text, final_url)
+        elif kind == "data_gov":
+            entries = parse_data_gov_resource(body, source)
         elif kind == "page":
             entries = [
                 {"title": title, "url": url, "summary": "", "published_at": None, "identifier": None}

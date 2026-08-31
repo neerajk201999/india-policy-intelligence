@@ -229,7 +229,7 @@ function compactSummary(value, limit = 44) {
 
 function createBriefingEntry(event, index) {
   const node = $("#briefing-template").content.firstElementChild.cloneNode(true);
-  $(".briefing-index", node).textContent = String(index + 1);
+  $(".briefing-index", node).textContent = String(index + 1).padStart(2, "0");
   $(".event-area", node).textContent = areaLabel(event.area);
   $(".event-status", node).textContent = event.signalType || event.status || "Policy update";
   $(".verification span", node).textContent = event.evidence || "Source linked";
@@ -293,7 +293,7 @@ function renderListOnly() {
 function renderBriefing() {
   const date = formatDate(state.data.meta.reportDate) || "Date unavailable";
   const count = state.data.events.length;
-  setIntro("Daily briefing", "The morning policy brief", `${count} source-linked developments selected from a ${state.data.summary.totalSources}-source public-record network.`, `${date} · ${formatUpdated(state.data.meta.generatedAt)}`);
+  setIntro("Morning edition", "The day in public policy", `${count} source-linked developments selected from a ${state.data.summary.totalSources}-source public-record network.`, `${date} · ${formatUpdated(state.data.meta.generatedAt)}`);
   setMeta("India Policy Intelligence", "Today’s verified Indian policy and regulatory developments.");
   const view = $("#route-view");
   const controls = createControls(state.data.events);
@@ -334,7 +334,7 @@ function renderWatchlist() {
 function renderSources() {
   const sources = state.data.sources;
   const healthy = sources.filter((source) => source.health === "healthy").length;
-  const feeds = sources.filter((source) => ["rss", "atom", "wordpress"].includes(source.sourceType)).length;
+  const feeds = sources.filter((source) => ["rss", "atom", "wordpress", "data_gov"].includes(source.sourceType)).length;
   setIntro("Coverage ledger", "The public record we monitor", "Every source is collected independently, provenance is retained, and a failure never becomes a policy claim.", `${sources.length} sources · ${feeds} feeds/APIs · ${healthy} healthy`);
   setMeta("Source Coverage", "The official and attributed sources monitored by India Policy Intelligence.");
   const view = $("#route-view");
