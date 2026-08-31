@@ -75,7 +75,7 @@ Passing candidates are ranked for the daily edition using a deterministic select
 - evidence: 5 for a publisher identifier and 4 for at least 100 words of evidence
 - actionability: 6 for a recorded effective date or deadline
 
-This score chooses and orders up to 30 developments for the daily Briefing; it is not an impact claim and is neither stored nor displayed. Every candidate that clears the evidence gate is stored in the complete Tracker, including candidates outside that daily selection. Canonical identity uses publisher host + document ID + publication date, falling back to canonical URL only when an ID is unavailable.
+This score chooses and orders up to 30 developments for the daily Briefing; it is not an impact claim and is neither stored nor displayed. The true daily diff is selected first. If that diff has fewer than eight developments, a labelled five-day context section supplements it from the complete verified record; the UI never presents those context records as newly published today. Every candidate that clears the evidence gate is stored in the complete Tracker, including candidates outside that daily selection. Canonical identity uses publisher host + document ID + publication date, falling back to canonical URL only when an ID is unavailable.
 
 ## Credentials and known access constraints
 

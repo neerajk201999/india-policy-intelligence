@@ -225,7 +225,8 @@ function createBriefingEntry(event, index) {
   const node = $("#briefing-template").content.firstElementChild.cloneNode(true);
   $(".briefing-index", node).textContent = String(index + 1).padStart(2, "0");
   $(".event-area", node).textContent = areaLabel(event.area);
-  $(".event-status", node).textContent = event.signalType || event.status || "Policy update";
+  const signal = event.signalType || event.status || "Policy update";
+  $(".event-status", node).textContent = event.briefingKind === "recent-context" ? `Recent context · ${signal}` : `Newly verified · ${signal}`;
   $(".verification span", node).textContent = event.evidence || "Source linked";
   if (!event.primarySourceUrl) $(".verification", node).hidden = true;
   const title = $("h2 a", node);
@@ -287,7 +288,10 @@ function renderListOnly() {
 function renderBriefing() {
   const date = formatDate(state.data.meta.reportDate) || "Date unavailable";
   const count = state.data.events.length;
-  setIntro("Daily briefing", "The day in public policy", `${count} selected developments from a ${state.data.summary.totalSources}-source public-record network. Every verified candidate is retained in Tracker.`, `${date} · Daily edition`);
+  const fresh = state.data.summary.newDevelopments || 0;
+  const context = state.data.summary.recentContext || 0;
+  const composition = context ? `${fresh} newly verified today; ${context} recent verified context.` : `${fresh} newly verified today.`;
+  setIntro("Daily briefing", "The day in public policy", `${composition} Every verified candidate is retained in Tracker.`, `${date} · Daily edition`);
   setMeta("India Policy Intelligence", "Today’s verified Indian policy and regulatory developments.");
   const view = $("#route-view");
   const controls = createControls(state.data.events);

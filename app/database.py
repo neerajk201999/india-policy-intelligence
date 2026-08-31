@@ -148,6 +148,33 @@ class Database:
         with self.connect() as conn:
             return conn.execute("SELECT * FROM events ORDER BY id DESC LIMIT ?", (limit,)).fetchall()
 
+    def recent_verified_context(self, since_date: str):
+        """Recent verified records used only as clearly labelled briefing context."""
+        with self.connect() as conn:
+            return conn.execute(
+                "SELECT * FROM events WHERE publication_date >= ? ORDER BY publication_date DESC,last_seen DESC,id DESC",
+                (since_date,),
+            ).fetchall()
+
+    def event_from_row(self, row) -> Event:
+        """Hydrate an event and its provenance from a stored SQLite row."""
+        with self.connect() as conn:
+            sources = [dict(item) for item in conn.execute(
+                "SELECT url,source_name AS name,source_type AS type,authority_level FROM event_sources WHERE event_id=?",
+                (row["id"],),
+            ).fetchall()]
+        return Event(
+            id=row["id"], canonical_title=row["canonical_title"], area=row["area"], signal_type=row["signal_type"],
+            description=row["description"], why_it_matters=row["why_it_matters"], status=row["status"],
+            first_seen=row["first_seen"], last_seen=row["last_seen"], publication_date=row["publication_date"],
+            effective_date=row["effective_date"], deadline=row["deadline"],
+            affected_entities=json.loads(row["affected_entities"]), primary_source_url=row["primary_source_url"],
+            secondary_source_urls=json.loads(row["secondary_source_urls"]), source_document_title=row["source_document_title"],
+            source_identifier=row["source_identifier"], content_hash=row["content_hash"],
+            previous_event_id=row["previous_event_id"], is_update=bool(row["is_update"]),
+            watch_status=row["watch_status"], sources=sources,
+        )
+
     def insert_event(self, event: Event) -> int:
         with self.connect() as conn:
             cursor = conn.execute(
@@ -227,18 +254,7 @@ class Database:
                 row = conn.execute("SELECT * FROM events WHERE id=?", (event_id,)).fetchone()
                 if not row:
                     continue
-                sources = [dict(item) for item in conn.execute("SELECT url,source_name AS name,source_type AS type,authority_level FROM event_sources WHERE event_id=?", (event_id,)).fetchall()]
-                events.append(Event(
-                    id=row["id"], canonical_title=row["canonical_title"], area=row["area"], signal_type=row["signal_type"],
-                    description=row["description"], why_it_matters=row["why_it_matters"], status=row["status"],
-                    first_seen=row["first_seen"], last_seen=row["last_seen"], publication_date=row["publication_date"],
-                    effective_date=row["effective_date"], deadline=row["deadline"],
-                    affected_entities=json.loads(row["affected_entities"]), primary_source_url=row["primary_source_url"],
-                    secondary_source_urls=json.loads(row["secondary_source_urls"]), source_document_title=row["source_document_title"],
-                    source_identifier=row["source_identifier"], content_hash=row["content_hash"],
-                    previous_event_id=row["previous_event_id"], is_update=bool(row["is_update"]),
-                    watch_status=row["watch_status"], sources=sources,
-                ))
+                events.append(self.event_from_row(row))
             return events
 
     def start_run(self, started_at: str) -> int:

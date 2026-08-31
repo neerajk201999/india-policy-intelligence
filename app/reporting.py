@@ -22,26 +22,36 @@ def render_report(now: datetime, events: Sequence[Event], watchlist: Iterable, c
         "Coverage: Previous 24 hours; important missed developments from the preceding few days",
         "",
     ]
-    for event in events:
-        prefix = "Update: " if event.is_update else ""
-        lines.extend([
-            f"## [{event.area.upper()} · {event.signal_type.upper()}] — {prefix}{event.canonical_title}", "",
-            "**What happened:**", "", event.description, "",
-            "**Why it matters:**", "", event.why_it_matters, "",
-            f"**Type:** {event.signal_type}", "", f"**Status:** {event.status}", "",
-        ])
-        if event.effective_date:
-            lines.extend([f"**Effective date:** {event.effective_date}", ""])
-        if event.deadline:
-            lines.extend([f"**Deadline:** {event.deadline}", ""])
-        if event.primary_source_url:
-            authority = min((source.get("authority_level", 3) for source in event.sources), default=3)
-            label = "Primary source" if authority == 1 else "Official source"
-            lines.extend([f"**Source:** {_link(label, event.primary_source_url)}", ""])
-        elif event.secondary_source_urls:
-            lines.extend([f"**Source:** {_link('Strongest available secondary source; primary confirmation unavailable', event.secondary_source_urls[0])}", ""])
-        if event.primary_source_url and event.secondary_source_urls:
-            lines.extend([f"**Context:** {_link('News/context source', event.secondary_source_urls[0])}", ""])
+    new_events = [event for event in events if event.first_seen.startswith(now.date().isoformat())]
+    context_events = [event for event in events if event not in new_events]
+    sections = [
+        ("## Today's newly verified developments", new_events),
+        ("## Recent verified context", context_events),
+    ]
+    for heading, section_events in sections:
+        if not section_events:
+            continue
+        lines.extend([heading, ""])
+        for event in section_events:
+            prefix = "Update: " if event.is_update else ""
+            lines.extend([
+                f"### [{event.area.upper()} · {event.signal_type.upper()}] — {prefix}{event.canonical_title}", "",
+                "**What happened:**", "", event.description, "",
+                "**Why it matters:**", "", event.why_it_matters, "",
+                f"**Type:** {event.signal_type}", "", f"**Status:** {event.status}", "",
+            ])
+            if event.effective_date:
+                lines.extend([f"**Effective date:** {event.effective_date}", ""])
+            if event.deadline:
+                lines.extend([f"**Deadline:** {event.deadline}", ""])
+            if event.primary_source_url:
+                authority = min((source.get("authority_level", 3) for source in event.sources), default=3)
+                label = "Primary source" if authority == 1 else "Official source"
+                lines.extend([f"**Source:** {_link(label, event.primary_source_url)}", ""])
+            elif event.secondary_source_urls:
+                lines.extend([f"**Source:** {_link('Strongest available secondary source; primary confirmation unavailable', event.secondary_source_urls[0])}", ""])
+            if event.primary_source_url and event.secondary_source_urls:
+                lines.extend([f"**Context:** {_link('News/context source', event.secondary_source_urls[0])}", ""])
     lines.extend(["## What to Watch", ""])
     count = 0
     for row in watchlist:

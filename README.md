@@ -26,7 +26,7 @@ python3 -m app.run --source "Reserve Bank of India - Notifications RSS"
 python3 -m app.run --offline
 ```
 
-The live command initializes `data/intelligence.db`, fetches enabled sources, and stores every verified development in Tracker. It then selects up to 30 of those developments for the readable daily Briefing and writes `reports/daily/YYYY-MM-DD.md`. `--offline` performs no HTTP requests and generates a transparent report from the existing watchlist/history. If `pypdf` is already available, the pipeline also extracts linked official PDFs; it remains fully functional and falls back to official page metadata when that optional package is absent.
+The live command initializes `data/intelligence.db`, fetches enabled sources, and stores every verified development in Tracker. The daily Briefing leads with the true new/updated diff; when that is sparse, it transparently adds a small set of clearly labelled, recently verified context records from the preceding five days, up to 30 items total. It then writes `reports/daily/YYYY-MM-DD.md`. `--offline` performs no HTTP requests and generates a transparent report from the existing watchlist/history. If `pypdf` is already available, the pipeline also extracts linked official PDFs; it remains fully functional and falls back to official page metadata when that optional package is absent.
 
 Open `http://127.0.0.1:8000` after starting the local website. The client checks `web/data/latest.json` every minute, exposes evidence status and source health, and never invents a live update when the dataset cannot be reached.
 

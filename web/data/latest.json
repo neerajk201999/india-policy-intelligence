@@ -3,14 +3,16 @@
   "meta": {
     "title": "India Policy & Regulatory Intelligence",
     "reportDate": "2026-08-31",
-    "generatedAt": "2026-08-31T10:26:39.567490+05:30",
+    "generatedAt": "2026-08-31T11:35:22.324786+05:30",
     "timezone": "Asia/Kolkata",
-    "coverage": "Previous 24 hours; limited 3–5 day backfill for material updates",
+    "coverage": "Newly verified developments, with clearly labelled five-day context when the daily diff is sparse",
     "refreshSchedule": "Daily at 08:00 IST"
   },
   "summary": {
-    "developments": 1,
-    "primaryVerified": 1,
+    "developments": 8,
+    "newDevelopments": 1,
+    "recentContext": 7,
+    "primaryVerified": 5,
     "watching": 0,
     "healthySources": 30,
     "totalSources": 52
@@ -18,7 +20,7 @@
   "areas": [
     {
       "name": "Deregulation & Ease of Doing Business",
-      "count": 0
+      "count": 1
     },
     {
       "name": "Digital Economy & AI",
@@ -26,11 +28,11 @@
     },
     {
       "name": "Financial & Banking",
-      "count": 0
+      "count": 4
     },
     {
       "name": "Macroeconomy, Trade & Public Finance",
-      "count": 1
+      "count": 3
     },
     {
       "name": "Competition",
@@ -89,7 +91,320 @@
           "type": "primary",
           "authorityLevel": 1
         }
-      ]
+      ],
+      "briefingKind": "new"
+    },
+    {
+      "id": 1,
+      "slug": "dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026",
+      "title": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "area": "Deregulation & Ease of Doing Business",
+      "signalType": "Regulation",
+      "subtopic": null,
+      "eventType": "Notified",
+      "whatHappened": "The Department of Consumer Affairs has notified the Legal Metrology (Indian Standard Time) Rules, 2026. The Rules provide for Indian Standard Time (IST) as the common time reference across the country for legal, administrative, commercial and other official purposes. The common time reference will support accurate time-stamping of banking and digital payment transactions, coordination of railways, airports and other transport systems, and also the coordination of emergency and other time-sensitive services. The Ministry of Consumer Affairs, Food and Public Distribution said that the Rules will come into force one hundred eighty days from the date of their publication in the Official Gazette. The rules are aimed at ensuring that important systems across the country use accurate and consistent IST.",
+      "whyItMatters": "This matters to banks, consumers, payment providers, transport operators because systems that timestamp transactions or coordinate time-sensitive services may need to align clocks, logs, audit trails and operating standards with the prescribed IST reference before commencement. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Notified",
+      "publicationDate": "2026-08-30",
+      "effectiveDate": null,
+      "effectiveDateText": "180 days after Official Gazette publication",
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "consumers",
+        "payment providers",
+        "transport operators"
+      ],
+      "primarySourceUrl": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "primarySourceTitle": "Dept of Consumer Affairs notifies Legal Metrology (Indian Standard Time) Rules, 2026",
+      "institution": "Akashvani News - National",
+      "sourceIdentifier": "https://newsonair.gov.in/?p=1826694",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": false,
+      "evidenceLevel": "Official",
+      "nextStep": null,
+      "firstSeen": "2026-08-30T14:47:17.923793+05:30",
+      "lastUpdated": "2026-08-30T18:55:01.518587+05:30",
+      "previousEventId": null,
+      "evidence": "Official evidence",
+      "sources": [
+        {
+          "url": "https://newsonair.gov.in/dept-of-consumer-affairs-notifies-legal-metrology-indian-standard-time-rules-2026/",
+          "name": "Akashvani News - National",
+          "type": "official",
+          "authorityLevel": 2
+        }
+      ],
+      "briefingKind": "recent-context"
+    },
+    {
+      "id": 22,
+      "slug": "petroleum-and-natural-gas-ministry-clarifies-cbg-framework-under-gobardhan-designed-to-provide-stabl",
+      "title": "Petroleum and Natural Gas Ministry clarifies CBG framework under GOBARdhan designed to provide stable price to CBG producers",
+      "area": "Macroeconomy, Trade & Public Finance",
+      "signalType": "Institutional",
+      "subtopic": null,
+      "eventType": "Announcement",
+      "whatHappened": "The Ministry of Petroleum and Natural Gas has clarified that the revised pricing framework for Compressed Biogas (CBG) under the GOBARdhan Scheme has been designed to provide a stable and viable price to CBG producers while ensuring that consumers do not face any material increase in CNG and household PNG prices. According to a recent newspaper article, the revised price of Compressed Biogas (CBG) under the GOBARdhan Scheme could place a significant additional burden on CNG and household PNG consumers. However, the Ministry explained that this conclusion does not present the correct picture, as it does not account for the Government’s affordability support and the substantially wider domestic gas pool over which the net cost of CBG will now be distributed. The Ministry explained that under the existing system, the procurement price paid to CBG producers is approximately 1 thousand 478 rupees per Million British thermal units, while the revised procurement price under the GOBARdhan Scheme is 2,110 rupees per Million British thermal units. It noted that the Government will also provide affordability support of 10 rupees per kilogram of CBG, equivalent to around 215 rupees per Million British thermal units with 95 per cent methane content, reducing the effective cost to approximately 1,895 rupees per Million British thermal units.",
+      "whyItMatters": "This matters to businesses, investors and public-policy teams because it changes the macroeconomic baseline used by businesses, investors and public-policy teams for demand, financing, trade and fiscal planning. Because this is not yet final, implementation obligations should not be treated as operative. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Announcement",
+      "publicationDate": "2026-08-29",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "consumers"
+      ],
+      "primarySourceUrl": "https://newsonair.gov.in/petroleum-and-natural-gas-ministry-clarifies-cbg-framework-under-gobardhan-designed-to-provide-stable-price-to-cbg-producers/",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Petroleum and Natural Gas Ministry clarifies CBG framework under GOBARdhan designed to provide stable price to CBG producers",
+      "primarySourceTitle": "Petroleum and Natural Gas Ministry clarifies CBG framework under GOBARdhan designed to provide stable price to CBG producers",
+      "institution": "Akashvani News - Business",
+      "sourceIdentifier": "https://newsonair.gov.in/?p=1825028",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": false,
+      "evidenceLevel": "Official",
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:55:01.518587+05:30",
+      "lastUpdated": "2026-08-31T10:26:39.567490+05:30",
+      "previousEventId": null,
+      "evidence": "Official evidence",
+      "sources": [
+        {
+          "url": "https://newsonair.gov.in/petroleum-and-natural-gas-ministry-clarifies-cbg-framework-under-gobardhan-designed-to-provide-stable-price-to-cbg-producers/",
+          "name": "Akashvani News - Business",
+          "type": "official",
+          "authorityLevel": 2
+        }
+      ],
+      "briefingKind": "recent-context"
+    },
+    {
+      "id": 4,
+      "slug": "industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis",
+      "title": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "area": "Macroeconomy, Trade & Public Finance",
+      "signalType": "Data",
+      "subtopic": null,
+      "eventType": "Data release",
+      "whatHappened": "India’s Industrial output growth, as measured by the Index of Industrial Production (IIP), expanded by 6.7 per cent in July this year on an annual basis. The July data indicates that industrial activity continued to expand at a healthy pace, although the pace of growth moderated from the revised June level. The sharp upward revision in June’s IIP growth to 8.8 per cent from 7.3 per cent also indicates that the industrial momentum entering the July quarter was stronger than initially estimated. According to government data, Manufacturing, which carries the heaviest weight in the index, grew by 7.3 per cent, while electricity and gas supply posted an 8.7 per cent expansion in July. Water supply, sewerage and waste management rose by 7.4 per cent. However, the mining sector proved to be a laggard, posting a negative growth of 0.9 per cent last month.",
+      "whyItMatters": "This matters to businesses, investors and public-policy teams because it changes the macroeconomic baseline used by businesses, investors and public-policy teams for demand, financing, trade and fiscal planning. Teams should compare the release with prior data, revisions and their own operating assumptions before changing plans. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Data release",
+      "publicationDate": "2026-08-29",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "schools"
+      ],
+      "primarySourceUrl": "https://newsonair.gov.in/industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis/",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "primarySourceTitle": "Industrial output growth expanded by 6.7% in July this year on annual basis",
+      "institution": "Akashvani News - Business",
+      "sourceIdentifier": "https://newsonair.gov.in/?p=1824827",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": false,
+      "evidenceLevel": "Official",
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:12:04.244412+05:30",
+      "lastUpdated": "2026-08-31T10:26:39.567490+05:30",
+      "previousEventId": null,
+      "evidence": "Official evidence",
+      "sources": [
+        {
+          "url": "https://newsonair.gov.in/industrial-output-growth-expanded-by-6-7-in-july-this-year-on-annual-basis/",
+          "name": "Akashvani News - Business",
+          "type": "official",
+          "authorityLevel": 2
+        }
+      ],
+      "briefingKind": "recent-context"
+    },
+    {
+      "id": 19,
+      "slug": "government-stock-full-auction-results",
+      "title": "Government Stock - Full Auction Results",
+      "area": "Financial & Banking",
+      "signalType": "Institutional",
+      "subtopic": null,
+      "eventType": "Announcement",
+      "whatHappened": "(Amount in ₹ Crore) Auction Results 6.94% GS 2036 I. Notified Amount 34,000 II. Competitive Bids Received (i) Number 383 (ii) Amount 82,151.762 III. Cut-off price (₹) / Yield 100.17 (YTM: 6.9136%) IV. Competitive Bids Accepted (i) Number 117 (ii) Amount 33,995.602 V. Partial Allotment Percentage of Competitive Bids 97.9374% (47 bids) VI. Weighted Average Price (₹) / Yield 100.18 (WAY: 6.9122%) VII. Non-Competitive Bids Received (i) Number 3 (ii) Amount 4.398 VIII. Non-Competitive Bids Accepted (i) Number 3 (ii) Amount 4.398 (iii) Partial Allotment Percentage IX. Underwriting Notified Amount 34,000 X. Amount of Underwriting accepted from primary dealers 34,000 XI. Devolvement on Primary Dealers NIL Ajit Prasad Deputy General Manager (Communications) Press Release: 2026-2027/983",
+      "whyItMatters": "This matters to regulated entities and their legal, policy and compliance teams because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Announcement",
+      "publicationDate": "2026-08-28",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [],
+      "primarySourceUrl": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63461",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Government Stock - Full Auction Results",
+      "primarySourceTitle": "Government Stock - Full Auction Results",
+      "institution": "Reserve Bank of India - Press Releases RSS",
+      "sourceIdentifier": "RBI Releases/PRID/63461",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "evidenceLevel": "Primary",
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:51:05.278489+05:30",
+      "lastUpdated": "2026-08-31T10:26:39.567490+05:30",
+      "previousEventId": null,
+      "evidence": "Primary evidence",
+      "sources": [
+        {
+          "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63461",
+          "name": "Reserve Bank of India - Press Releases RSS",
+          "type": "primary",
+          "authorityLevel": 1
+        }
+      ],
+      "briefingKind": "recent-context"
+    },
+    {
+      "id": 12,
+      "slug": "auction-of-91-day-182-day-and-364-day-treasury-bills",
+      "title": "Auction of 91-Day, 182-Day and 364-Day Treasury Bills",
+      "area": "Financial & Banking",
+      "signalType": "Institutional",
+      "subtopic": null,
+      "eventType": "Announcement",
+      "whatHappened": "Reserve Bank of India announces the auction of Government of India Treasury Bills as per the following details: Sr. Treasury Bill Notified Amount (₹ crore) Auction Date Settlement Date 1 91-Day 9,000 September 02, 2026 (Wednesday) September 03, 2026 (Thursday) 2 182-Day 8,000 3 364-Day 7,000 Total 24,000 The sale will be subject to the terms and conditions specified in the General Notification F.No.4(2)-B(W&M)/2018 dated March 26, 2025 , issued by Government of India, as amended from time to time. State Governments, Union Territories with legislature, eligible Provident Funds in India, designated Foreign Central Banks and any person or institution specified by the Bank in this regard can participate on non-competitive basis, the allocation for which will be outside the notified amount. Individuals can also participate on non-competitive basis, as retail investors. For retail investors, the allocation will be restricted to a maximum of 5 percent of the notified amount. Individual investors can also place bids as per the non-competitive scheme through the Retail Direct portal ( https://rbiretaildirect.org.in ). The auction will be Price based using multiple price method . Bids for the auction should be submitted in electronic format on the Reserve Bank of India’s Core Banking Solution (E-Kuber system) on Wednesday, September 02, 2026 , during the below given timings: Category of Bids Timing Competitive 10:30 am - 11:30 am Non-Competitive 10:30 am - 11:00 am Results will be announced on the day of the auction.",
+      "whyItMatters": "This matters to banks, investors because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Announcement",
+      "publicationDate": "2026-08-28",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "investors"
+      ],
+      "primarySourceUrl": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63465",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Auction of 91-Day, 182-Day and 364-Day Treasury Bills",
+      "primarySourceTitle": "Auction of 91-Day, 182-Day and 364-Day Treasury Bills",
+      "institution": "Reserve Bank of India - Press Releases RSS",
+      "sourceIdentifier": "RBI Releases/PRID/63465",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "evidenceLevel": "Primary",
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:51:05.278489+05:30",
+      "lastUpdated": "2026-08-31T10:26:39.567490+05:30",
+      "previousEventId": null,
+      "evidence": "Primary evidence",
+      "sources": [
+        {
+          "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63465",
+          "name": "Reserve Bank of India - Press Releases RSS",
+          "type": "primary",
+          "authorityLevel": 1
+        }
+      ],
+      "briefingKind": "recent-context"
+    },
+    {
+      "id": 11,
+      "slug": "auction-of-state-government-securities",
+      "title": "Auction of State Government Securities",
+      "area": "Financial & Banking",
+      "signalType": "Institutional",
+      "subtopic": null,
+      "eventType": "Announcement",
+      "whatHappened": "The following State Governments have offered to sell stock by way of auction, for an aggregate amount of ₹27,000 Crore (Face Value). State Amount to be raised (₹ Crore) Tenor (Year) Type of Auction 1. Assam 1000 Re-issue of 7.62% Assam SGS 2046, issued on January 21, 2026 Price 2. Bihar 800 Re-issue of 7.42% Bihar SGS 2035, issued on July 08, 2026 Price 1200 25 Yield 3. Chhattisgarh 500 Re-issue of 7.40% Chhattisgarh SGS 2035, issued on July 08, 2026 Price 500 Re-issue of 7.64% Chhattisgarh SGS 2042, issued on July 08, 2026 Price 4. Himachal Pradesh 700 Re-issue of 7.56% Himachal Pradesh SGS 2039, issued on July 08, 2026 Price 5. Jharkhand 300 12 Yield 300 16 Yield 6. Kerala 800 Re-issue of 7.30% Kerala SGS 2033, issued on July 08, 2026 Price 1000 Re-issue of 7.56% Kerala SGS 2039, issued on July 08, 2026 Price 7. Madhya Pradesh 1600 Re-issue of 7.61% Madhya Pradesh SGS 2044, issued on July 08, 2026 Price 2000 30 Yield 8. Manipur 100 Re-issue of 7.64% Manipur SGS 2040, issued on July 08, 2026 Price 9. Odisha 1000 Re-issue of 6.94% Odisha SGS 2030, issued on August 05, 2026 Price 1000 Re-issue of 7.64% Odisha SGS 2040, issued on August 05, 2026 Price 10.",
+      "whyItMatters": "This matters to banks, investors because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Announcement",
+      "publicationDate": "2026-08-28",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "investors"
+      ],
+      "primarySourceUrl": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63468",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Auction of State Government Securities",
+      "primarySourceTitle": "Auction of State Government Securities",
+      "institution": "Reserve Bank of India - Press Releases RSS",
+      "sourceIdentifier": "RBI Releases/PRID/63468",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "evidenceLevel": "Primary",
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:51:05.278489+05:30",
+      "lastUpdated": "2026-08-31T10:26:39.567490+05:30",
+      "previousEventId": null,
+      "evidence": "Primary evidence",
+      "sources": [
+        {
+          "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63468",
+          "name": "Reserve Bank of India - Press Releases RSS",
+          "type": "primary",
+          "authorityLevel": 1
+        }
+      ],
+      "briefingKind": "recent-context"
+    },
+    {
+      "id": 10,
+      "slug": "directions-under-section-35-a-read-with-section-56-of-the-banking-regulation-act-1949-ashok-sahakari",
+      "title": "Directions under Section 35 A read with Section 56 of the Banking Regulation Act, 1949 – Ashok Sahakari Bank Ltd., Ahmednagar",
+      "area": "Financial & Banking",
+      "signalType": "Regulation",
+      "subtopic": null,
+      "eventType": "Notified",
+      "whatHappened": "It is hereby notified for information of the public that in exercise of powers vested in it under sub section (1) of Section 35 A read with Section 56 of the Banking Regulation Act, 1949, the Reserve Bank of India (RBI) vide Directive Ref. No.S4110 /12-22-377 / 2026-27 dated August 28, 2026 has issued certain Directions to Ashok Sahakari Bank Ltd., Ahmednagar , (“the bank”), whereby, as from the close of business on August 28, 2026 , the bank shall not, without prior approval of RBI in writing, grant or renew any loans and advances, make any investment, incur any liability including borrowal of funds and acceptance of fresh deposits, disburse or agree to disburse any payment whether in discharge of its liabilities and obligations or otherwise, enter into any compromise or arrangement and sell, transfer or otherwise dispose of any of its properties or assets except as notified in the RBI Directions dated August 28, 2026, a copy of which has been directed to be displayed on the bank's website / premises for perusal by interested members of the public. Considering the bank's present liquidity position, the bank has been directed not to allow withdrawal of any amount from savings bank or current accounts or any other account of a depositor but is allowed to set off loans against deposits subject to the conditions stated in the above RBI Directions.",
+      "whyItMatters": "This matters to banks, insurers because it may change prudential, conduct, disclosure, onboarding or customer-protection duties in financial services. Teams should check scope, commencement and transition provisions against the source document. Implementation owners should map the instrument against existing policies, products and controls.",
+      "status": "Notified",
+      "publicationDate": "2026-08-28",
+      "effectiveDate": null,
+      "effectiveDateText": null,
+      "deadline": null,
+      "affectedEntities": [
+        "banks",
+        "insurers"
+      ],
+      "primarySourceUrl": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63466",
+      "secondarySourceUrls": [],
+      "sourceDocumentTitle": "Directions under Section 35 A read with Section 56 of the Banking Regulation Act, 1949 – Ashok Sahakari Bank Ltd., Ahmednagar",
+      "primarySourceTitle": "Directions under Section 35 A read with Section 56 of the Banking Regulation Act, 1949 – Ashok Sahakari Bank Ltd., Ahmednagar",
+      "institution": "Reserve Bank of India - Press Releases RSS",
+      "sourceIdentifier": "RBI Releases/PRID/63466",
+      "isUpdate": false,
+      "watchStatus": null,
+      "isOpen": false,
+      "isVerified": true,
+      "evidenceLevel": "Primary",
+      "nextStep": null,
+      "firstSeen": "2026-08-30T18:45:52.677753+05:30",
+      "lastUpdated": "2026-08-31T10:26:39.567490+05:30",
+      "previousEventId": null,
+      "evidence": "Primary evidence",
+      "sources": [
+        {
+          "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63466",
+          "name": "Reserve Bank of India - Press Releases RSS",
+          "type": "primary",
+          "authorityLevel": 1
+        }
+      ],
+      "briefingKind": "recent-context"
     }
   ],
   "tracker": [
@@ -1803,8 +2118,8 @@
   "archive": [
     {
       "date": "2026-08-31",
-      "generatedAt": "2026-08-31T10:26:39.567490+05:30",
-      "eventCount": 1
+      "generatedAt": "2026-08-31T11:35:22.324786+05:30",
+      "eventCount": 8
     },
     {
       "date": "2026-08-30",

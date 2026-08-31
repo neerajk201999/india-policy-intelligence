@@ -102,6 +102,28 @@ class SystemTests(unittest.TestCase):
             "RBI Releases/PRID/63468",
         )
 
+    def test_sparse_daily_diff_is_supplemented_with_labelled_recent_context(self):
+        pipeline = Pipeline(root=self.root, now=NOW, client=FakeClient(), max_items=8)
+        db = pipeline.db
+        db.initialize()
+        topics = topics_config()
+        older = event_from_item(
+            RawItem("RBI", "primary", 1, "https://example.test/older", "RBI circular on KYC", NOW.replace(day=29),
+                    "RBI issued a circular on KYC requirements for banks, including customer due diligence and account monitoring."),
+            "RBI issued a circular on KYC requirements for banks, including customer due diligence, account monitoring, record retention, periodic review, responsibilities for outsourced verification and compliance reporting.",
+            "Financial & Banking", topics, NOW.replace(day=29),
+        )
+        older.id = db.insert_event(older)
+        current = event_from_item(
+            RawItem("RBI", "primary", 1, "https://example.test/current", "RBI issues draft directions on digital lending", NOW,
+                    "RBI issued draft directions on digital lending disclosures for banks and NBFCs."),
+            "RBI issued draft directions on digital lending disclosures for banks and NBFCs, including standard key facts statements, annual percentage rates, grievance contacts, cooling-off periods, customer journeys and lender responsibility for outsourced service providers.",
+            "Financial & Banking", topics, NOW,
+        )
+        current.id = db.insert_event(current)
+        selection = pipeline._select_daily_edition([current])
+        self.assertEqual([event.id for event in selection], [current.id, older.id])
+
     def test_article_extraction_excludes_related_story_navigation(self):
         html = """<nav>Old policy story</nav><article><h1>New rule</h1><div class='entry-content'><p>The regulator notified a new rule with detailed compliance duties for banks and payment firms.</p><p>The rule applies after publication and changes transaction records, disclosures, audit logs and customer notices across covered systems.</p></div></article><footer>Unrelated headlines and contact details</footer>"""
         extracted = article_text(html)

@@ -70,9 +70,9 @@ class Pipeline:
             # history and make Tracker a second, incomplete version of Briefing.
             prior_today = self.db.report_events(self.now.date().isoformat())
             known_ids = {event.id for event in prior_today}
-            report_events = prior_today + [event for event in included if event.id not in known_ids]
-            report_events.sort(key=self._candidate_priority, reverse=True)
-            report_events = report_events[: self.max_items]
+            daily_events = prior_today + [event for event in included if event.id not in known_ids]
+            daily_events.sort(key=self._candidate_priority, reverse=True)
+            report_events = self._select_daily_edition(daily_events)
             self.db.reconcile_watchlist(self.now.date().isoformat())
             watchlist = self.db.open_watchlist()
             report = render_report(self.now, report_events, watchlist, self.lookback_days)
@@ -85,6 +85,22 @@ class Pipeline:
             errors = collector.errors + [f"pipeline: {type(exc).__name__}: {exc}"]
             self.db.finish_run(run_id, datetime.now(IST).isoformat(), "failed", 0, 0, errors)
             raise
+
+    def _select_daily_edition(self, daily_events: List[Event]) -> List[Event]:
+        """Supplement a sparse true diff with accurately labelled recent context."""
+        selected = list(daily_events[: self.max_items])
+        minimum_edition = min(self.max_items, 8)
+        if len(selected) >= minimum_edition:
+            return selected
+        selected_ids = {event.id for event in selected if event.id}
+        for row in self.db.recent_verified_context(self.backfill_since.date().isoformat()):
+            if row["id"] in selected_ids:
+                continue
+            selected.append(self.db.event_from_row(row))
+            selected_ids.add(row["id"])
+            if len(selected) >= minimum_edition:
+                break
+        return selected[: self.max_items]
 
     def _prepare_candidates(self, items) -> List[Event]:
         result = []

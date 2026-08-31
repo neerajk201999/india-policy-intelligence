@@ -119,12 +119,18 @@ class Collector:
             if published is not None and published < self.since:
                 continue
             identifier = entry.get("identifier") or self._identifier_from_url(str(entry["url"]), source)
+            # A source can cover two named areas (for example SEBI covers financial
+            # regulation and corporate governance). Use its first configured area as
+            # a conservative fallback only after the headline has passed the policy-
+            # action gate; never turn a broad "All" source into a guessed area.
+            configured_areas = [value.strip() for value in str(source.get("topic", "")).split(";")]
+            default_area = next((value for value in configured_areas if value in topics["areas"]), None)
             result.append(RawItem(
                 source_name=source["name"], source_type=source.get("category", "primary"),
                 authority_level=int(source.get("authority_level", 1)), url=str(entry["url"]),
                 title=str(entry["title"]), published_at=published, summary=str(entry.get("summary", "")),
                 source_identifier=identifier, default_signal_type=source.get("default_signal_type"),
-                default_area=source.get("topic") if source.get("topic") in topics["areas"] else None,
+                default_area=default_area,
             ))
         return result
 

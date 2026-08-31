@@ -105,7 +105,9 @@ def export(db_path: Path, output: Path) -> dict:
     for event_id in event_ids:
         row = connection.execute("SELECT * FROM events WHERE id=?", (event_id,)).fetchone()
         if row:
-            event_records.append(event_payload(connection, dict(row)))
+            record = event_payload(connection, dict(row))
+            record["briefingKind"] = "new" if str(record["firstSeen"]).startswith(report_date) else "recent-context"
+            event_records.append(record)
     tracker_records = [event_payload(connection, item) for item in rows(connection, "SELECT * FROM events ORDER BY publication_date DESC,last_seen DESC,id DESC")]
     # The Watchlist is a complete action queue, intentionally distinct from the
     # complete Tracker and the curated daily Briefing.
@@ -143,11 +145,13 @@ def export(db_path: Path, output: Path) -> dict:
             "reportDate": report_date,
             "generatedAt": generated_at,
             "timezone": "Asia/Kolkata",
-            "coverage": "Previous 24 hours; limited 3–5 day backfill for material updates",
+            "coverage": "Newly verified developments, with clearly labelled five-day context when the daily diff is sparse",
             "refreshSchedule": "Daily at 08:00 IST",
         },
         "summary": {
             "developments": len(event_records),
+            "newDevelopments": sum(event["briefingKind"] == "new" for event in event_records),
+            "recentContext": sum(event["briefingKind"] == "recent-context" for event in event_records),
             "primaryVerified": sum(event["evidenceLevel"] == "Primary" for event in event_records),
             "watching": len(watch_records),
             "healthySources": healthy,
