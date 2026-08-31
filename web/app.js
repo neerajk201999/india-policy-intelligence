@@ -31,12 +31,6 @@ function formatDate(value, options = { day: "numeric", month: "long", year: "num
   return date ? new Intl.DateTimeFormat("en-IN", { ...options, timeZone: "Asia/Kolkata" }).format(date) : null;
 }
 
-function formatUpdated(value) {
-  const date = safeDate(value);
-  if (!date) return "Update time unavailable";
-  return `Updated ${new Intl.DateTimeFormat("en-IN", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Kolkata" }).format(date)} IST`;
-}
-
 function eventPath(event) {
   return `/tracker/${encodeURIComponent(event.slug || "policy-update")}`;
 }
@@ -293,7 +287,7 @@ function renderListOnly() {
 function renderBriefing() {
   const date = formatDate(state.data.meta.reportDate) || "Date unavailable";
   const count = state.data.events.length;
-  setIntro("Morning edition", "The day in public policy", `${count} source-linked developments selected from a ${state.data.summary.totalSources}-source public-record network.`, `${date} · ${formatUpdated(state.data.meta.generatedAt)}`);
+  setIntro("Daily briefing", "The day in public policy", `${count} selected developments from a ${state.data.summary.totalSources}-source public-record network. Every verified candidate is retained in Tracker.`, `${date} · Daily edition`);
   setMeta("India Policy Intelligence", "Today’s verified Indian policy and regulatory developments.");
   const view = $("#route-view");
   const controls = createControls(state.data.events);
@@ -303,7 +297,7 @@ function renderBriefing() {
 }
 
 function renderTracker() {
-  setIntro("Policy tracker", "Policy developments over time", "Browse verified developments, legal status changes and related updates.", `${state.data.tracker.length} recorded developments`);
+  setIntro("Policy tracker", "The complete verified record", "Every development that passes the evidence gate is kept here, whether or not it is selected for the daily Briefing.", `${state.data.tracker.length} verified developments`);
   setMeta("Policy Tracker", "Search and browse the history of verified Indian policy and regulatory developments.");
   const view = $("#route-view");
   const controls = createControls(state.data.tracker, true);
@@ -313,7 +307,7 @@ function renderTracker() {
 }
 
 function renderWatchlist() {
-  setIntro("Watchlist", "Open policy developments", "Only pending developments with a concrete next step or deadline.", `${state.data.watchlist.length} currently open`);
+  setIntro("Watchlist", "What may move next", "Only unresolved drafts, consultations, Bills, Cabinet decisions and deadline-bound actions appear here; completed announcements remain in Tracker.", `${state.data.watchlist.length} active items`);
   setMeta("Policy Watchlist", "Pending Indian policy developments likely to move next.");
   const view = $("#route-view");
   if (!state.data.watchlist.length) { view.replaceChildren(emptyState("Nothing currently requires monitoring", "The watchlist will populate when a verified draft, consultation, Bill, deadline or other concrete next step remains open.")); return; }
@@ -399,7 +393,6 @@ function renderDetail() {
 function render() {
   if (!state.data) return;
   setNavigation();
-  $("#header-updated").textContent = formatUpdated(state.data.meta.generatedAt);
   const route = routeName();
   if (route === "briefing") renderBriefing();
   if (route === "tracker") renderTracker();

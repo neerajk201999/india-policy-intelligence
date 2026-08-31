@@ -305,7 +305,10 @@ def event_from_item(item: RawItem, detail: str, area: str, topics: Dict, now: da
     content_hash = hashlib.sha256(fingerprint.encode()).hexdigest()
     primary = item.url if item.authority_level <= 2 else None
     secondary = [] if primary else [item.url]
-    watch = "open" if status in ("Draft", "Consultation", "Bill introduced", "Announcement", "Cabinet approved") or (deadline and deadline >= now.date().isoformat()) else None
+    # Watchlist is an action queue, not a list of every announcement.  A completed
+    # auction or press statement belongs in Tracker; an unresolved formal process or
+    # a live deadline belongs here.
+    watch = "open" if status in ("Draft", "Consultation", "Bill introduced", "Cabinet approved") or (deadline and deadline >= now.date().isoformat()) else None
     stamp = now.isoformat()
     return Event(
         canonical_title=title, area=area, signal_type=signal_type, description=build_description(item, detail, status),

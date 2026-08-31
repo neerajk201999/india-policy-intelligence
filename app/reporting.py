@@ -67,7 +67,7 @@ def render_report(now: datetime, events: Sequence[Event], watchlist: Iterable, c
         heading = _link(title, source) if source else title
         lines.extend([f"### {heading}", "", next_step, ""])
         count += 1
-        if count == 4:
+        if count == 20:
             break
     if count == 0:
         lines.extend(["No unresolved, sufficiently evidenced item is currently on the watchlist.", ""])

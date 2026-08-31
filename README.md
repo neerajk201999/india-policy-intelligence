@@ -26,7 +26,7 @@ python3 -m app.run --source "Reserve Bank of India - Notifications RSS"
 python3 -m app.run --offline
 ```
 
-The live command initializes `data/intelligence.db`, fetches enabled sources, creates or updates structured events, reviews the watchlist, and writes `reports/daily/YYYY-MM-DD.md`. `--offline` performs no HTTP requests and generates a transparent report from the existing watchlist/history. If `pypdf` is already available, the pipeline also extracts linked official PDFs; it remains fully functional and falls back to official page metadata when that optional package is absent.
+The live command initializes `data/intelligence.db`, fetches enabled sources, and stores every verified development in Tracker. It then selects up to 30 of those developments for the readable daily Briefing and writes `reports/daily/YYYY-MM-DD.md`. `--offline` performs no HTTP requests and generates a transparent report from the existing watchlist/history. If `pypdf` is already available, the pipeline also extracts linked official PDFs; it remains fully functional and falls back to official page metadata when that optional package is absent.
 
 Open `http://127.0.0.1:8000` after starting the local website. The client checks `web/data/latest.json` every minute, exposes evidence status and source health, and never invents a live update when the dataset cannot be reached.
 
@@ -57,7 +57,7 @@ The `.yaml` files use JSON syntax, which is valid YAML. This keeps configuration
 
 ## Persistence and change detection
 
-SQLite stores events, event-source provenance, source health, run history, and report history. Events are fingerprinted from a publisher host, document identifier and publication date whenever an identifier is available; otherwise the canonical URL is used. Exact fingerprints are touched but not reported again. Fuzzy title matching is only a fallback for documents with no identifier, so similarly worded directions cannot be collapsed into one item. Drafts, consultations, introduced Bills, Cabinet approvals and unresolved announcements enter the watchlist.
+SQLite stores events, event-source provenance, source health, run history, and report history. Events are fingerprinted from a publisher host, document identifier and publication date whenever an identifier is available; otherwise the canonical URL is used. Exact fingerprints are touched but not reported again. Fuzzy title matching is only a fallback for documents with no identifier, so similarly worded directions cannot be collapsed into one item. Tracker retains every verified development; Briefing is the up-to-30 daily selection. Watchlist is a separate queue of up to 20 unresolved drafts, consultations, introduced Bills, Cabinet approvals and live deadlines—not routine completed announcements.
 
 The database does not contain or expose an impact score. Inclusion uses qualitative topic/action checks and negative filters for speeches, ceremonies, vacancies, tenders and similar routine material.
 
@@ -101,7 +101,7 @@ python3 -m unittest discover -s tests -v
 python3 -m compileall -q app tests
 ```
 
-The deterministic test suite covers database creation, feed dates, topic/relevance filtering, canonical identity, duplicate suppression, historical lookup, clickable links, watchlist limits, and nonfatal source failures.
+The deterministic test suite covers database creation, feed dates, topic/relevance filtering, canonical identity, complete Tracker retention, daily Briefing selection, duplicate suppression, historical lookup, clickable links, watchlist controls, and nonfatal source failures.
 
 ## Limits and troubleshooting
 

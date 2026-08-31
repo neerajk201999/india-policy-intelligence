@@ -165,6 +165,11 @@ class Database:
             event_id = int(cursor.lastrowid)
             for source in event.sources:
                 conn.execute("INSERT OR IGNORE INTO event_sources VALUES(?,?,?,?,?)", (event_id, source["url"], source["name"], source["type"], source["authority_level"]))
+            if event.previous_event_id:
+                # A later version replaces the prior open step in the action queue;
+                # history remains linked in Tracker, but users should not be asked to
+                # monitor both an old draft and its successor.
+                conn.execute("UPDATE events SET watch_status=NULL WHERE id=?", (event.previous_event_id,))
             return event_id
 
     def touch_event(self, event_id: int, seen_at: str) -> None:
@@ -182,6 +187,20 @@ class Database:
     def open_watchlist(self):
         with self.connect() as conn:
             return conn.execute("SELECT * FROM events WHERE watch_status='open' ORDER BY publication_date DESC LIMIT 20").fetchall()
+
+    def reconcile_watchlist(self, today: str) -> None:
+        """Remove stale or non-actionable legacy entries from the active queue."""
+        with self.connect() as conn:
+            conn.execute(
+                """UPDATE events SET watch_status=NULL
+                WHERE watch_status='open' AND deadline IS NOT NULL AND deadline < ?""",
+                (today,),
+            )
+            conn.execute(
+                """UPDATE events SET watch_status=NULL
+                WHERE watch_status='open' AND deadline IS NULL
+                AND status NOT IN ('Draft','Consultation','Bill introduced','Cabinet approved')"""
+            )
 
     def source_alerts(self, threshold: int = 3):
         """Persistent failures become CI warnings instead of quiet degraded state."""

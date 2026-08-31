@@ -11,7 +11,7 @@
   "summary": {
     "developments": 20,
     "primaryVerified": 17,
-    "watching": 1,
+    "watching": 0,
     "healthySources": 34,
     "totalSources": 52
   },
@@ -924,11 +924,11 @@
       "institution": "Akashvani News - Business",
       "sourceIdentifier": "https://newsonair.gov.in/?p=1825028",
       "isUpdate": false,
-      "watchStatus": "open",
-      "isOpen": true,
+      "watchStatus": null,
+      "isOpen": false,
       "isVerified": false,
       "evidenceLevel": "Official",
-      "nextStep": "Authoritative document",
+      "nextStep": null,
       "firstSeen": "2026-08-30T18:55:01.518587+05:30",
       "lastUpdated": "2026-08-30T18:55:01.518587+05:30",
       "previousEventId": null,
@@ -1015,11 +1015,11 @@
       "institution": "Akashvani News - Business",
       "sourceIdentifier": "https://newsonair.gov.in/?p=1825028",
       "isUpdate": false,
-      "watchStatus": "open",
-      "isOpen": true,
+      "watchStatus": null,
+      "isOpen": false,
       "isVerified": false,
       "evidenceLevel": "Official",
-      "nextStep": "Authoritative document",
+      "nextStep": null,
       "firstSeen": "2026-08-30T18:55:01.518587+05:30",
       "lastUpdated": "2026-08-30T18:55:01.518587+05:30",
       "previousEventId": null,
@@ -1837,51 +1837,7 @@
       ]
     }
   ],
-  "watchlist": [
-    {
-      "id": 22,
-      "slug": "petroleum-and-natural-gas-ministry-clarifies-cbg-framework-under-gobardhan-designed-to-provide-stabl",
-      "title": "Petroleum and Natural Gas Ministry clarifies CBG framework under GOBARdhan designed to provide stable price to CBG producers",
-      "area": "Macroeconomy, Trade & Public Finance",
-      "signalType": "Institutional",
-      "subtopic": null,
-      "eventType": "Announcement",
-      "whatHappened": "The Ministry of Petroleum and Natural Gas has clarified that the revised pricing framework for Compressed Biogas (CBG) under the GOBARdhan Scheme has been designed to provide a stable and viable price to CBG producers while ensuring that consumers do not face any material increase in CNG and household PNG prices. According to a recent newspaper article, the revised price of Compressed Biogas (CBG) under the GOBARdhan Scheme could place a significant additional burden on CNG and household PNG consumers. However, the Ministry explained that this conclusion does not present the correct picture, as it does not account for the Government’s affordability support and the substantially wider domestic gas pool over which the net cost of CBG will now be distributed. The Ministry explained that under the existing system, the procurement price paid to CBG producers is approximately 1 thousand 478 rupees per Million British thermal units, while the revised procurement price under the GOBARdhan Scheme is 2,110 rupees per Million British thermal units. It noted that the Government will also provide affordability support of 10 rupees per kilogram of CBG, equivalent to around 215 rupees per Million British thermal units with 95 per cent methane content, reducing the effective cost to approximately 1,895 rupees per Million British thermal units.",
-      "whyItMatters": "This matters to businesses, investors and public-policy teams because it changes the macroeconomic baseline used by businesses, investors and public-policy teams for demand, financing, trade and fiscal planning. Because this is not yet final, implementation obligations should not be treated as operative. Implementation owners should map the instrument against existing policies, products and controls.",
-      "status": "Announcement",
-      "publicationDate": "2026-08-29",
-      "effectiveDate": null,
-      "effectiveDateText": null,
-      "deadline": null,
-      "affectedEntities": [
-        "consumers"
-      ],
-      "primarySourceUrl": "https://newsonair.gov.in/petroleum-and-natural-gas-ministry-clarifies-cbg-framework-under-gobardhan-designed-to-provide-stable-price-to-cbg-producers/",
-      "secondarySourceUrls": [],
-      "sourceDocumentTitle": "Petroleum and Natural Gas Ministry clarifies CBG framework under GOBARdhan designed to provide stable price to CBG producers",
-      "primarySourceTitle": "Petroleum and Natural Gas Ministry clarifies CBG framework under GOBARdhan designed to provide stable price to CBG producers",
-      "institution": "Akashvani News - Business",
-      "sourceIdentifier": "https://newsonair.gov.in/?p=1825028",
-      "isUpdate": false,
-      "watchStatus": "open",
-      "isOpen": true,
-      "isVerified": false,
-      "evidenceLevel": "Official",
-      "nextStep": "Authoritative document",
-      "firstSeen": "2026-08-30T18:55:01.518587+05:30",
-      "lastUpdated": "2026-08-30T18:55:01.518587+05:30",
-      "previousEventId": null,
-      "evidence": "Official evidence",
-      "sources": [
-        {
-          "url": "https://newsonair.gov.in/petroleum-and-natural-gas-ministry-clarifies-cbg-framework-under-gobardhan-designed-to-provide-stable-price-to-cbg-producers/",
-          "name": "Akashvani News - Business",
-          "type": "official",
-          "authorityLevel": 2
-        }
-      ]
-    }
-  ],
+  "watchlist": [],
   "sources": [
     {
       "name": "BSE - Notices and Circulars",

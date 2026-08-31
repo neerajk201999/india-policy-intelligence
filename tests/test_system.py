@@ -156,6 +156,29 @@ class SystemTests(unittest.TestCase):
             self.assertEqual(conn.execute("SELECT count(*) FROM events").fetchone()[0], 1)
             self.assertEqual(conn.execute("SELECT count(*) FROM daily_reports").fetchone()[0], 1)
 
+    def test_tracker_keeps_all_verified_candidates_when_briefing_is_capped(self):
+        pipeline = Pipeline(root=self.root, now=NOW, client=FakeClient(), max_items=1)
+        topics = topics_config()
+        first = event_from_item(
+            RawItem("RBI", "primary", 1, "https://example.test/one", "RBI issues circular on KYC", NOW,
+                    "RBI issues a circular on KYC requirements for banks, including customer due diligence, account monitoring, record retention, periodic review and responsibility for outsourced verification."),
+            "RBI issues a circular on KYC requirements for banks, including customer due diligence, account monitoring, record retention, periodic review and responsibility for outsourced verification.",
+            "Financial & Banking", topics, NOW,
+        )
+        second = event_from_item(
+            RawItem("MoSPI", "primary", 1, "https://example.test/two", "Consumer Price Index data released", NOW,
+                    "The official Consumer Price Index data release records the latest inflation series, publication metadata, revisions, category weights, rural and urban coverage, and supporting statistical tables for users reviewing current price trends."),
+            "The official Consumer Price Index data release records the latest inflation series, publication metadata, revisions, category weights, rural and urban coverage, and supporting statistical tables for users reviewing current price trends.",
+            "Macroeconomy, Trade & Public Finance", topics, NOW,
+        )
+        pipeline._prepare_candidates = lambda _items: [first, second]
+        result = pipeline.run()
+        self.assertEqual(result.included, 2)
+        with sqlite3.connect(self.root / "data" / "intelligence.db") as conn:
+            self.assertEqual(conn.execute("SELECT count(*) FROM events").fetchone()[0], 2)
+            report_ids = json.loads(conn.execute("SELECT event_ids FROM daily_reports").fetchone()[0])
+            self.assertEqual(len(report_ids), 1)
+
     def test_source_failure_is_nonfatal_and_recorded(self):
         result = Pipeline(root=self.root, now=NOW, client=FakeClient(fail=True)).run()
         self.assertEqual(result.included, 0)
@@ -193,6 +216,8 @@ class SystemTests(unittest.TestCase):
         self.assertIsNotNone(first)
         self.assertTrue(second.is_update)
         self.assertEqual(second.previous_event_id, first.id)
+        with sqlite3.connect(self.root / "data" / "intelligence.db") as conn:
+            self.assertIsNone(conn.execute("SELECT watch_status FROM events WHERE id=?", (first.id,)).fetchone()[0])
 
     def test_equivalent_official_paths_do_not_create_a_false_update(self):
         pipeline = Pipeline(root=self.root, now=NOW, client=FakeClient())
@@ -225,7 +250,21 @@ class SystemTests(unittest.TestCase):
             db.source_result("Unstable feed", f"2026-08-30T0{index}:00:00+05:30", False, "timeout")
         self.assertEqual(db.source_alerts()[0]["name"], "Unstable feed")
 
-    def test_watchlist_max_four(self):
+    def test_watchlist_reconciliation_removes_completed_announcements_and_expired_deadlines(self):
+        db = Database(self.root / "data" / "intelligence.db")
+        db.initialize()
+        topics = topics_config()
+        announcement = event_from_item(RawItem("RBI", "primary", 1, "https://example.test/auction", "RBI announces auction", NOW, "RBI announces an auction."), "RBI announces an auction.", "Financial & Banking", topics, NOW)
+        announcement.watch_status = "open"
+        announcement.id = db.insert_event(announcement)
+        consultation = event_from_item(RawItem("RBI", "primary", 1, "https://example.test/draft", "RBI draft directions", NOW, "RBI draft directions invite comments."), "RBI draft directions invite comments.", "Financial & Banking", topics, NOW)
+        consultation.deadline = "2026-08-01"
+        consultation.watch_status = "open"
+        consultation.id = db.insert_event(consultation)
+        db.reconcile_watchlist("2026-08-30")
+        self.assertEqual(db.open_watchlist(), [])
+
+    def test_watchlist_keeps_all_active_items_in_the_daily_report(self):
         topics = topics_config()
         events = []
         for n in range(5):
@@ -234,7 +273,7 @@ class SystemTests(unittest.TestCase):
             event.id = n + 1
             events.append(event)
         text = render_report(NOW, [], [dict(id=e.id, canonical_title=e.canonical_title, status=e.status, deadline=e.deadline, primary_source_url=e.primary_source_url) for e in events])
-        self.assertEqual(text.count("### [RBI draft regulation"), 4)
+        self.assertEqual(text.count("### [RBI draft regulation"), 5)
 
     def test_editorial_gate_rejects_thin_event(self):
         item = RawItem("RBI", "primary", 1, "https://example.test/thin", "RBI circular on KYC", NOW, "Short notice.")

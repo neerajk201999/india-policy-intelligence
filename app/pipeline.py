@@ -64,13 +64,16 @@ class Pipeline:
                 saved = self._store_if_new(event)
                 if saved:
                     included.append(saved)
-                if len(included) >= self.max_items:
-                    break
+            # The tracker is the complete verified record.  The edition limit is
+            # applied only after every publishable candidate has been persisted.
+            # Stopping here would silently discard lower-ranked developments from
+            # history and make Tracker a second, incomplete version of Briefing.
             prior_today = self.db.report_events(self.now.date().isoformat())
             known_ids = {event.id for event in prior_today}
             report_events = prior_today + [event for event in included if event.id not in known_ids]
             report_events.sort(key=self._candidate_priority, reverse=True)
             report_events = report_events[: self.max_items]
+            self.db.reconcile_watchlist(self.now.date().isoformat())
             watchlist = self.db.open_watchlist()
             report = render_report(self.now, report_events, watchlist, self.lookback_days)
             report_path = save_report(self.root / "reports" / "daily", self.now, report)
