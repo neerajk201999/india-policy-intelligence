@@ -57,7 +57,7 @@ The `.yaml` files use JSON syntax, which is valid YAML. This keeps configuration
 
 ## Persistence and change detection
 
-SQLite stores events, event-source provenance, source health, run history, and report history. Events are fingerprinted from a publisher host, document identifier and publication date whenever an identifier is available; otherwise the canonical URL is used. Exact fingerprints are touched but not reported again. Fuzzy title matching is only a fallback for documents with no identifier, so similarly worded directions cannot be collapsed into one item. Tracker retains every verified development; Briefing is the up-to-30 daily selection. Watchlist is a separate queue of up to 20 unresolved drafts, consultations, introduced Bills, Cabinet approvals and live deadlines—not routine completed announcements.
+SQLite stores events, event-source provenance, source health, run history, and report history. Events are fingerprinted from a publisher host, document identifier and publication date whenever an identifier is available; otherwise the canonical URL is used. Exact fingerprints are touched but not reported again. Fuzzy title matching is only a fallback for documents with no identifier, so similarly worded directions cannot be collapsed into one item. Tracker retains every verified development; Briefing is the up-to-30 daily selection. Watchlist is the complete separate queue of unresolved drafts, consultations, introduced Bills, Cabinet approvals and live deadlines—not routine completed announcements.
 
 The database does not contain or expose an impact score. Inclusion uses qualitative topic/action checks and negative filters for speeches, ceremonies, vacancies, tenders and similar routine material.
 

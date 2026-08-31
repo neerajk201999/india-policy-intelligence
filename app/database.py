@@ -186,7 +186,7 @@ class Database:
 
     def open_watchlist(self):
         with self.connect() as conn:
-            return conn.execute("SELECT * FROM events WHERE watch_status='open' ORDER BY publication_date DESC LIMIT 20").fetchall()
+            return conn.execute("SELECT * FROM events WHERE watch_status='open' ORDER BY publication_date DESC").fetchall()
 
     def reconcile_watchlist(self, today: str) -> None:
         """Remove stale or non-actionable legacy entries from the active queue."""
