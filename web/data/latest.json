@@ -3,14 +3,14 @@
   "meta": {
     "title": "India Policy & Regulatory Intelligence",
     "reportDate": "2026-09-01",
-    "generatedAt": "2026-09-01T16:51:48.672051+05:30",
+    "generatedAt": "2026-09-01T17:00:32.667501+05:30",
     "timezone": "Asia/Kolkata",
     "coverage": "Newly verified developments, with clearly labelled five-day context when the daily diff is sparse",
     "refreshSchedule": "Daily at 08:00 IST"
   },
   "summary": {
-    "developments": 9,
-    "newDevelopments": 9,
+    "developments": 8,
+    "newDevelopments": 8,
     "recentContext": 0,
     "primaryVerified": 6,
     "watching": 0,
@@ -32,7 +32,7 @@
     },
     {
       "name": "Macroeconomy, Trade & Public Finance",
-      "count": 4
+      "count": 3
     },
     {
       "name": "Competition",
@@ -222,48 +222,6 @@
         {
           "url": "https://newsonair.gov.in/pm-says-indias-economic-growth-of-7-8-is-reflection-of-hard-work-collective-resolve-of-140-crore-citizens/",
           "name": "Akashvani News - Business",
-          "type": "official",
-          "authorityLevel": 2
-        }
-      ],
-      "briefingKind": "new"
-    },
-    {
-      "id": 33,
-      "slug": "gdp-7-8",
-      "title": "GDP વધીને 7.8 ટકા થતાં પ્રધાનમંત્રીએ દેશના આર્થિક વિકાસ માટે દેશના નાગરિકોની મહેનત અને સંકલ્પને શ્રેય આપ્યો.",
-      "area": "Macroeconomy, Trade & Public Finance",
-      "signalType": "Data",
-      "subtopic": null,
-      "eventType": "Announcement",
-      "whatHappened": "પ્રધાનમંત્રી નરેન્દ્ર મોદીએ કહ્યું છે કે ભારતનો 7.8 ટકાનો આર્થિક વિકાસ 140 કરોડ નાગરિકોની મહેનત અને સામૂહિક સંકલ્પનું પ્રતિબિંબ છે. આજે સોશિયલ મીડિયા પોસ્ટમાં એક વીડિયો શેર કરતા શ્રી મોદીએ કહ્યું કે કોવિડ- 19 રોગચાળા પછી ચાલી રહેલા યુદ્ધો અને અસ્થિરતા જેવી વૈશ્વિક સમસ્યાઓ છતાં ભારત ઝડપી ગતિએ પ્રગતિ કરી રહ્યું છે. તેમણે કહ્યું કે આ વિકાસ જાળવી રાખવા માટે આત્મનિર્ભર ભારત બનવું મહત્વપૂર્ણ છે. પ્રધાનમંત્રીએ નાગરિકોને સ્વદેશી અપનાવવા , વોકલ ફોર લોકલને પ્રોત્સાહન આપવા વિનંતી કરી. શ્રી મોદીએ નાગરિકોને વિદેશ યાત્રા , વિદેશમાં લગ્નનું આયોજન કરવાનું ટાળવા અને જો જરૂરી ન હોય તો સોનું ન ખરીદવા વિનંતી પણ કરી.",
-      "whyItMatters": "This matters to businesses, investors and public-policy teams because it changes the macroeconomic baseline used by businesses, investors and public-policy teams for demand, financing, trade and fiscal planning. Because this is not yet final, implementation obligations should not be treated as operative. Implementation owners should map the instrument against existing policies, products and controls.",
-      "status": "Announcement",
-      "publicationDate": "2026-09-01",
-      "effectiveDate": null,
-      "effectiveDateText": null,
-      "deadline": null,
-      "affectedEntities": [],
-      "primarySourceUrl": "https://newsonair.gov.in/gu/pm-narendra-modi-stresses-atmanirbhar-bharat-vocal-for-local-gdp-growth/",
-      "secondarySourceUrls": [],
-      "sourceDocumentTitle": "GDP વધીને 7.8 ટકા થતાં પ્રધાનમંત્રીએ દેશના આર્થિક વિકાસ માટે દેશના નાગરિકોની મહેનત અને સંકલ્પને શ્રેય આપ્યો.",
-      "primarySourceTitle": "GDP વધીને 7.8 ટકા થતાં પ્રધાનમંત્રીએ દેશના આર્થિક વિકાસ માટે દેશના નાગરિકોની મહેનત અને સંકલ્પને શ્રેય આપ્યો.",
-      "institution": "Akashvani News - Official desk",
-      "sourceIdentifier": "1830297",
-      "isUpdate": false,
-      "watchStatus": null,
-      "isOpen": false,
-      "isVerified": false,
-      "evidenceLevel": "Official",
-      "nextStep": null,
-      "firstSeen": "2026-09-01T16:51:48.672051+05:30",
-      "lastUpdated": "2026-09-01T16:51:48.672051+05:30",
-      "previousEventId": null,
-      "evidence": "Official evidence",
-      "sources": [
-        {
-          "url": "https://newsonair.gov.in/gu/pm-narendra-modi-stresses-atmanirbhar-bharat-vocal-for-local-gdp-growth/",
-          "name": "Akashvani News - Official desk",
           "type": "official",
           "authorityLevel": 2
         }
@@ -2621,8 +2579,8 @@
   "archive": [
     {
       "date": "2026-09-01",
-      "generatedAt": "2026-09-01T16:51:48.672051+05:30",
-      "eventCount": 9
+      "generatedAt": "2026-09-01T17:00:32.667501+05:30",
+      "eventCount": 8
     },
     {
       "date": "2026-08-31",
