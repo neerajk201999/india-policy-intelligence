@@ -68,8 +68,7 @@ function setNavigation() {
 
 async function fetchData() {
   const urls = window.POLICY_DATA_URLS || ["/data/latest.json"];
-  let lastError;
-  for (const configured of urls) {
+  const attempts = await Promise.all(urls.map(async (configured) => {
     try {
       const separator = configured.includes("?") ? "&" : "?";
       const response = await fetch(`${configured}${separator}v=${Date.now()}`, { cache: "no-store" });
@@ -79,10 +78,17 @@ async function fetchData() {
       payload.tracker = Array.isArray(payload.tracker) ? payload.tracker : payload.events;
       payload.watchlist = Array.isArray(payload.watchlist) ? payload.watchlist : [];
       payload.sources = Array.isArray(payload.sources) ? payload.sources : [];
-      return payload;
-    } catch (error) { lastError = error; }
+      return { payload, error: null };
+    } catch (error) { return { payload: null, error }; }
+  }));
+  const valid = attempts.map((attempt) => attempt.payload).filter(Boolean);
+  if (!valid.length) {
+    throw attempts.find((attempt) => attempt.error)?.error || new Error("No publication data source is configured");
   }
-  throw lastError || new Error("No publication data source is configured");
+  // A bot commit can reach GitHub before Vercel finishes promoting the static
+  // deployment. Choose the freshest verified export instead of accepting the
+  // first successful (but potentially stale) response.
+  return valid.sort((a, b) => (safeDate(b.meta.generatedAt)?.getTime() || 0) - (safeDate(a.meta.generatedAt)?.getTime() || 0))[0];
 }
 
 function searchableText(event) {

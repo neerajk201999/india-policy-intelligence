@@ -92,7 +92,7 @@ No cloud scheduler is needed. On macOS/Linux, run `crontab -e` and add a morning
 
 On Windows Task Scheduler, create a daily Basic Task, choose “Start a program,” use the full path to `python.exe`, set arguments to `-m app.run`, and set “Start in” to the project directory.
 
-The hosted system uses `.github/workflows/daily-intelligence.yml`. GitHub Actions runs at `30 2 * * *` UTC, exactly 08:00 IST, installs PDF support, runs the research pipeline and tests, exports JSON, then commits the dated report and SQLite state. The website polls the published JSON each minute. This avoids relying on Vercel's ephemeral filesystem for research history.
+The hosted system uses `.github/workflows/daily-intelligence.yml`. Because GitHub's cron service is best-effort and was observed starting a single job more than five hours late, the workflow now makes hourly attempts from 02:00 through 08:00 IST. Attempts before 07:00 and attempts after that day's report exists exit immediately, so the first eligible delayed event publishes once and later events are harmless. Manual dispatch always runs. The job installs PDF support, runs the research pipeline and tests, exports JSON, then commits the dated report and SQLite state. The website polls both the Vercel export and the GitHub publication each minute and uses the fresher verified timestamp. This avoids relying on Vercel's ephemeral filesystem for research history.
 
 ## Testing
 

@@ -71,6 +71,7 @@ class Pipeline:
             prior_today = self.db.report_events(self.now.date().isoformat())
             known_ids = {event.id for event in prior_today}
             daily_events = prior_today + [event for event in included if event.id not in known_ids]
+            daily_events = self._deduplicate_candidates(daily_events)
             daily_events.sort(key=self._candidate_priority, reverse=True)
             report_events = self._select_daily_edition(daily_events)
             self.db.reconcile_watchlist(self.now.date().isoformat())
@@ -96,7 +97,10 @@ class Pipeline:
         for row in self.db.recent_verified_context(self.backfill_since.date().isoformat()):
             if row["id"] in selected_ids:
                 continue
-            selected.append(self.db.event_from_row(row))
+            candidate = self.db.event_from_row(row)
+            if any(self._same_macro_data_release(candidate, existing) for existing in selected):
+                continue
+            selected.append(candidate)
             selected_ids.add(row["id"])
             if len(selected) >= minimum_edition:
                 break
@@ -167,7 +171,8 @@ class Pipeline:
                 # shared publisher document ID or exactly the same canonical URL.
                 same_identifier = bool(event.source_identifier and existing.source_identifier and event.source_identifier == existing.source_identifier)
                 same_story = normalize_url(event.primary_source_url or "") == normalize_url(existing.primary_source_url or "")
-                if same_identifier or same_story:
+                same_macro_release = Pipeline._same_macro_data_release(event, existing)
+                if same_identifier or same_story or same_macro_release:
                     duplicate_index = index
                     break
             if duplicate_index is None:
@@ -183,6 +188,27 @@ class Pipeline:
             preferred.sources.extend(s for s in other.sources if s not in preferred.sources)
             selected[duplicate_index] = preferred
         return selected
+
+    @staticmethod
+    def _same_macro_data_release(left: Event, right: Event) -> bool:
+        """Collapse two headlines reporting the same dated macro indicator/value."""
+        import re
+        if left.signal_type != "Data" or right.signal_type != "Data" or left.publication_date != right.publication_date:
+            return False
+        indicators = {
+            "gdp": ("gross domestic product", "gdp", "economic growth"),
+            "iip": ("industrial output", "index of industrial production", "iip"),
+            "cpi": ("consumer price index", "cpi", "retail inflation"),
+            "wpi": ("wholesale price index", "wpi", "wholesale inflation"),
+        }
+        def signature(event: Event):
+            text = f"{event.canonical_title} {event.description}".casefold()
+            indicator = next((name for name, terms in indicators.items() if any(term in text for term in terms)), None)
+            title_values = set(re.findall(r"\b\d+(?:\.\d+)?\s*%", event.canonical_title))
+            return indicator, title_values
+        left_indicator, left_values = signature(left)
+        right_indicator, right_values = signature(right)
+        return bool(left_indicator and left_indicator == right_indicator and left_values & right_values)
 
     @staticmethod
     def _date_from_detail(detail: str):

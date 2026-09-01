@@ -12,12 +12,13 @@ from zoneinfo import ZoneInfo
 from app.classifier import classify, classify_signal_type, event_from_item, is_meaningful
 from app.config import ROOT, sources_config, topics_config
 from app.database import Database
-from app.http import Response
+from app.http import HttpClient, Response
 from app.models import RawItem
 from app.parsing import article_text, parse_data_gov_resource, parse_date, parse_feed, parse_rbi_notifications, parse_wordpress_posts
 from app.pipeline import Pipeline
 from app.reporting import render_report
 from app.quality import publication_issues
+from scripts.refresh_gate import should_refresh
 
 
 NOW = datetime(2026, 8, 30, 9, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
@@ -79,6 +80,22 @@ class SystemTests(unittest.TestCase):
         self.assertEqual(classify_signal_type("Draft regulations invite comments", "Draft"), "Consultation")
         self.assertEqual(classify_signal_type("Bill introduced in Parliament", "Bill introduced"), "Legislative")
         self.assertEqual(classify_signal_type("Auction of State Government Securities", "Announcement", "Institutional"), "Institutional")
+
+    def test_scheduler_gate_is_early_safe_idempotent_and_manually_rerunnable(self):
+        db_path = self.root / "data" / "intelligence.db"
+        self.assertFalse(should_refresh("schedule", NOW.replace(hour=6), db_path))
+        self.assertTrue(should_refresh("schedule", NOW.replace(hour=7), db_path))
+        self.assertTrue(should_refresh("workflow_dispatch", NOW.replace(hour=6), db_path))
+        db = Database(db_path)
+        db.initialize()
+        db.save_report(NOW.date().isoformat(), NOW.isoformat(), [], "report.md")
+        self.assertFalse(should_refresh("schedule", NOW.replace(hour=8), db_path))
+
+    def test_http_client_encodes_spaces_without_damaging_query_structure(self):
+        self.assertEqual(
+            HttpClient.safe_url("https://cerc.example/Draft amendment.pdf?id=1&lang=en"),
+            "https://cerc.example/Draft%20amendment.pdf?id=1&lang=en",
+        )
 
     def test_comprehensive_registry_contains_requested_source_families(self):
         sources = sources_config()["sources"]
@@ -263,6 +280,22 @@ class SystemTests(unittest.TestCase):
         self.assertIsNotNone(first)
         self.assertIsNotNone(second)
         self.assertFalse(second.is_update)
+
+    def test_duplicate_macro_headlines_collapse_to_one_underlying_release(self):
+        topics = topics_config()
+        release = event_from_item(
+            RawItem("Official desk", "official", 2, "https://example.test/gdp-release", "India GDP growth reaches 7.8%", NOW,
+                    "Official GDP data show growth of 7.8% in the quarter."),
+            "Official gross domestic product data show growth of 7.8% in the quarter, with sector estimates, prior-period comparisons, revisions, methodology and supporting national accounts tables published for users.",
+            "Macroeconomy, Trade & Public Finance", topics, NOW,
+        )
+        statement = event_from_item(
+            RawItem("Official statement", "official", 2, "https://example.test/gdp-statement", "Economic growth of 7.8% reflects strong momentum", NOW,
+                    "The statement discusses economic growth of 7.8% reported in the official GDP release."),
+            "The statement discusses economic growth of 7.8% reported in the official GDP release and repeats the published result with commentary on recent performance, global conditions and collective economic activity.",
+            "Macroeconomy, Trade & Public Finance", topics, NOW,
+        )
+        self.assertEqual(len(Pipeline._deduplicate_candidates([release, statement])), 1)
 
     def test_source_alerts_begin_after_three_failures(self):
         db = Database(self.root / "data" / "intelligence.db")

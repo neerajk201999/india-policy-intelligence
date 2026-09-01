@@ -25,6 +25,7 @@
   "rewrites": [
     { "source": "/tracker", "destination": "/index.html" },
     { "source": "/tracker/:path*", "destination": "/index.html" },
-    { "source": "/watchlist", "destination": "/index.html" }
+    { "source": "/watchlist", "destination": "/index.html" },
+    { "source": "/sources", "destination": "/index.html" }
   ]
 }

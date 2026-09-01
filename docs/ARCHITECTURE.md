@@ -39,7 +39,7 @@ Official feeds/APIs first + HTML fallback + trusted news discovery
  Markdown archive + static JSON + editorial website
 ```
 
-GitHub Actions runs this flow at 02:30 UTC, which is 08:00 IST throughout the year. It commits the SQLite history, dated Markdown report and `web/data/latest.json`. The Vercel-hosted static client checks the public JSON every minute. Vercel does not own research state and cannot erase it during a deployment.
+GitHub Actions makes idempotent hourly attempts from 02:00 through 08:00 IST to compensate for its best-effort scheduler. A local gate skips attempts before 07:00 and every later attempt after that date's report exists; manual dispatch remains available. It commits the SQLite history, dated Markdown report and `web/data/latest.json`. The Vercel-hosted client checks both the deployed JSON and the GitHub publication every minute and selects the newer verified timestamp, covering the interval between a bot commit and deployment promotion. Vercel does not own research state and cannot erase it during a deployment.
 
 ## Evidence policy
 
