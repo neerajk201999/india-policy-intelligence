@@ -204,7 +204,12 @@ class Pipeline:
         def signature(event: Event):
             text = f"{event.canonical_title} {event.description}".casefold()
             indicator = next((name for name, terms in indicators.items() if any(term in text for term in terms)), None)
-            title_values = set(re.findall(r"\b\d+(?:\.\d+)?\s*%", event.canonical_title))
+            # Some official regional-language headlines keep the Latin indicator
+            # and decimal value but spell out "percent" (for example Gujarati
+            # ``GDP 7.8 ટકા``). Decimal macro values are specific enough once the
+            # indicator and publication date also match; integers are excluded to
+            # avoid treating base years or quarters as release values.
+            title_values = set(re.findall(r"\b\d{1,2}\.\d+\b", event.canonical_title))
             return indicator, title_values
         left_indicator, left_values = signature(left)
         right_indicator, right_values = signature(right)

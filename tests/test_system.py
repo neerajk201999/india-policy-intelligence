@@ -295,7 +295,13 @@ class SystemTests(unittest.TestCase):
             "The statement discusses economic growth of 7.8% reported in the official GDP release and repeats the published result with commentary on recent performance, global conditions and collective economic activity.",
             "Macroeconomy, Trade & Public Finance", topics, NOW,
         )
-        self.assertEqual(len(Pipeline._deduplicate_candidates([release, statement])), 1)
+        regional = event_from_item(
+            RawItem("Official regional statement", "official", 2, "https://example.test/gdp-gujarati", "GDP વધીને 7.8 ટકા થતાં આર્થિક વિકાસ", NOW,
+                    "GDP 7.8 ટકા અંગેનું સત્તાવાર નિવેદન."),
+            "GDP 7.8 ટકા અંગેનું સત્તાવાર નિવેદન અને તાજેતરના આર્થિક વિકાસ, વૈશ્વિક પરિસ્થિતિ તથા સામૂહિક આર્થિક પ્રવૃત્તિ અંગેની વિગતવાર ચર્ચા પ્રકાશિત કરવામાં આવી છે.",
+            "Macroeconomy, Trade & Public Finance", topics, NOW,
+        )
+        self.assertEqual(len(Pipeline._deduplicate_candidates([release, statement, regional])), 1)
 
     def test_source_alerts_begin_after_three_failures(self):
         db = Database(self.root / "data" / "intelligence.db")
